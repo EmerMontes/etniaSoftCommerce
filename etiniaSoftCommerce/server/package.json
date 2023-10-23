@@ -1,0 +1,15 @@
+{
+  "name": "softcomerce",
+  "version": "1.0.0",
+  "description": "ecomerce software portal",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon index.js"
+  },
+  "author": "grupo 04",
+  "license": "ISC",
+  "dependencies": {
+    "nodemon": "^3.0.1"
+  }
+}
