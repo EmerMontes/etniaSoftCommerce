@@ -1,0 +1,11 @@
+{
+  "name": "softcomerce",
+  "version": "1.0.0",
+  "description": "ecomerce software portal",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "grupo 04",
+  "license": "ISC"
+}
