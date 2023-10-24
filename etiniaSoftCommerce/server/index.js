@@ -1,2 +1,1 @@
-"inicializando PF"
-"Joaquin"
+"inicializando"
