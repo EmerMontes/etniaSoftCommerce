@@ -1,4 +1,3 @@
-
 const {DataTypes} = require("sequelize-oracle");
 
 module.exports = (sequelize) => {
