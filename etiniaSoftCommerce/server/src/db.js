@@ -1,3 +1,4 @@
+
 const Sequelize = require('sequelize');
 const { sequelize } = require('./models/index'); 
 require('./model-relationships'); 
@@ -14,3 +15,4 @@ async function initializeDatabase() {
 module.exports = {
   initializeDatabase,
 };
+

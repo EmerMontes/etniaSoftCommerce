@@ -1,16 +1,14 @@
 const express = require("express");
-const router = require("./routes/index");
+const router = require("./routes");
 const morgan = require("morgan");
 const cors = require("cors");
 
-const app = express();
+const server = express();
 
-app.use(morgan("dev"));
-
-
-app.use(express.json());
-app.use(cors());
-app.use((req, res, next) => {
+server.use(morgan("dev"));
+server.use(express.json());
+server.use(cors());
+server.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', '*');
     res.header('Access-Control-Allow-Credentials', 'true');
     res.header(
@@ -23,6 +21,7 @@ app.use((req, res, next) => {
     );
     next();
  });
-app.use(router);
 
-module.exports = app;
+server.use(router);
+
+module.exports = server;
