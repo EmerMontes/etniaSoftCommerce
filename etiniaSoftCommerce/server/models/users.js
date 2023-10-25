@@ -1,3 +1,4 @@
+
 const {DataTypes} = require("sequelize-oracle");
 
 module.exports = (sequelize) => {
@@ -47,3 +48,4 @@ module.exports = (sequelize) => {
     {timestamps: false}
   );
 };
+
