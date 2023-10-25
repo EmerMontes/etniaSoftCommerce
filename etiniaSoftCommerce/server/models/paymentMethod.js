@@ -2,7 +2,7 @@ const {DataTypes} = require("sequelize-oracle");
 
 module.exports = (sequelize) => {
   sequelize.define(
-    "Payment Method",
+    "Payment_Method",
     {
       id: {
         type: DataTypes.INTEGER,
