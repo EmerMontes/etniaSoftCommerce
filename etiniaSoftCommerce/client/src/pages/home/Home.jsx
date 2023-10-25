@@ -1,6 +1,6 @@
 import React from 'react';
 import Header from '../../components/header/Header'; // Asegúrate de importar el componente Header
-import CardContainer from '../../components/cardsContainer/CardsContainer; // Asegúrate de importar el componente CardContainer
+import CardContainer from '../../components/cardsContainer/CardsContainer'; // Asegúrate de importar el componente CardContainer
 import NavBar from '../../components/navBar/NavBar'; // Asegúrate de importar el componente NavBar
 
 function Home(props) {

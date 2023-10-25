@@ -1,5 +1,5 @@
 import React from 'react';
-import Card from './Card'; // Asegúrate de importar el componente Card
+import Card from '../card/Card'; // Asegúrate de importar el componente Card
 
 function CardContainer(props) {
   return (

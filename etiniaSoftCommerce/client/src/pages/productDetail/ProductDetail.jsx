@@ -1,6 +1,6 @@
 //import { useParams } from "react-router-dom";
 
-export default  function Detail (props){
+export default  function ProductDetail (props){
     //const { id } = useParams();
     //const Product = useSelector((state)=> state);
 
