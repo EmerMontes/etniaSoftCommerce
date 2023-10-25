@@ -1,4 +1,4 @@
-const {DataTypes} = require("sequelize");
+const {DataTypes} = require("sequelize-oracle");
 
 module.exports = (sequelize) => {
   sequelize.define(
