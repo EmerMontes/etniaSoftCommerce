@@ -2,10 +2,11 @@ const {DataTypes} = require("sequelize-oracle");
 
 module.exports = (sequelize) => {
   sequelize.define(
-    "User",
+    "Articles",
     {
       id: {
         type: DataTypes.INTEGER,
+        autoIncrement: true,
         allowNull: false,
         primaryKey: true,
       },
@@ -13,38 +14,42 @@ module.exports = (sequelize) => {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      last_name:{
+      brand:{
         type: DataTypes.STRING,
         allowNull: false,
       },
-      phone_number:{
-        type: DataTypes.DECIMAL,
+      gender:{
+        type: DataTypes.INTEGER,
         allowNull: false,
       },
-      address:{
+      category:{
         type: DataTypes.STRING,
         allowNull: false,
       },
-      admin:{
-        type: DataTypes.BOOLEAN,
+      img:{
+        type: DataTypes.STRING,
             allowNull: false,
       },
-      employee:{
-        type: DataTypes.BOOLEAN,
+      video:{
+        type: DataTypes.STRING,
             allowNull: false,
       },
-      email: {
+      description: {
         type: DataTypes.STRING,
         allowNull: false,
         isEmail: true,
       },
-      password: {
-        type: DataTypes.STRING,
+      price: {
+        type: DataTypes.INTEGER,
         allowNull: false,
-        is: [/\d/],
+        isEmail: true,
+      },
+      quantity: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        
       },
     },
     {timestamps: false}
   );
 };
-
