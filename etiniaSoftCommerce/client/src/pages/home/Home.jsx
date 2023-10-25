@@ -14,6 +14,7 @@ function Home(props) {
       <Header />
       <CardContainer products={products} />
       <NavBar />
+      <h2>Bienvenido al Home</h2>
     </div>
   );
 }

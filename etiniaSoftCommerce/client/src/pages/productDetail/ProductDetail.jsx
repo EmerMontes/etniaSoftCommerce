@@ -1,7 +1,7 @@
-//import { useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 export default  function ProductDetail (props){
-    //const { id } = useParams();
+    const { id } = useParams();
     //const Product = useSelector((state)=> state);
 
     // const loadIdCountry = ()=>{
@@ -14,6 +14,6 @@ export default  function ProductDetail (props){
     // },[])
 
     return(
-        <div>Este es el componente Detail</div>
+        <div>Este es el componente Detail Product {id}</div>
     )
 }
