@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "concurrently \"npm run server\" \"npm run api\""
+    "start": "concurrently \"npm run server\"",
+    "server": "node index.js"
   },
   "author": "grupo 04",
   "license": "ISC",
@@ -24,6 +25,6 @@
     "pg": "^8.10.0",
     "pg-hstore": "^2.3.4",
     "sequelize": "^6.31.1"
->>>>>>> main
+
   }
 }
