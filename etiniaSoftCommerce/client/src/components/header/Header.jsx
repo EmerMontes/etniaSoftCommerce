@@ -1,5 +1,6 @@
 import React from 'react';
-import SearchBar from './SearchBar'; // Asegúrate de importar el componente SearchBar
+import SearchBar from '../searchBar/SearchBar'; // Asegúrate de importar el componente SearchBar
+// import LogoEtnia-blanco from "../../assets/png/Logo-Etnia-blanco";
 
 function Header(props) {
   return (
