@@ -9,7 +9,13 @@ module.exports = (sequelize) => {
         allowNull: false,
         primaryKey: true,
       },
-      user_id:{ 
+      id_user:{
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        references: {
+            model: 'User', 
+            key: 'id', 
+        },
       },
       account_number:{
         type: DataTypes.DECIMAL,

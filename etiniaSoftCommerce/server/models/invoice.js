@@ -9,13 +9,36 @@ module.exports = (sequelize) => {
         allowNull: false,
         primaryKey: true,
       },
-      purchase_id:{ 
+      id_purchase:{ type: DataTypes.INTEGER,
+        allowNull: false,
+        references: {
+            model: 'Purchase', 
+            key: 'id', 
+        }
       },
-      user_id:{
+      id_user:{
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        references: {
+            model: 'User', 
+            key: 'id', 
+        },
       },
-      company_id:{
+      id_company:{
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        references: {
+            model: 'Company',
+            key: 'id'
+        }
       },
-      payment_method_id:{
+      id_payment_method:{
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        references: {
+            model: 'Payment_Method', 
+            key: 'id', 
+        }
       },
       date:{
         type: DataTypes.date,

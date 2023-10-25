@@ -9,7 +9,12 @@ module.exports = (sequelize) => {
         allowNull: false,
         primaryKey: true,
       },
-      user_id:{ 
+      user_id:{ type: DataTypes.INTEGER,
+        allowNull: false,
+        references: {
+            model: 'User',
+            key: 'id'
+        }
       },
       payment_method:{
         type: DataTypes.ENUM("Credit", "Debit", "Cash"),
