@@ -1,12 +1,10 @@
 const {Router}= require("express");
-//const importModelo = require("./modelo");
+const articlesRouter = require("./articlesRoutes");
 
 
 
 const indexRouter = Router();
 
-
-//indexRouter.use("/***modelo***", modelo);
-
+indexRouter.use("/articles", articlesRouter);
 
 module.exports = indexRouter;
