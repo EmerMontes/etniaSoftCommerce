@@ -1,4 +1,4 @@
-const { Model, DataTypes } = require('sequelize-oracle');
+const { Model, DataTypes } = require('sequelize');
 const { connection } = require('../config/connection');
 
 class Logistics extends Model {}

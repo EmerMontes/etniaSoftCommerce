@@ -1,7 +1,7 @@
 
-const Sequelize = require('sequelize');
+//const Sequelize = require('sequelize');
 const { sequelize } = require('./models/index'); 
-require('./model-relationships'); 
+const {db} = require('./models/index'); 
 
 async function initializeDatabase() {
   try {
