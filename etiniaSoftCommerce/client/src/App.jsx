@@ -1,9 +1,9 @@
 import { Routes, Route} from 'react-router-dom';
 import { useState } from 'react'
 import Home from './pages/home/Home'
-import ProductDetail from './pages/productDetail/ProductDetail'
+import ProductDetail from './pages/productDetail/ProductDetail';
 import Landing from './pages/landing/Landing';
-import UserDetail from './pages/userDetail/UserDetail';
+import UserDetail from './components/userDetail/UserDetail';
 import PayForm from './pages/payForm/PayForm';
 
 import './App.css'
