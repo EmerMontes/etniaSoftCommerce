@@ -1,20 +1,19 @@
-const {DataTypes} = require("sequelize-oracle");
+const {DataTypes} = require("sequelize");
 
 module.exports = (sequelize) => {
   sequelize.define(
-    "Payment_Method",
+    "PaymentMethod",
     {
       id: {
         type: DataTypes.INTEGER,
         allowNull: false,
         primaryKey: true,
       },
-      user_id:{ 
-      },
-      payment_method:{
+      paymentMethod:{
         type: DataTypes.ENUM("Credit", "Debit", "Cash"),
         allowNull: false
       },
     },
+    {timestamps: false}
   );
 };

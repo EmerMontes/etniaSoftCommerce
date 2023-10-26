@@ -1,17 +1,15 @@
-const {DataTypes} = require("sequelize-oracle");
+const {DataTypes} = require("sequelize");
 
 module.exports = (sequelize) => {
   sequelize.define(
-    "Bank Accounts",
+    "BankAccounts",
     {
       id: {
         type: DataTypes.INTEGER,
         allowNull: false,
         primaryKey: true,
       },
-      user_id:{ 
-      },
-      account_number:{
+      accountNumber:{
         type: DataTypes.DECIMAL,
         allowNull: false
       },
@@ -19,11 +17,11 @@ module.exports = (sequelize) => {
         type: DataTypes.STRING,
         allowNull: false
       },
-      type_of_account:{
+      typeOfAccount:{
         type: DataTypes.STRING,
         allowNull: false
       },
-      client_name:{
+      clientName:{
         type: DataTypes.STRING,
         allowNull: false
       }
