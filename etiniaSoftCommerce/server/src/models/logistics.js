@@ -1,6 +1,6 @@
 const { DataTypes } = require('sequelize');
 
-cmodule.exports = (sequelize) => {
+module.exports = (sequelize) => {
   sequelize.define("Logistics",{
     id: {
       type: DataTypes.INTEGER,
@@ -24,8 +24,8 @@ cmodule.exports = (sequelize) => {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    shipping_price: {
-      type: DataTypes.DECIMAL(10, 2),
+    shippingPrice: {
+      type: DataTypes.DECIMAL,
       allowNull: false,
     },
   },

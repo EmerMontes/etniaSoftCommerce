@@ -1,24 +1,15 @@
 const {DataTypes} = require("sequelize");
-const User = require('./users');
 
 module.exports = (sequelize) => {
   sequelize.define(
-    "Bank_Accounts",
+    "BankAccounts",
     {
       id: {
         type: DataTypes.INTEGER,
         allowNull: false,
         primaryKey: true,
       },
-      id_user:{
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        references: {
-            model: User, 
-            key: 'id', 
-        },
-      },
-      account_number:{
+      accountNumber:{
         type: DataTypes.DECIMAL,
         allowNull: false
       },
@@ -26,11 +17,11 @@ module.exports = (sequelize) => {
         type: DataTypes.STRING,
         allowNull: false
       },
-      type_of_account:{
+      typeOfAccount:{
         type: DataTypes.STRING,
         allowNull: false
       },
-      client_name:{
+      clientName:{
         type: DataTypes.STRING,
         allowNull: false
       }

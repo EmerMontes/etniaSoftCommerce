@@ -1,5 +1,4 @@
 const {DataTypes} = require("sequelize");
-const User = require('./users');
 
 module.exports = (sequelize) => {
   sequelize.define(
@@ -10,14 +9,6 @@ module.exports = (sequelize) => {
         autoIncrement: true,
         allowNull: false,
         primaryKey: true,
-      },
-      id_user:{
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        references: {
-            model: User, 
-            key: 'id', 
-        },
       },
       state:{
         type: DataTypes.STRING,

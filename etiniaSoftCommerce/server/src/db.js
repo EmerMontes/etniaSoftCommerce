@@ -7,7 +7,7 @@ const {
   DB_USER, DB_PASSWORD, DB_HOST, DB_DEPLOY
 } = process.env;
 
-const sequelize = new Sequelize(`oracle://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/softComerce`, {
+const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/softCommerce`, {
   logging: false, 
   native: false, 
 });
@@ -34,41 +34,52 @@ let entries = Object.entries(sequelize.models);
 let capsEntries = entries.map((entry) => [entry[0][0].toUpperCase() + entry[0].slice(1), entry[1]]);
 sequelize.models = Object.fromEntries(capsEntries);
 
-const { Articles, User, Shipments, bank_Accounts, company, complaints, Coupon, Invoice, logistics, Payment_Method, Purchase, reviews } = sequelize.models;
+const { Company, Reviews, PaymentMethod, Purchases, Coupon, Invoice, BankAccounts, Logistics, Complaints, Products, Shipments, User } = sequelize.models;
 
-User.hasMany(Purchase, {through: "user_purchase"});
-Purchase.belongsToMany(User, {through: "user_purchase"});
+User.belongsToMany(Products, {through: "user_products"});
+Products.belongsToMany(User, {through: "user_products"});
 
-User.hasMany(bank_Accounts, {through: "user_bank_accounts"});
-bank_Accounts.belongsTo(User, {through: "user_bank_accounts"});
+User.hasMany(Shipments, { foreignKey: "userId", sourceKey: "id" });
+Shipments.belongsTo(User, { foreignKey: "userId", targetKey: "id" });
 
-logistics.hasMany(Shipments, {through: "logistics_shipments"});
-Shipments.belongsTo(logistics, {through: "logisctics_shpments"});
+User.hasMany(BankAccounts, { foreignKey: "userId", sourceKey: "id" });
+BankAccounts.belongsTo(User, { foreignKey: "userId", targetKey: "id"});
 
-User.hasMany(complaints, {through: "user_complaints"});
-complaints.belongsTo(User, {through: "user_complaints"});
+User.hasMany(Complaints, { foreignKey: "userId", sourceKey: "id" });
+Complaints.belongsTo(User, { foreignKey: "userId", targetKey: "id" });
 
-company.hasMany(Invoice, {through: "company_invoice"});
-Invoice.belongsTo(company, {through: "company_invoice"});
+User.hasMany(Coupon,  { foreignKey: "userId", sourceKey: "id" });
+Coupon.belongsTo(User,  { foreignKey: "userId", targetKey: "id" });
 
-User.hasOne(Payment_Method, {through: "user_paymentMethod"});
-Payment_Method.belongsTo(User, {through: "user_paymentMethod"});
+User.hasMany(Invoice, { foreignKey: "userId", sourceKey: "id" });
+Invoice.belongsTo(User, { foreignKey: "userId", targetKey: "id" });
 
-User.hasMany(Articles, {through: "user_articles"});
-Articles.belongsToMany(User, {through: "user_articles"});
+Company.hasMany(Invoice, { foreignKey: "companyId", sourceKey: "id" });
+Invoice.belongsTo(Company, { foreignKey: "companyId", targetKey: "id" });
 
-User.hasMany(Coupon, {through: "user_coupon"});
-Coupon.belongsTo(User, {through: "user_coupon"});
+Purchases.hasOne(Invoice, { foreignKey: "purchaseId", sourceKey: "id" });
+Invoice.belongsTo(Purchases, { foreignKey: "purchaseId", targetKey: "id" });
 
-User.hasMany(Shipments, {through: "user_shipments"});
-Shipments.belongsTo(User, {through: "user_shpments"});
+PaymentMethod.hasOne(Invoice, { foreignKey: "paymentMethodId", sourceKey: "id" });
+Invoice.belongsTo(PaymentMethod, { foreignKey: "paymentMethodId", targetKey: "id" });
 
-User.hasMany(reviews, {through: "user_reviews"});
-reviews.belongsTo(User, {through: "user_reviews"});
+Products.hasOne(Purchases, { foreignKey: "productsId", sourceKey: "id" });
+Purchases.belongsToMany(Products, { through: "product_purchases"});
 
-User.hasMany(Invoice, {through: "user_invoice"});
-Invoice.belongsTo(User, {through: "user_invoice"});
+User.hasMany(Purchases, { foreignKey: "userId", sourceKey: "id" });
+Purchases.belongsTo(User, { foreignKey: "userId", sourceKey: "id" });
 
+User.hasOne(PaymentMethod, { foreignKey: "userId", sourceKey: "id" });
+PaymentMethod.belongsToMany(User, { through: "user_paymentMethod" });
+
+User.hasMany(Reviews, { foreignKey: "userId", sourceKey: "id" });
+Reviews.belongsTo(User, { foreignKey: "userId", targetKey: "id" });
+
+Products.hasMany(Reviews, { foreignKey: "productId", sourceKey: "id" });
+Reviews.belongsTo(Products, { foreignKey: "productId", targetKey: "id" });
+
+Logistics.hasMany(Shipments, { foreignKey: "logisticsId", sourceKey: "id" });
+Shipments.belongsTo(Logistics, { foreignKey: "logisticsId", targetKey: "id" });
 
 
 module.exports = {
