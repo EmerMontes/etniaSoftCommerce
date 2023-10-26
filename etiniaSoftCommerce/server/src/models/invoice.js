@@ -1,4 +1,8 @@
 const {DataTypes} = require("sequelize");
+const Purchase = require('./purchases');
+const User = require('./users');
+const Company = require('./company');
+const Payment_Method = require('./paymentMethod');
 
 module.exports = (sequelize) => {
   sequelize.define(
@@ -12,7 +16,7 @@ module.exports = (sequelize) => {
       id_purchase:{ type: DataTypes.INTEGER,
         allowNull: false,
         references: {
-            model: 'Purchase', 
+            model: Purchase, 
             key: 'id', 
         }
       },
@@ -20,7 +24,7 @@ module.exports = (sequelize) => {
         type: DataTypes.INTEGER,
         allowNull: false,
         references: {
-            model: 'User', 
+            model: User, 
             key: 'id', 
         },
       },
@@ -28,7 +32,7 @@ module.exports = (sequelize) => {
         type: DataTypes.INTEGER,
         allowNull: false,
         references: {
-            model: 'Company',
+            model: Company,
             key: 'id'
         }
       },
@@ -36,7 +40,7 @@ module.exports = (sequelize) => {
         type: DataTypes.INTEGER,
         allowNull: false,
         references: {
-            model: 'Payment_Method', 
+            model: Payment_Method, 
             key: 'id', 
         }
       },
@@ -44,6 +48,8 @@ module.exports = (sequelize) => {
         type: DataTypes.date,
             allowNull: false,
       }, 
+      
     },
+    {timestamps: false}
   );
 };

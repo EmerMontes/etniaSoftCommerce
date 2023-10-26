@@ -1,10 +1,7 @@
-const { Model, DataTypes } = require('sequelize');
-const { connection } = require('../config/connection');
+const { DataTypes } = require('sequelize');
 
-class Logistics extends Model {}
-
-Logistics.init(
-  {
+cmodule.exports = (sequelize) => {
+  sequelize.define("Logistics",{
     id: {
       type: DataTypes.INTEGER,
       allowNull: false,
@@ -32,13 +29,6 @@ Logistics.init(
       allowNull: false,
     },
   },
-  {
-    sequelize: connection,
-    timestamps: false,
-    freezeTableName: true,
-    underscored: true,
-    modelName: 'logistics',
-  }
+  {timestamps: false }
 );
-
-module.exports = Logistics;
+}

@@ -1,11 +1,8 @@
-const { Model, DataTypes } = require('sequelize');
-const { connection } = require('../config/connection');
-const User = require('./user');
+const { DataTypes } = require('sequelize');
+const User = require('./users');
 
-class Complaints extends Model {}
-
-Complaints.init(
-  {
+module.exports = (sequelize) => {
+  sequelize.define("Complaints",{
     id: {
       type: DataTypes.INTEGER,
       allowNull: false,
@@ -30,13 +27,6 @@ Complaints.init(
       defaultValue: 'pending',
     },
   },
-  {
-    sequelize: connection,
-    timestamps: false,
-    freezeTableName: true,
-    underscored: true,
-    modelName: 'complaints',
-  }
+  {timestamps: false }
 );
-
-module.exports = Complaints;
+}

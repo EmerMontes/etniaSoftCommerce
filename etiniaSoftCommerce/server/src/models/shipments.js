@@ -1,4 +1,9 @@
 const {DataTypes} = require("sequelize");
+const User = require("./users")
+const Logistics = require("./logistics")
+const Invoice = require("./invoice")
+
+
 
 module.exports = (sequelize) => {
   sequelize.define(
@@ -14,7 +19,7 @@ module.exports = (sequelize) => {
         type: DataTypes.INTEGER,
         allowNull: false,
         references: {
-            model: 'User', 
+            model: User, 
             key: 'id', 
         },
       },
@@ -22,7 +27,7 @@ module.exports = (sequelize) => {
         type: DataTypes.INTEGER,
         allowNull: false,
         references: {
-            model: 'Factura', 
+            model: Invoice, 
             key: 'id', 
         },
       },
@@ -30,7 +35,7 @@ module.exports = (sequelize) => {
         type: DataTypes.INTEGER,
         allowNull: false,
         references: {
-            model: 'Transportadora', 
+            model: Logistics, 
             key: 'id', 
         },
       },

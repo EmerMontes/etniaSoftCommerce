@@ -1,4 +1,5 @@
 const {DataTypes} = require("sequelize");
+const User = require('./users');
 
 module.exports = (sequelize) => {
   sequelize.define(
@@ -12,7 +13,7 @@ module.exports = (sequelize) => {
       user_id:{ type: DataTypes.INTEGER,
         allowNull: false,
         references: {
-            model: 'User',
+            model: User,
             key: 'id'
         }
       },
@@ -21,5 +22,6 @@ module.exports = (sequelize) => {
         allowNull: false
       },
     },
+    {timestamps: false}
   );
 };

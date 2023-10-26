@@ -1,4 +1,6 @@
 const {DataTypes} = require("sequelize");
+const Articles = require('./articles');
+const User = require('./users');
 
 module.exports = (sequelize) => {
   sequelize.define(
@@ -14,7 +16,7 @@ module.exports = (sequelize) => {
         type: DataTypes.INTEGER,
         allowNull: false,
         references: {
-            model: 'Articles', 
+            model: Articles, 
             key: 'id', 
         },
       },
@@ -22,7 +24,7 @@ module.exports = (sequelize) => {
         type: DataTypes.INTEGER,
         allowNull: false,
         references: {
-            model: 'User', 
+            model: User, 
             key: 'id', 
         },
       },

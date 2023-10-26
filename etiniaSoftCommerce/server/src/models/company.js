@@ -1,10 +1,8 @@
-const { Model, DataTypes } = require('sequelize');
-const { connection } = require('../config/connection');
+const { DataTypes } = require('sequelize');
 
-class Company extends Model {}
-
-Company.init(
-  {
+module.exports = (sequelize) => {
+  sequelize.define("Company",{
+  
     id: {
       type: DataTypes.INTEGER,
       allowNull: false,
@@ -28,13 +26,6 @@ Company.init(
       allowNull: false,
     },
   },
-  {
-    sequelize: connection,
-    timestamps: false,
-    freezeTableName: true,
-    underscored: true,
-    modelName: 'company',
-  }
+  {timestamps: false, }
 );
-
-module.exports = Company;
+}

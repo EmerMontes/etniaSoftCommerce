@@ -1,13 +1,13 @@
-const { Model, DataTypes } = require('sequelize');
-const { connection } = require('../config/connection');
+const { DataTypes } = require('sequelize');
 const Articles = require('./articles');
 const User = require('./user');
 const Company = require('./company');
 
-class Reviews extends Model {}
-
-Reviews.init(
-  {
+module.exports = (sequelize) => {
+  sequelize.define(
+    "Reviews",
+    {
+    
     id: {
       type: DataTypes.INTEGER,
       allowNull: false,
@@ -47,13 +47,7 @@ Reviews.init(
       allowNull: false,
     },
   },
-  {
-    sequelize: connection,
-    timestamps: false,
-    freezeTableName: true,
-    underscored: true,
-    modelName: 'reviews',
-  }
-);
+  {timestamps: false }
+)
+}
 
-module.exports = Reviews;
