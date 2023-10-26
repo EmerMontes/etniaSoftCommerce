@@ -66,6 +66,9 @@ Shipments.belongsTo(User, {through: "user_shpments"});
 User.hasMany(reviews, {through: "user_reviews"});
 reviews.belongsTo(User, {through: "user_reviews"});
 
+User.hasMany(Invoice, {through: "user_invoice"});
+Invoice.belongsTo(User, {through: "user_invoice"});
+
 
 
 module.exports = {
