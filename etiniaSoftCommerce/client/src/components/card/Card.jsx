@@ -1,10 +1,17 @@
 import React from 'react';
+import { Link } from "react-router-dom";
 
-function Card(props) {
-  // Aquí debes renderizar la información del producto
+function Card({id, name, gender, sale, img, color, price}) {
   return (
     <div className="card">
-      {/* Renderiza la información del producto aquí */}
+      <Link to={`/product/${id}`}>
+      <div>
+        <h2>{name}</h2>
+        <img src={img} alt={name}/>
+        <h2>{price}</h2>
+        <h2>{sale}</h2>
+      </div>
+      </Link>
     </div>
   );
 }
