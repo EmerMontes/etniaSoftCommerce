@@ -1,8 +1,8 @@
-const {DataTypes} = require("sequelize-oracle");
+const {DataTypes} = require("sequelize");
 
 module.exports = (sequelize) => {
   sequelize.define(
-    "Articles",
+    "User",
     {
       id: {
         type: DataTypes.INTEGER,
@@ -14,40 +14,35 @@ module.exports = (sequelize) => {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      brand:{
+      last_name:{
         type: DataTypes.STRING,
         allowNull: false,
       },
-      gender:{
-        type: DataTypes.INTEGER,
+      phone_number:{
+        type: DataTypes.DECIMAL,
         allowNull: false,
       },
-      category:{
+      address:{
         type: DataTypes.STRING,
         allowNull: false,
       },
-      img:{
-        type: DataTypes.STRING,
+      admin:{
+        type: DataTypes.BOOLEAN,
             allowNull: false,
       },
-      video:{
-        type: DataTypes.STRING,
+      employee:{
+        type: DataTypes.BOOLEAN,
             allowNull: false,
       },
-      description: {
+      email: {
         type: DataTypes.STRING,
         allowNull: false,
         isEmail: true,
       },
-      price: {
-        type: DataTypes.INTEGER,
+      password: {
+        type: DataTypes.STRING,
         allowNull: false,
-        isEmail: true,
-      },
-      quantity: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        
+        is: [/\d/],
       },
     },
     {timestamps: false}
