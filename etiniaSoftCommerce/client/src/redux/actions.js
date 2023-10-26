@@ -1,86 +1,125 @@
 import axios from 'axios';
+//routes Get
+export const GET_ALL_PRODUCTS = "GET_ALL_PRODUCTS";
+export const GET_DETAIL_SIZE_COLOR = "GET_DETAIL_SIZE_COLOR";
+export const GET_ORDER_PRICE = "GET_ORDER_PRICE";
+//Routes Post
+export const CREATE_PRODUCT = "CREATE_PRODUCT";
+export const ADD_FAVORITES = "ADD_FAVORITES";
+export const REMOVE_FAVORITES="GET_REMOVE_FAVORITES";
+//filters
+export const GET_FILTER_GENDER = "GET_FILTER_GENDER";
+export const GET_FILTER_CATEGORY = "GET_FILTER_CATEGORY";
+export const GET_FILTER_COLOR = "GET_FILTER_COLOR";
+export const GET_FILTER_SIZE = "GET_FILTER_SIZE";
+export const GET_FILTER_SALE = "GET_FILTER_SALE";
 
-export const GET_ALL_PRODUCTS="GET_ALL_PRODUCTS";
-export const  GET_DETAIL_TALLA_COLOR="GET_DETAIL_TALLA_COLOR";
-export const GET_ORDER_PRECIO_AZ="GET_ORDER_PRECIO_AZ";
-export const GET_ORDER_PRECIO_ZA="GET_ORDER_PRECIO_ZA";
-export const GET_FILTER_GENERO="GET_FILTER_GENERO";
-export const GET_ALL_CATEGORIES = "GET_ALL_CATEGORIES"
-export const GET_FILTER_COLOR="GET_FILTER_COLOR";
-export const GET_FILTER_TALLA="GET_FILTER_TALLA";
-export const GET_FAVORITES="GET_FAVORITES";
-export const GET_FILTER_DESCUENTO="GET_FILTER_DESCUENTO"
-export const CREATE_PRODUCT = "CREATE_PRODUCT"
+const URL='http://localhost:3001'
+
+export function filtrarPorDescuento(descuento) {
+  return{
+      type: GET_FILTER_SIZE,
+      payload: descuento
+  }
+}
 
 export function getAllProducts() {
-    return async function (dispatch){
-        const productsInfo=await axios.get(``)
-        dispatch({
-            type: GET_ALL_PRODUCTS,
-            payload: productsInfo.data
-        })
-    }
+  return async function (dispatch) {
+    const productsInfo = await axios.get(`${URL}/products`);
+    dispatch({
+      type: GET_ALL_PRODUCTS,
+      payload: productsInfo.data
+    });
   }
-  export function getFavorites(id) {
-    return async function(dispatch){
-        const favorites=await axios.get(`${id}`)
-        dispatch({
-            type:GET_FAVORITES,
-            payload:favorites.data
-        })
-    } 
+}
+
+export function PostAddFavorites(products) {
+  return async  (dispatch)=> {
+   try{
+    const {data} = await axios.post(`${URL}/favorites`);
+    return dispatch({
+      type:GET_ADD_FAVORITES,
+      payload:data,
+    });
+   }catch(error){
+    console.log(error);
+   }
+  };
+};
+
+export const PostRemoveFav=(id)=>{
+  return async (dispatch)=>{
+    try{
+      const{data}=await axios.delete(`${URL}/favorites`+id);
+      return dispatch({
+        type:GET_REMOVE_FAVORITES,
+        payload:data,
+      });
+    }catch(error){
+      console.log(error);
+    }
+  };
+}
+
+
+export function getAllCategories(category) {
+  return{
+    type:GET_FILTER_CATEGORY,
+    payload:category
   }
 
-  export function getAllCategories() {
-    return async function (dispatch) {
-        const categoriesInfo = await axios.get('')
-        dispatch({
-            type: GET_ALL_CATEGORIES,
-            payload: categoriesInfo.data
-        })
-    }
 }
-export function createProduct(payload) {
-    return async function (dispatch) {
-        const info = await axios.post('', payload)
-        dispatch({
-            type: CREATE_PRODUCT,
-            payload: info.data
-        })
-    }
-}
-  
-  export function getDetailTallaColor(id) {
-    return  async function(dispatch){
-        const productDetail=await axios.get('/products/${id}')
-        dispatch({
-            type:GET_DETAIL_TALLA_COLOR,
-            payload:productDetail.data
-        })
-    }
-  }
-  
-  export function getOrderPrecioAz() {
-    return 
-  }
-  
-  export function getOrderPrecioZa() {
-    return 
-  }
-  
-  export function getFilterGenero() {
-    return
-  }
-  
 
-  
-  export function getFilterColor() {
-    return
+export function createProduct(newproduct) {
+  return async function (dispatch) {
+    const info = await axios.post(`${URL}/products`,newproduct);
+    dispatch({
+      type: CREATE_PRODUCT,
+      payload: info.data
+    });
   }
-  
-  export function getFilterTalla() {
-    return 
+}
+
+export function getDetailTallaColor(name) {
+  return async function (dispatch) {
+    const productDetail = await axios.get(`${URL}/products/${name}`);
+    dispatch({
+      type: GET_DETAIL_SIZE_COLOR,
+      payload: productDetail.data
+    });
   }
-  
+}
+
+export function getOrderPrecio(order) {
+  return async function(dispatch) {
+    const productorder=await axios.get(`${URL}/order/${order}`);
+    dispatch({
+      type:GET_ORDER_PRICE,
+      payload:productorder
+    });
+   
+  };
+}
+
+export function getFilterGenero(genero) {
+  return {
+    type: GET_FILTER_GENDER,
+    payload:genero
+  };
+}
+
+export function getFilterColor(color) {
+  return {
+    type: GET_FILTER_COLOR,
+    payload: color
+  };
+}
+
+export function getFilterTalla(talla) {
+  return {
+    type: GET_FILTER_SIZE,
+    payload:talla
+}
+}
 
 
