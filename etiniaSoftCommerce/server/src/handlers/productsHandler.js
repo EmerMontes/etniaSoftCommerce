@@ -38,17 +38,28 @@ const {
 
   const createProductsHandler = async (req, res) => {
     try {
-      const activity = await createProducts(req.body);
-      res.status(201).json(activity);
+      const product = await createProducts(req.body);
+      res.status(201).json(product);
     } catch (error) {
       res.status(400).json({ error: error.message });
     }
   };
+
   const deleteProductsHandler = async (req, res) => {
     const id = req.params.id;
     try {
-      const activity = await deleteProductById (id);
-      res.status(201).json(activity);
+      const product = await deleteProductById (id);
+      res.status(201).json(product);
+    } catch (error) {
+      res.status(400).json({ error: error.message });
+    }
+  };
+
+  const updateProductsHandler = async (req, res) => {
+    const id = req.params.id;
+    try {
+      const product = await updateProductById (id, req.body);
+      res.status(201).json(product);
     } catch (error) {
       res.status(400).json({ error: error.message });
     }
@@ -63,6 +74,7 @@ const {
     getIdHandler: getIdHandler,
     getProductsByName: getProductsByName,
     createProductsHandler: createProductsHandler,
-    deleteProductsHandler:deleteProductsHandler
+    deleteProductsHandler:deleteProductsHandler,
+    updateProductsHandler: updateProductsHandler
   };
   

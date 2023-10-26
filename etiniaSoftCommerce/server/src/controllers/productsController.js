@@ -81,10 +81,27 @@ const deleteProductById = async (id) => {
     throw error;
   }
 };
+const updateProductById = async (id, newData) => {
+  try {
+    const productToUpdate = await Products.findByPk(id);
+
+    if (!productToUpdate) {
+      throw new Error(`Producto con ID ${id} no encontrado.`);
+    }
+
+    // Actualiza los campos del producto con los nuevos datos
+    await productToUpdate.update(newData);
+
+    return productToUpdate;
+  } catch (error) {
+    throw error;
+  }
+};
 module.exports = {
   getAllProducts,
   getProductsById,
   getProductByName,
   createProducts,
-  deleteProductById
+  deleteProductById,
+  updateProductById
 };
