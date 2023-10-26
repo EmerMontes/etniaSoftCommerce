@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from "react-router-dom";
+import './Card.css';
 
 function Card({id, name, gender, sale, img, color, price}) {
   return (
