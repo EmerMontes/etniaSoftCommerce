@@ -1,6 +1,6 @@
 import { GET_ALL_PRODUCTS, GET_DETAIL_SIZE_COLOR, GET_ORDER_PRICE,
     GET_FILTER_GENDER, GET_FILTER_CATEGORY, GET_FILTER_COLOR, GET_FILTER_SALE, ADD_FAVORITES,
-    REMOVE_FAVORITES, GET_FILTER_SALE, CREATE_PRODUCT} from "../actions";
+    REMOVE_FAVORITES, CREATE_PRODUCT, GET_FILTER_SIZE} from "./actions";
 
 
 const initialState = {
@@ -79,11 +79,11 @@ const reducer = (state = initialState, action) => {
                 ...state, productShow: allProductsColor
             }
                               
-        case GET_FILTER_SALE:
-            let allProductsDescuento = state.productShow.filter((product) =>product.sale !== null)
-            return {
-                ...state, productShow: allProductsDescuento
-            }
+        // case GET_FILTER_SALE:
+        //     let allProductsDescuento = state.productShow.filter((product) =>product.sale !== null)
+        //     return {
+        //         ...state, productShow: allProductsDescuento
+        //     }
                    
        default:
            return {...state

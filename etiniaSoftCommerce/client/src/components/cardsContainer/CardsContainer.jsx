@@ -5,7 +5,7 @@ import './CardsContainer.css';
 function CardContainer(props) {
   return (
     <div className="card-container">
-      {props.products.products?.map(product => (
+      {props.products?.map(product => (
         <Card 
           key={product.id}
           id={product.id}
