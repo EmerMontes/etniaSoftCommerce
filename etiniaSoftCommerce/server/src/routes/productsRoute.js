@@ -7,7 +7,8 @@ productsRouter.get("/", getProductseHandler);
 productsRouter.get("/list", handAllProductsRend);
 productsRouter.get("/:id", getIdHandler);
 productsRouter.get("/name/:name",getProductsByName);
-productsRouter.get("/filter/:filter", handleProductFilters);
+
+
 productsRouter.post("/",createProductsHandler);
 productsRouter.delete("/delete/:id", deleteProductsHandler);
 productsRouter.put("/put/:id", updateProductsHandler);
