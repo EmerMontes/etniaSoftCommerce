@@ -5,12 +5,13 @@ export const GET_DETAIL_SIZE_COLOR = "GET_DETAIL_SIZE_COLOR";
 export const GET_ORDER_PRICE = "GET_ORDER_PRICE";
 export const GET_ALL_USERS = "GET_ALL_USERS"
 export const GET_USERS_BY_NAME="GET_USERS_BY_NAME"
+export const ADD_FAVORITES = "ADD_FAVORITES";
 //routes Delete
 export const DELETE_PRODUCT = "DELETE_PRODUCT"
-export const REMOVE_FAVORITES="REMOVE_FAVORITES";
+
 //Routes Post
 export const CREATE_PRODUCT = "CREATE_PRODUCT";
-export const ADD_FAVORITES = "ADD_FAVORITES";
+
 export const CREATE_USER = "CREATE_USER"
 //routes Put
 export const UPDATE_USER = "UPDATE_USER"
@@ -20,6 +21,7 @@ export const GET_FILTER_CATEGORY = "GET_FILTER_CATEGORY";
 export const GET_FILTER_COLOR = "GET_FILTER_COLOR";
 export const GET_FILTER_SIZE = "GET_FILTER_SIZE";
 export const GET_FILTER_SALE = "GET_FILTER_SALE";
+export const REMOVE_FAVORITES="REMOVE_FAVORITES";
 
 const URL='http://localhost:3001'
 
@@ -92,12 +94,12 @@ export function getAllProducts() {
   }
 }
 
-export function PostAddFavorites(products) {
+export function getAddFavorites(id) {
   return async  (dispatch)=> {
    try{
-    const {data} = await axios.post(`${URL}/favorites`);
+    const {data} = await axios.get(`${URL}/favorites`);
     return dispatch({
-      type:GET_ADD_FAVORITES,
+      type: ADD_FAVORITES,
       payload:data,
     });
    }catch(error){
@@ -106,18 +108,11 @@ export function PostAddFavorites(products) {
   };
 };
 
-export const PostRemoveFav=(id)=>{
-  return async (dispatch)=>{
-    try{
-      const{data}=await axios.delete(`${URL}/favorites`+id);
-      return dispatch({
+export function removeFav (id) {
+     return {
         type:REMOVE_FAVORITES,
-        payload:data,
-      });
-    }catch(error){
-      console.log(error);
-    }
-  };
+        payload: id 
+     } 
 }
 
 
