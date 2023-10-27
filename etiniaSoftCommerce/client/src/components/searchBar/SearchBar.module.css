@@ -1,0 +1,31 @@
+/* SearchBar.module.css */
+.searchbar {
+    display: flex;
+    align-items: center;
+  }
+  
+  input[type="search"] {
+    flex: 50; /* El input ocupa más espacio que el botón */
+    padding: 0.5rem;
+    font-size: 1rem;
+    height: 2rem; /* Misma altura que el botón */
+    min-width: 0;
+  }
+  
+  button {
+    flex: 5; /* El botón ocupa menos espacio que el input */
+    padding: 0.5rem;
+    font-size: 1rem;
+    background-color: #71A611;
+    color: white;
+    border: none;
+    cursor: pointer;
+    min-width: 0;
+    height: 2rem; /* Misma altura que el input */
+  }
+  
+  .Lupa {
+    max-width: 1.5rem; /* Tamaño adecuado para la lupa en rem */
+  }
+  
+  

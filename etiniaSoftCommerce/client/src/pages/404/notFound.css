@@ -1,0 +1,19 @@
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    flex-direction: column;
+    font-family: 'Arial, sans-serif';
+  }
+  
+  .heading {
+    font-size: 3em;
+    color: #4285f4;
+    margin-bottom: 16px;
+  }
+  
+  .text {
+    font-size: 1.5em;
+    color: #5c5b5b;
+  }

@@ -1,6 +1,7 @@
 import React from 'react';
+import Styles from './Filters.module.css';
 
-const Select = ({ name, options, handleChange, state }) => {
+const Filters = ({ name, options, handleChange, state }) => {
   return (
       <select name={name} onChange={handleChange} value={state || ""}>
         <option value="" disabled hidden>{name}</option>
@@ -13,4 +14,4 @@ const Select = ({ name, options, handleChange, state }) => {
   );
 };
 
-export default Select;
+export default Filters;

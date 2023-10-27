@@ -1,13 +1,13 @@
 const {Products} = require('../db');
 
-const getDetailName = async ( name ) => {
+const getAllProducts = async () => {
          
-    const product = await Products.findAll({where: {name: name},});
+    const product = await Products.findAll();
 
     return product;
                                   
 }
 
 module.exports = {
-    getDetailName
+    getAllProducts
 };
