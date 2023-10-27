@@ -70,6 +70,8 @@ function Home(props) {
       <h2>Bienvenido al Home</h2>
       <NavBar />
       <CardContainer products={Products}/>
+      <br />
+      <button onClick={()=> dispatch(getAllProducts())}>RESET</button>
     </div>
   );
 }
