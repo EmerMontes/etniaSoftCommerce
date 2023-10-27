@@ -3,6 +3,7 @@ import Header from '../../components/header/Header';
 import CardContainer from '../../components/cardsContainer/CardsContainer';
 import NavBar from '../../components/navBar/NavBar';
 import products from "../../utils/db.json"
+import SearchBar from '../../components/searchBar/SearchBar';
 
 function Home(props) {
 
