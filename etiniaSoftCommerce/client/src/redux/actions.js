@@ -36,7 +36,6 @@ export function getByID(id){
   }
 }
 
-
 export function getUsersByName(name){
   return async function(dispatch){
     const response = (await axios.get(`${URL}` + name)).data
@@ -97,7 +96,7 @@ export function filtrarPorDescuento(descuento) {
 
 export function getAllProducts() {
   return async function (dispatch) {
-    const productsInfo = await axios.get(`${URL}/products/list`);
+    const productsInfo = await axios.get(`${URL}/products/`);
     console.log (productsInfo)
     dispatch({
       type: GET_ALL_PRODUCTS,
