@@ -19,21 +19,17 @@ function Home(props) {
 
   useEffect(() => {
     loadProducts();
-    console.log(Products)
   }, []);
 
   const handleChange = (event)=>{
     const {name, value} = event.target
     if(name === "Gender"){
-      console.log(value)
       dispatch(getFilterGenero(value));
     }
     if(name === "Category"){
-      console.log(value);
       dispatch(getAllCategories(value));
     }
     if(name === "Color"){
-      console.log(value);
       dispatch(getFilterColor(value));
     }
     if(name === "Sale"){
@@ -41,7 +37,6 @@ function Home(props) {
       dispatch(filtrarPorDescuento(value));
     }
     if(name === "Size"){
-      console.log(value);
       dispatch(getFilterTalla(value));
     }
     if(name === "Price"){

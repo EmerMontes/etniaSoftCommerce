@@ -9,12 +9,12 @@ export default  function ProductDetail (props){
     const { id } = useParams();
 
     const loadIdProduct = ()=>{
-        dispatch(getByID(id))
+        if(id === Product.id) return;
+        else dispatch(getByID(id))
     }
 
     useEffect(()=>{
         loadIdProduct()
-        console.log(Product)
     },[])
 
     return(
