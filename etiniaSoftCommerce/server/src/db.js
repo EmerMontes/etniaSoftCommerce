@@ -2,9 +2,12 @@
 require("dotenv").config();
 const { Sequelize } = require("sequelize"); // Importamos la librería Sequelize para trabajar con la base de datos
 
+
+
 const fs = require("fs");
 const path = require("path");
 const { DB_USER, DB_PASSWORD, DB_HOST } = process.env; // Obtenemos las variables de entorno necesarias para la conexión a la base de datos
+
 
 // Creamos una instancia de Sequelize para establecer la conexión a la base de datos
 const sequelize = new Sequelize(
