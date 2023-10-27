@@ -1,0 +1,24 @@
+/* NavBar.module.css */
+.navbar {
+    background-color: gray;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 0.5rem; /* Ajusta el espaciado interno según tus necesidades */
+  }
+  
+  .navbar button {
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .navbar button:hover {
+    transform: scale(1.1); /* Efecto de escala al pasar el ratón por encima */
+  }
+  
+  /* Estilos para las imágenes dentro de los botones */
+  .navbar img {
+    max-width: 1.5rem; /* Tamaño adecuado para las imágenes en rem */
+  }
+  
