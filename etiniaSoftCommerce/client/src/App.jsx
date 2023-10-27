@@ -5,7 +5,8 @@ import ProductDetail from './pages/productDetail/ProductDetail';
 import Landing from './pages/landing/Landing';
 import UserDetail from './components/userDetail/UserDetail';
 import PayForm from './pages/payForm/PayForm';
-
+import ShoppingCart from './pages/shoppingCart/ShoppingCart';
+import LogIn from './pages/logIn/LogIn';
 import './App.css'
 
 
@@ -15,11 +16,12 @@ function App() {
   return (
     <div className="body-container">
     <Routes>
-      <Route path="/" element={<Landing />} />
+      <Route path="/" element={<LogIn />} />
       <Route path="/home" element={<Home />} />
       <Route path="/product/:id" element={<ProductDetail />} />
       <Route path='/user/:id' element={<UserDetail />}/>
       <Route path='/payform' element={<PayForm />}/>
+      <Route path="/carrito" element={<ShoppingCart />} />
     </Routes>
 </div>
   )
