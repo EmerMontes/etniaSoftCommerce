@@ -6,6 +6,7 @@ export const GET_ORDER_PRICE = "GET_ORDER_PRICE";
 export const GET_ALL_USERS = "GET_ALL_USERS"
 export const GET_USERS_BY_NAME="GET_USERS_BY_NAME"
 export const ADD_FAVORITES = "ADD_FAVORITES";
+export const GET_BY_ID="GET_BY_ID";
 //routes Delete
 export const DELETE_PRODUCT = "DELETE_PRODUCT"
 
@@ -24,6 +25,17 @@ export const GET_FILTER_SALE = "GET_FILTER_SALE";
 export const REMOVE_FAVORITES="REMOVE_FAVORITES";
 
 const URL='http://localhost:3001'
+
+export function getByID(id){
+  return async function(dispatch){
+    const {data}= await axios.get(`${URL}/products/${id}`)
+    dispatch({
+      type:GET_BY_ID,
+      payload:data
+    })
+  }
+}
+
 
 export function getUsersByName(name){
   return async function(dispatch){
