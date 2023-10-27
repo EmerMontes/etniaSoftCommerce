@@ -1,0 +1,41 @@
+
+/* Card.css */
+.card {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin: 10px;
+    text-align: center;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+  }
+  
+  .card:hover {
+    transform: scale(1.05);
+  }
+  
+  .card a {
+    text-decoration: none;
+    color: inherit;
+  }
+  
+  .card img {
+    max-width: 10rem;
+    margin-top: 10px;
+  }
+  
+  .card h2 {
+    font-size: 1.2rem;
+    margin: 0;
+    color: black;
+  }
+  
+  .card .price {
+    color: #007bff; /* Cambia el color del precio según tu diseño */
+  }
+  
+  .card .sale {
+    color: #ff0000; /* Cambia el color de la etiqueta de venta según tu diseño */
+  }
+  
