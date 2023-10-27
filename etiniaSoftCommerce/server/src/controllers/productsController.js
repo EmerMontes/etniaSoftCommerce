@@ -97,11 +97,23 @@ const updateProductById = async (id, newData) => {
     throw error;
   }
 };
+
+const handleProductFiltersControllers = (req, res) => {
+  const { color, size } = req.query;
+
+  // Imprime los valores de color y talla para confirmar que están llegando correctamente
+  console.log("Color:", color);
+  console.log("Size:", size);
+
+  res.json({ color, size });
+};
+
 module.exports = {
   getAllProducts,
   getProductsById,
   getProductByName,
   createProducts,
   deleteProductById,
-  updateProductById
+  updateProductById,
+  handleProductFiltersControllers
 };

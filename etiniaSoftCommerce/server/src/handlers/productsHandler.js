@@ -3,7 +3,8 @@ const {
     getProductByName,
     getAllProducts,
     createProducts,
-    deleteProductById 
+    deleteProductById,
+    handleProductFiltersControllers 
   } = require("../controllers/productsController");
 
   
@@ -64,7 +65,14 @@ const {
       res.status(400).json({ error: error.message });
     }
   };
-
+  const handleProductFilters = async (req, res) => {
+    try {
+      const product = await handleProductFiltersControllers (req, res);
+      res.status(201).json(product);
+    } catch (error) {
+      res.status(400).json({ error: error.message });
+    }
+  };
   
   // /:id = params si modifica
   // query === ? name&raza, no modifica la ruta
@@ -75,6 +83,7 @@ const {
     getProductsByName: getProductsByName,
     createProductsHandler: createProductsHandler,
     deleteProductsHandler:deleteProductsHandler,
-    updateProductsHandler: updateProductsHandler
+    updateProductsHandler: updateProductsHandler,
+    handleProductFilters:handleProductFilters
   };
   
