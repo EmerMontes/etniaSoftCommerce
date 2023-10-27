@@ -35,7 +35,7 @@ function Home(props) {
   const colorOpt = ["Azul", "Verde", "Negro", "Gris", "Rojo", "Blanco", "Rosa"];
   const saleOpt = [ "5%", "10%", "15%", "30%" ];
   const sizeOpt = [ "S", "L", "M", "XS", "XXL"];
-  const PriceOpt = ["50.000", "65.000", "75.000", "95.000", "130.000", "150.000" ]
+  const PriceOpt = ["highest", "lowest"]
 
 
   return (
