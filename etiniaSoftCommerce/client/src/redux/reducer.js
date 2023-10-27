@@ -108,11 +108,11 @@ const reducer = (state = initialState, action) => {
                 ...state, productShow: allProductsColor
             }
                               
-        // case GET_FILTER_SALE:
-        //     let allProductsDescuento = state.productShow.filter((product) =>product.sale !== null)
-        //     return {
-        //         ...state, productShow: allProductsDescuento
-        //     }
+        case GET_FILTER_SALE:
+            let allProductsDescuento = state.productShow.filter((product) =>product.sale !== null)
+            return {
+                ...state, productShow: allProductsDescuento
+            }
                    
        default:
            return {...state

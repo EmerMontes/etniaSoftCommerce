@@ -5,7 +5,7 @@ import CardContainer from '../../components/cardsContainer/CardsContainer';
 import NavBar from '../../components/navBar/NavBar';
 import SearchBar from '../../components/searchBar/SearchBar';
 import Select from '../../components/sizeSelector/SizeSelector';
-import { getAllProducts, getFilterGenero, getAllCategories, getFilterColor, getFilterTalla, getOrderPrecio } from '../../redux/actions';
+import { getAllProducts, getFilterGenero, getAllCategories, getFilterColor, getFilterTalla, getOrderPrecio, filtrarPorDescuento } from '../../redux/actions';
 
 function Home(props) {
   const Products = useSelector((state)=> state.productShow)
@@ -38,6 +38,7 @@ function Home(props) {
     }
     if(name === "Sale"){
       console.log(value);
+      dispatch(filtrarPorDescuento(value));
     }
     if(name === "Size"){
       console.log(value);
@@ -52,7 +53,7 @@ function Home(props) {
   const genderOpt = ["male", "female"];
   const categoryOpt = ["Camisetas", "Vestidos", "Pantalones", "Faldas", "Chaquetas", "Blusas"];
   const colorOpt = ["Azul", "Verde", "Negro", "Gris", "Rojo", "Blanco", "Rosa"];
-  const saleOpt = [ "5%", "10%", "15%", "30%" ];
+  const saleOpt = [ 0, 1];
   const sizeOpt = [ "S", "L", "M", "XS", "XXL"];
   const PriceOpt = ["highest", "lowest"]
 

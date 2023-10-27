@@ -1,6 +1,9 @@
 import { useState } from 'react';
+import { useDispatch} from 'react-redux';
+
 
 function SearchBar(props) {
+  const dispatch = useDispatch();
   const [name, setName] = useState("");
 
   const handleChange = (event)=>{
@@ -8,7 +11,7 @@ function SearchBar(props) {
  };
 
  const handleSearch = (event)=>{
-  //dispatch()
+  console.log(name)
   setName("");
 }
 
