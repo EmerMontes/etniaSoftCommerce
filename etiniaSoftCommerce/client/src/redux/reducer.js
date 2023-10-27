@@ -36,15 +36,14 @@ const reducer = (state = initialState, action) => {
         case ADD_FAVORITES:
             return {
                 ...state,
-                allFavorites: action.payload,
-                allProducts: action.payload
+                allFavorites: [...state.allFavorites,action.payload]
             }
 
         case REMOVE_FAVORITES:
+            let productRemove = state.allFavorites.filter((product) =>product.id !== action.payload)
             return {
                 ...state,
-                allFavorites: action.payload,
-                allProducts: action.payload //se puso para solucionar bug
+                allFavorites: productRemove,
                 }
         
 

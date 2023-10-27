@@ -83,7 +83,8 @@ export function filtrarPorDescuento(descuento) {
 
 export function getAllProducts() {
   return async function (dispatch) {
-    const productsInfo = await axios.get(`${URL}/products`);
+    const productsInfo = await axios.get(`${URL}/products/list`);
+    console.log (productsInfo)
     dispatch({
       type: GET_ALL_PRODUCTS,
       payload: productsInfo.data

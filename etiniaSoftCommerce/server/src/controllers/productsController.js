@@ -97,11 +97,13 @@ const updateProductById = async (id, newData) => {
     throw error;
   }
 };
+
 module.exports = {
   getAllProducts,
   getProductsById,
   getProductByName,
   createProducts,
   deleteProductById,
+
   updateProductById
 };

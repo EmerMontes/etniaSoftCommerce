@@ -1,15 +1,17 @@
-const {getAllProducts} = require('../controllers/getAllProducts')
+const {getAllProducts} = require('../controllers/productsController')
 
-const  handAllProductsAdmin = async (req, res) => {
-
+const  handAllProductsRend = async (req, res) => {
+console.log('Hola mundo')
 
     try {
-             
+            
         const allProducts = await getAllProducts();
+        
         let productsRend = [];
         let indicador = true;
         productsRend.push(allProducts[0]);
         for (let i=1; i<allProducts.length; i++) {
+            indicador = true;
             for (let j=0; j<productsRend.length; j++){
                 if (allProducts[i].name === productsRend[j].name) indicador = false;
             }
@@ -25,5 +27,5 @@ const  handAllProductsAdmin = async (req, res) => {
 }
 
 module.exports = {
-    handAllProductsAdmin
+    handAllProductsRend
 }

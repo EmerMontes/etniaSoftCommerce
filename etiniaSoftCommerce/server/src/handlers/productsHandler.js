@@ -3,7 +3,8 @@ const {
     getProductByName,
     getAllProducts,
     createProducts,
-    deleteProductById 
+
+    deleteProductById ,
   } = require("../controllers/productsController");
 
   
@@ -75,6 +76,8 @@ const {
     getProductsByName: getProductsByName,
     createProductsHandler: createProductsHandler,
     deleteProductsHandler:deleteProductsHandler,
+
     updateProductsHandler: updateProductsHandler
+
   };
   
