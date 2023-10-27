@@ -1,7 +1,10 @@
 productsRouter = require("express").Router();
+
+const {handAllProductsRend} = require('../handlers/handAllProductsRend')
 const {getProductseHandler, getIdHandler, getProductsByName, createProductsHandler,deleteProductsHandler,updateProductsHandler,handleProductFilters} = require("../handlers/productsHandler")
 
 productsRouter.get("/", getProductseHandler);
+productsRouter.get("/list", handAllProductsRend);
 productsRouter.get("/:id", getIdHandler);
 productsRouter.get("/name/:name",getProductsByName);
 productsRouter.get("/filter/:filter", handleProductFilters);
