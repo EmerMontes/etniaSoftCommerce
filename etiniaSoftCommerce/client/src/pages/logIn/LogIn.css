@@ -28,7 +28,7 @@
   }
   
   input {
-    width: 100%;
+    width: 18rem;
     padding: 10px;
     border-radius: 5px;
   }
@@ -42,6 +42,8 @@
   }
   
   .google-login {
+    height: 3rem;
+    padding: auto;
     background-color: #fff;
     color: #000;
     border: 1px solid #ccc;
