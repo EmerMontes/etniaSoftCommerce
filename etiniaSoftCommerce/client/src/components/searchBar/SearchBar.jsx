@@ -5,10 +5,10 @@ function SearchBar(props) {
 
   const handleChange = (event)=>{
     setName(event.target.value)
-    console.log(name)
  };
 
  const handleSearch = (event)=>{
+  //dispatch()
   setName("");
 }
 
