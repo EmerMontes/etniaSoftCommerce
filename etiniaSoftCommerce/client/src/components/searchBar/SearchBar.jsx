@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useDispatch} from 'react-redux';
+import { getProductsname } from '../../redux/actions';
 
 
 function SearchBar(props) {
@@ -11,7 +12,7 @@ function SearchBar(props) {
  };
 
  const handleSearch = (event)=>{
-  console.log(name)
+  dispatch(getProductsname(name));
   setName("");
 }
 

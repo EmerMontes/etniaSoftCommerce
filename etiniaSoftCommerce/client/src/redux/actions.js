@@ -27,7 +27,7 @@ const URL='http://localhost:3001'
 
 export function getProductsname(name){
   return async function(dispatch){
-    const productsname= (await axios.get(`${URL}/products/name:${name}`)).data
+    const productsname= (await axios.get(`${URL}/products/name/${name}`)).data
     dispatch({
         type: GET_PRODUCTS_BY_NAME,
         payload: productsname
@@ -106,7 +106,6 @@ export function filtrarPorDescuento(descuento) {
 export function getAllProducts() {
   return async function (dispatch) {
     const productsInfo = await axios.get(`${URL}/products/`);
-    console.log (productsInfo)
     dispatch({
       type: GET_ALL_PRODUCTS,
       payload: productsInfo.data
