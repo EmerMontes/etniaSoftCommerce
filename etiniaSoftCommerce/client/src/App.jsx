@@ -1,7 +1,7 @@
 import { Routes, Route} from 'react-router-dom';
 import { useState } from 'react'
 import Home from './pages/home/Home'
-import Dashboard from './pages/admin/dashboard/index'
+
 import ProductDetail from './pages/productDetail/ProductDetail';
 import Landing from './pages/landing/Landing';
 import UserDetail from './components/userDetail/UserDetail';
@@ -18,15 +18,6 @@ function App() {
   return (
     <div className="body-container">
     <Routes>
-<<<<<<< HEAD
-      <Route path="/" element={<Landing />} />
-      <Route path="/home" element={<Home />} />
-      <Route path="/admin" element={<Dashboard />} />
-
-      <Route path="/product/:id" element={<ProductDetail />} />
-      <Route path='/user/:id' element={<UserDetail />}/>
-      <Route path='/payform' element={<PayForm />}/>
-=======
 
       <Route exact path="/" element={<LogIn />} />
       <Route exact path="/home" element={<Home />} />
@@ -36,7 +27,7 @@ function App() {
       <Route exact path="/carrito" element={<ShoppingCart />} />   
      <Route exact path="*" element={<NotFound404/>}/>
 
->>>>>>> 6b5a9f0ed0080c85e3160ddbc8421efb345c9efc
+
     </Routes>
 </div>
   )
