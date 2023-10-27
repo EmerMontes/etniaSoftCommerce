@@ -1,6 +1,8 @@
 import { GET_ALL_PRODUCTS, GET_DETAIL_SIZE_COLOR, GET_ORDER_PRICE,
     GET_FILTER_GENDER, GET_FILTER_CATEGORY, GET_FILTER_COLOR, GET_FILTER_SIZE, ADD_FAVORITES,
-    REMOVE_FAVORITES, GET_FILTER_SALE, CREATE_PRODUCT, CREATE_USER, DELETE_PRODUCT,GET_ALL_USERS, GET_USERS_BY_NAME,UPDATE_USER,GET_BY_ID} from "./actions";
+    REMOVE_FAVORITES, GET_FILTER_SALE, CREATE_PRODUCT, CREATE_USER, DELETE_PRODUCT,
+    GET_ALL_USERS, GET_USERS_BY_NAME,UPDATE_USER,GET_BY_ID,
+GET_PRODUCTS_BY_NAME} from "./actions";
 
 
 const initialState = {
@@ -25,6 +27,11 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 productDetail:action.payload,
             }
+            case GET_PRODUCTS_BY_NAME:
+                return {
+                    ...state,
+                    allProducts: action.payload,
+                }
 
 
         case GET_ALL_USERS:
