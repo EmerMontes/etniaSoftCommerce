@@ -1,18 +1,28 @@
-import React, { useState } from 'react';
+
+
 import styles from './SearchBar.module.css'; // Importa los estilos CSS
 import Lupa from '../../assets/png/Lupa.png';
 
+import { useState } from 'react';
+import { useDispatch} from 'react-redux';
+import { getProductsname } from '../../redux/actions';
+
+
+
 function SearchBar(props) {
+  const dispatch = useDispatch();
   const [name, setName] = useState("");
 
   const handleChange = (event) => {
     setName(event.target.value);
   };
 
-  const handleSearch = (event) => {
-    //dispatch()
-    setName("");
-  }
+
+ const handleSearch = (event)=>{
+  dispatch(getProductsname(name));
+  setName("");
+}
+
 
   return (
     <div className={styles.searchbar}>
