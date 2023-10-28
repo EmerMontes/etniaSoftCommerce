@@ -11,7 +11,7 @@ const initialState = {
    allFavorites: [],
    productShow: [],
    allUsers: [],
-   page:[]
+   page: 1
 };
 
 const reducer = (state = initialState, action) => {
@@ -123,7 +123,10 @@ const reducer = (state = initialState, action) => {
             }
         
         case PAGINATION:
-            let page = state.page.pagination(page)
+            return {
+                ...state, 
+                page: action.payload, 
+              };
                    
        default:
            return {...state
