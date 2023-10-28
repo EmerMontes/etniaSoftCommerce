@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import './Card.css';
 
 function Card({id, name, gender, sale, img, color, price}) {
-  console.log(id)
+
   return (
     <div className="card">
       <Link to={`/product/${id}`}>
