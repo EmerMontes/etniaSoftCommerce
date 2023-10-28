@@ -8,7 +8,7 @@ function CardContainer(props) {
   
   return (
     <div className="card-container">
-      {productArray[1].map(product => (
+    {productArray[1]?.map(product => (
       <Card 
           key={product.id}
           id={product.id}

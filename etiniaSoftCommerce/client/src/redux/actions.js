@@ -22,6 +22,7 @@ export const GET_FILTER_COLOR = "GET_FILTER_COLOR";
 export const GET_FILTER_SIZE = "GET_FILTER_SIZE";
 export const GET_FILTER_SALE = "GET_FILTER_SALE";
 export const REMOVE_FAVORITES="REMOVE_FAVORITES";
+export const PAGINATION = "PAGINATION";
 
 const URL='http://localhost:3001'
 
@@ -195,4 +196,12 @@ export function getFilterTalla(talla) {
 }
 }
 
-
+export function pagination(page){
+  return async function(dispatch){
+    const products= (await axios.get(`${URL}/products?page=${page}`)).data
+    dispatch({
+        type: PAGINATION,
+        payload: products
+    })
+}
+}

@@ -2,7 +2,7 @@ import { GET_ALL_PRODUCTS, GET_DETAIL_SIZE_COLOR, GET_ORDER_PRICE,
     GET_FILTER_GENDER, GET_FILTER_CATEGORY, GET_FILTER_COLOR, GET_FILTER_SIZE, ADD_FAVORITES,
     REMOVE_FAVORITES, GET_FILTER_SALE, CREATE_PRODUCT, CREATE_USER, DELETE_PRODUCT,
     GET_ALL_USERS, GET_USERS_BY_NAME,UPDATE_USER,GET_BY_ID,
-GET_PRODUCTS_BY_NAME} from "./actions";
+GET_PRODUCTS_BY_NAME, PAGINATION} from "./actions";
 
 
 const initialState = {
@@ -11,7 +11,7 @@ const initialState = {
    allFavorites: [],
    productShow: [],
    allUsers: [],
-
+   page:[]
 };
 
 const reducer = (state = initialState, action) => {
@@ -121,6 +121,9 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state, productShow: allProductsDescuento
             }
+        
+        case PAGINATION:
+            let page = state.page.pagination(page)
                    
        default:
            return {...state
