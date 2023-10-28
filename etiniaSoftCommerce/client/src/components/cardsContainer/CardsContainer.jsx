@@ -1,16 +1,9 @@
 import React, { useEffect, useSelector } from 'react';
 import Card from '../card/Card';
 import './CardsContainer.css';
-import { pagination } from '../../redux/actions';
-
 
 function CardContainer(props) {
-  const page = useSelector((state) => state.pagination)
   
-  const dispatch = useDispatch()
-  useEffect(()=>{dispatch(pagination(2))},[])
- 
-  console.log(page)
   const productArray = Object.values(props.products || {});
   
   return (
