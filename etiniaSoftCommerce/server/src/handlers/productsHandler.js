@@ -3,7 +3,6 @@ const {
     getProductByName,
     getAllProducts,
     createProducts,
-
     deleteProductById ,
   } = require("../controllers/productsController");
 
@@ -20,8 +19,9 @@ const {
   
   const getProductseHandler = async (req, res) => {
     try {
-      const response = await getAllProducts();
-      res.status(200).json(response);
+      await getAllProducts(req, res, () => {
+        res.status(200).json(res.paginatedResults); 
+      });
     } catch (error) {
       res.status(400).json({ error: error.message });
     }

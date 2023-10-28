@@ -3,10 +3,13 @@ import Card from '../card/Card';
 import './CardsContainer.css';
 
 function CardContainer(props) {
+ 
+  const productArray = Object.values(props.products || {});
+  
   return (
     <div className="card-container">
-      {props.products?.map(product => (
-        <Card 
+      {productArray[1].map(product => (
+      <Card 
           key={product.id}
           id={product.id}
           name={product.name}
@@ -17,8 +20,10 @@ function CardContainer(props) {
           price={product.price}
         />
       ))}
+    <div><button>previous</button><button>next</button>
+      </div>
     </div>
-  );
+  ); 
 }
 
 export default CardContainer;
