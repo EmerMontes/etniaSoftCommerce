@@ -4,10 +4,8 @@ import Header from '../../components/header/Header';
 import CardContainer from '../../components/cardsContainer/CardsContainer';
 import NavBar from '../../components/navBar/NavBar';
 import Filters from '../../components/filters/Filters';
-import SearchBar from '../../components/searchBar/SearchBar';
-import Select from '../../components/sizeSelector/SizeSelector';
 import { getAllProducts, getFilterGenero, getAllCategories, getFilterColor, getFilterTalla, getOrderPrecio, filtrarPorDescuento } from '../../redux/actions';
-
+import styles from './Home.module.css';
 
 function Home(props) {
   const Products = useSelector((state)=> state.productShow)
@@ -56,7 +54,7 @@ function Home(props) {
 
 
   return (
-    <div className="home">
+    <div className={styles.home}>
       <NavBar />
 
       <Header />

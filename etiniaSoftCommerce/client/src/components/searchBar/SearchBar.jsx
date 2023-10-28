@@ -1,8 +1,5 @@
-
-
 import styles from './SearchBar.module.css'; // Importa los estilos CSS
 import Lupa from '../../assets/png/Lupa.png';
-
 import { useState } from 'react';
 import { useDispatch} from 'react-redux';
 import { getProductsname } from '../../redux/actions';
