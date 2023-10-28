@@ -2,6 +2,8 @@
 .select-container {
     display: flex;
     align-items: center;
+    align-content: center;
+    text-align: center;
   }
   
   select {
