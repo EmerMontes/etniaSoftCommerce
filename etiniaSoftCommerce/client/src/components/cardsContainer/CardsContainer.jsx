@@ -2,11 +2,10 @@ import React, { useEffect, useSelector } from 'react';
 import Card from '../card/Card';
 import './CardsContainer.css';
 
-
-
 function CardContainer(props) {
 
   const productArray = props.products ? Object.values(props.products) : [];
+
 
   return (
     <div className="card-container">
