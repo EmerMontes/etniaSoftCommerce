@@ -47,10 +47,14 @@ button {
 
 .google-login {
   height: 3rem;
-  padding: auto;
+  padding: 0,1vh;
   background-color: #fff;
   color: #000;
   border: 1px solid #ccc;
+  margin-bottom: 2vh;
+  align-items: center;
+  align-content: center;
+  text-align: center;
 }
 
 .googlelogo {
