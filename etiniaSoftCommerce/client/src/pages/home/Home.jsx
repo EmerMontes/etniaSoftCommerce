@@ -48,14 +48,7 @@ function Home(props) {
     loadProducts();
   }, [dispatch]);
 
-  const handlePreviousClick = () => {
-    dispatch(pagination(num - 1));
-  };
 
-  const handleNextClick = () => {
-    dispatch(pagination(num + 1));
-    console.log(num)
-  };
 
   const handleChange = (event) => {
     const { name, value } = event.target;
