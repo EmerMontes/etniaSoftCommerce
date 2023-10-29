@@ -4,11 +4,9 @@ const {getProductseHandler, getIdHandler, getProductsByName, createProductsHandl
 const {handOrderPrice}=require('../handlers/handOrderPrice')
 
 productsRouter.get("/", getProductseHandler);
-productsRouter.get("/next", getProductseHandler)
-productsRouter.get("/previous", getProductseHandler)
 productsRouter.get("/:id", getIdHandler);
 productsRouter.get("/name/:name",getProductsByName);
-productsRouter.get("/order/:order",handOrderPrice);
+productsRouter.get("/order/",handOrderPrice);
 
 
 productsRouter.post("/",createProductsHandler);

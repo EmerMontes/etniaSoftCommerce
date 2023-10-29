@@ -1,11 +1,11 @@
-const {getAllProducts} = require('../controllers/getAllProducts')
+const {paginateAllProducts} = require('../controllers/productsController')
 
 const  handOrderPrice = async (req, res) => {
 
 
     try {
 
-        const products = await getAllProducts();
+        const products = await paginateAllProducts();
         const {order} = req.params;
         if (order === 'A'){
             products.sort((a,b) => a.price - b.price );

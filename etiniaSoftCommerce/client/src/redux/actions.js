@@ -199,16 +199,12 @@ export const pagination = (pageNumber) => {
   return async (dispatch) => {
  console.log(`${URL}/products?page=${pageNumber}`);
     try {
-      // Realiza la solicitud a la API utilizando axios o tu librería de solicitud preferida
       const response = await axios.get(`${URL}/products?page=${pageNumber}`);
-
-      // Despacha una acción para actualizar el estado con los datos recibidos
       dispatch({
         type: PAGINATION,
-        payload: response.data, // Asume que los datos se encuentran en response.data
+        payload: response.data, 
       });
     } catch (error) {
-      // Maneja cualquier error de la solicitud
       console.error('Error en la solicitud de paginación:', error);
     }
   };
