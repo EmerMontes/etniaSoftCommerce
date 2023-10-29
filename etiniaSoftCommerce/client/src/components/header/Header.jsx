@@ -1,12 +1,13 @@
 import React from 'react';
-import SearchBar from '../searchBar/SearchBar'; // Asegúrate de importar el componente SearchBar
-// import LogoEtnia-blanco from "../../assets/png/Logo-Etnia-blanco";
+import SearchBar from '../searchBar/SearchBar';
+import LogoEtniablanco from '../../assets/png/LogoEtniablanco.png';
+import styles from './Header.module.css'; // Importa los estilos CSS
 
 function Header(props) {
   return (
-    <div className="header">
-      <div className="logo">
-        {/* Aquí debes mostrar el logo de la marca */}
+    <div className={styles.header}>
+      <div className={styles.logo}>
+        <img src={LogoEtniablanco} alt="Etnia Logo" />
       </div>
       <SearchBar />
     </div>
@@ -14,4 +15,3 @@ function Header(props) {
 }
 
 export default Header;
-

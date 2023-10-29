@@ -5,14 +5,13 @@ export const GET_DETAIL_SIZE_COLOR = "GET_DETAIL_SIZE_COLOR";
 export const GET_ORDER_PRICE = "GET_ORDER_PRICE";
 export const GET_ALL_USERS = "GET_ALL_USERS"
 export const GET_USERS_BY_NAME="GET_USERS_BY_NAME"
+export const GET_PRODUCTS_BY_NAME="GET_PRODUCTS_BY_NAME";
 export const ADD_FAVORITES = "ADD_FAVORITES";
 export const GET_BY_ID="GET_BY_ID";
 //routes Delete
 export const DELETE_PRODUCT = "DELETE_PRODUCT"
-
 //Routes Post
 export const CREATE_PRODUCT = "CREATE_PRODUCT";
-
 export const CREATE_USER = "CREATE_USER"
 //routes Put
 export const UPDATE_USER = "UPDATE_USER"
@@ -24,7 +23,40 @@ export const GET_FILTER_SIZE = "GET_FILTER_SIZE";
 export const GET_FILTER_SALE = "GET_FILTER_SALE";
 export const REMOVE_FAVORITES="REMOVE_FAVORITES";
 
+export const CLEAR_ERRORS = "CLEAR_ERRORS";
+export const ERRORS = "ERRORS";
+
+
+export const PAGINATION ="SET_PAGINATION"
+
 const URL='http://localhost:3001'
+
+export function setNewErrors(obj){
+  return async function(dispatch){
+      dispatch({
+          type: ERRORS,
+          payload: obj
+      })
+  }
+};
+
+export function clearErrors(){
+  return async function(dispatch){
+      dispatch({
+          type: CLEAR_ERRORS
+      })
+  }
+};
+
+export function getProductsname(name){
+  return async function(dispatch){
+    const productsname= (await axios.get(`${URL}/products/name/${name}`)).data
+    dispatch({
+        type: GET_PRODUCTS_BY_NAME,
+        payload: productsname
+    })
+}
+}
 
 export function getByID(id){
   return async function(dispatch){
@@ -88,19 +120,25 @@ export function createUser(payload) {
 }
 
 export function filtrarPorDescuento(descuento) {
-  return{
+  console.log(descuento)
+  return async function (dispatch) {
+    const productFilter = (await axios.get(`${URL}/products?sale=${descuento}`)).data
+    console.log(productFilter)
+    dispatch({
       type: GET_FILTER_SIZE,
-      payload: descuento
+      payload: productFilter
+    })
   }
 }
 
+
 export function getAllProducts() {
   return async function (dispatch) {
-    const productsInfo = await axios.get(`${URL}/products/`);
-    console.log (productsInfo)
+    const productsInfo = await axios.get(`${URL}/products`);
+ 
     dispatch({
       type: GET_ALL_PRODUCTS,
-      payload: productsInfo.data
+      payload: productsInfo.data.results
     });
   }
 }
@@ -117,7 +155,7 @@ export function getAddFavorites(id) {
     console.log(error);
    }
   };
-};
+}
 
 export function removeFav (id) {
      return {
@@ -127,13 +165,17 @@ export function removeFav (id) {
 }
 
 
-export function getAllCategories(category) {
-  return{
-    type:GET_FILTER_CATEGORY,
-    payload:category
+export function getFilterCategory(category) {
+  return async function (dispatch) {
+    const productFilter = (await axios.get(`${URL}/products?category=${category}`)).data
+    console.log(productFilter)
+    dispatch({
+      type:GET_FILTER_CATEGORY,
+      payload:productFilter
+    })
   }
-
 }
+
 
 export function createProduct(newproduct) {
   return async function (dispatch) {
@@ -157,34 +199,61 @@ export function getDetailTallaColor(name) {
 
 export function getOrderPrecio(order) {
   return async function(dispatch) {
-    const productorder=await axios.get(`${URL}/order/${order}`);
-    dispatch({
-      type:GET_ORDER_PRICE,
-      payload:productorder
-    });
-   
-  };
+      const productorder = (await axios.get(`${URL}/products?price=${order}`)).data;
+      console.log(productorder)
+       dispatch({
+        type:GET_ORDER_PRICE,
+        payload:productorder
+      })
+    
+  }
 }
+
 
 export function getFilterGenero(genero) {
-  return {
-    type: GET_FILTER_GENDER,
-    payload:genero
-  };
+  return async function (dispatch) {
+    const productFilter = (await axios.get(`${URL}/products?gender=${genero}`)).data
+    dispatch({
+      type: GET_FILTER_GENDER,
+      payload:productFilter
+    })
+  }
 }
+
 
 export function getFilterColor(color) {
-  return {
-    type: GET_FILTER_COLOR,
-    payload: color
-  };
+  return async function (dispatch) {
+    const productFilter = (await axios.get(`${URL}/products?color=${color}`)).data
+    dispatch({
+      type: GET_FILTER_COLOR,
+      payload: productFilter
+    })
+  }
 }
+
 
 export function getFilterTalla(talla) {
-  return {
-    type: GET_FILTER_SIZE,
-    payload:talla
-}
+  return async function (dispatch) {
+    const productFilter = (await axios.get(`${URL}/products?size=${talla}`)).data
+    dispatch({
+      type: GET_FILTER_SIZE,
+      payload:productFilter
+    })
+  }
 }
 
 
+export const pagination = (pageNumber) => {
+  return async (dispatch) => {
+ console.log(`${URL}/products?page=${pageNumber}`);
+    try {
+      const response = await axios.get(`${URL}/products?page=${pageNumber}`);
+      dispatch({
+        type: PAGINATION,
+        payload: response.data, 
+      });
+    } catch (error) {
+      console.error('Error en la solicitud de paginación:', error);
+    }
+  };
+};
