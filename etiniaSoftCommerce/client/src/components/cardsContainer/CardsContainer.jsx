@@ -1,4 +1,6 @@
-import React, { useEffect, useSelector } from 'react';
+/* eslint-disable react/prop-types */
+/* eslint-disable no-unused-vars */
+import React, { useSelector } from 'react';
 import Card from '../card/Card';
 import styles from './CardsContainer.module.css';
 

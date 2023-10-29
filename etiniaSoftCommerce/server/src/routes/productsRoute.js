@@ -1,13 +1,13 @@
 productsRouter = require("express").Router();
 
-const {getProductseHandler, getIdHandler, getProductsByName, createProductsHandler,deleteProductsHandler,updateProductsHandler,handleProductFilters,} = require("../handlers/productsHandler")
-const {handOrderPrice}=require('../handlers/handOrderPrice')
+const {getAllProductseHandler,getProductseHandler, getIdHandler, getProductsByName,
+      createProductsHandler,deleteProductsHandler,updateProductsHandler,} = require("../handlers/productsHandler")
 
 productsRouter.get("/", getProductseHandler);
+productsRouter.get("/all-products",getAllProductseHandler);
+
 productsRouter.get("/:id", getIdHandler);
 productsRouter.get("/name/:name",getProductsByName);
-productsRouter.get("/order/",handOrderPrice);
-
 
 productsRouter.post("/",createProductsHandler);
 productsRouter.delete("/delete/:id", deleteProductsHandler);

@@ -128,10 +128,11 @@ export function filtrarPorDescuento(descuento) {
 
 export function getAllProducts() {
   return async function (dispatch) {
-    const productsInfo = await axios.get(`${URL}/products/`);
+    const productsInfo = await axios.get(`${URL}/products`);
+ 
     dispatch({
       type: GET_ALL_PRODUCTS,
-      payload: productsInfo.data
+      payload: productsInfo.data.results
     });
   }
 }
@@ -148,7 +149,7 @@ export function getAddFavorites(id) {
     console.log(error);
    }
   };
-};
+}
 
 export function removeFav (id) {
      return {
