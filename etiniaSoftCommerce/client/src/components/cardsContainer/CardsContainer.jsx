@@ -2,7 +2,7 @@
 /* eslint-disable no-unused-vars */
 import React, { useSelector } from 'react';
 import Card from '../card/Card';
-import './CardsContainer.css';
+import styles from './CardsContainer.module.css';
 
 function CardContainer(props) {
 
@@ -10,7 +10,7 @@ function CardContainer(props) {
 
 
   return (
-    <div className="card-container">
+    <div className={styles['card-container']}>
     {productArray[1]?.map(product => (
       <Card 
           key={product.id}
