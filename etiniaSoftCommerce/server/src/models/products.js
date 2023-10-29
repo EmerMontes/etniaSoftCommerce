@@ -4,7 +4,6 @@ module.exports = (sequelize) => {
   sequelize.define("Products",{
       id: {
         type: DataTypes.INTEGER,
-        autoIncrement: true,
         allowNull: false,
         primaryKey: true,
       },
@@ -38,8 +37,7 @@ module.exports = (sequelize) => {
       },
       img:{
         type: DataTypes.TEXT,
-      defaultValue: "https://www.latercera.com/resizer/DQq-BF-ulL7eY2IK1V9CdfW4SJI=/arc-anglerfish-arc2-prod-copesa/public/JRVRFF65PNAJ5PU4JCRHYFJRP4.jpeg"
-      
+        defaultValue: "https://www.latercera.com/resizer/DQq-BF-ulL7eY2IK1V9CdfW4SJI=/arc-anglerfish-arc2-prod-copesa/public/JRVRFF65PNAJ5PU4JCRHYFJRP4.jpeg"
       },
       description: {
         type: DataTypes.STRING,
@@ -52,7 +50,6 @@ module.exports = (sequelize) => {
       quantity: {
         type: DataTypes.DECIMAL,
         allowNull: false,
-        
       },
     },
     {timestamps: false}
