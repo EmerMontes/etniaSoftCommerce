@@ -1,10 +1,10 @@
 import React from 'react';
 import Card from '../card/Card';
-import './CardsContainer.css';
+import styles from './CardsContainer.module.css';
 
 function CardContainer(props) {
   return (
-    <div className="card-container">
+    <div className={styles['card-container']}>
       {props.products?.map(product => (
         <Card 
           key={product.id}
