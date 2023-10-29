@@ -56,8 +56,6 @@ const reducer = (state = initialState, action) => {
                     
                 }
 
-
-
         case GET_ALL_USERS:
             return {
                 ...state,
@@ -125,38 +123,33 @@ const reducer = (state = initialState, action) => {
                     errors: {...state.errors, [objError.type]: objError.error}
                 }
 
-       case GET_FILTER_GENDER:
-                let allProductsGenero = state.productShow.filter((product) =>product.gender === action.payload)
-                return {
-                    ...state, productShow: allProductsGenero
-                }
-        
-        
+        case GET_FILTER_GENDER:
+                    return {
+                        ...state, productShow: action.payload
+                    }
+    
         case GET_FILTER_CATEGORY:
-            let allProductsCategory = state.productShow.filter((product) =>product.category === action.payload)
-            return {
-                ...state, productShow: allProductsCategory
-            }
+                return {
+                        ...state, productShow: action.payload
+                    }
+        
 
         case GET_FILTER_SIZE:
-            let allProductsTalla = state.productShow.filter((product) =>product.size === action.payload)
-            return {
-                ...state, productShow: allProductsTalla
-            }
+                return {
+                    ...state, productShow: action.payload
+                }
         
         case GET_FILTER_COLOR:
-            let allProductsColor = state.productShow.filter((product) =>product.color === action.payload)
-            return {
-                ...state, productShow: allProductsColor
-            }
-                              
+                return {
+                    ...state, productShow: action.payload
+                }
+                   
         case GET_FILTER_SALE:
-            let allProductsDescuento = state.productShow.filter((product) =>product.sale !== null)
             return {
-                ...state, productShow: allProductsDescuento
+                ...state, productShow: action.payload
             }
         
-            case 'SET_PAGINATION':
+        case 'SET_PAGINATION':
                 return {
                   ...state,
                   pagination: action.payload, 

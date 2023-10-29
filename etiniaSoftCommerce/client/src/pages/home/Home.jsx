@@ -9,7 +9,7 @@ import Filters from "../../components/filters/Filters";
 import {
   getAllProducts,
   getFilterGenero,
-  getAllCategories,
+  getFilterCategory,
   getFilterColor,
   getFilterTalla,
   getOrderPrecio,
@@ -56,7 +56,7 @@ function Home(props) {
       dispatch(getFilterGenero(value));
     }
     if (name === "Category") {
-      dispatch(getAllCategories(value));
+      dispatch(getFilterCategory(value));
     }
     if (name === "Color") {
       dispatch(getFilterColor(value));
@@ -77,14 +77,14 @@ function Home(props) {
   const genderOpt = ["male", "female"];
   const categoryOpt = [
     "Camisetas",
-    "Vestidos",
-    "Pantalones",
+    "Licras",
+    "Tops",
     "Faldas",
     "Chaquetas",
     "Blusas",
   ];
-  const colorOpt = ["Azul", "Verde", "Negro", "Gris", "Rojo", "Blanco", "Rosa"];
-  const saleOpt = [0, 1];
+  const colorOpt = ["Gris Jasped", "Verde Menta", "Negro", "Gris Oscuro", "Mora en leche", "Blanco", "Palo de Rosa Claro"];
+  const saleOpt = ["Sale", "No Sale"];
   const sizeOpt = ["S", "L", "M", "XS", "XXL"];
   const PriceOpt = ["highest", "lowest"];
 

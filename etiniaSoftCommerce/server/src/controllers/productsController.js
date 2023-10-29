@@ -35,9 +35,14 @@ const paginateAllProducts = async (req, res, next) => {
       [Op.iLike]: `%${color}%`,
     };
   }
-  if (sale) {
+  if (sale === "Sale") {
     whereConditions.sale = {
-      [Op.iLike]: `%${sale}%`,
+      [Op.iLike]: `%${sale}%` !== 0,
+    };
+  }
+  if (sale === "No Sale") {
+    whereConditions.sale = {
+      [Op.iLike]: `%${sale}%` == 0,
     };
   }
   if (size) {

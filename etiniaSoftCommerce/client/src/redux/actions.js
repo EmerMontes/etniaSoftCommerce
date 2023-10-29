@@ -120,11 +120,17 @@ export function createUser(payload) {
 }
 
 export function filtrarPorDescuento(descuento) {
-  return{
+  console.log(descuento)
+  return async function (dispatch) {
+    const productFilter = (await axios.get(`${URL}/products?sale=${descuento}`)).data
+    console.log(productFilter)
+    dispatch({
       type: GET_FILTER_SIZE,
-      payload: descuento
+      payload: productFilter
+    })
   }
 }
+
 
 export function getAllProducts() {
   return async function (dispatch) {
@@ -159,13 +165,17 @@ export function removeFav (id) {
 }
 
 
-export function getAllCategories(category) {
-  return{
-    type:GET_FILTER_CATEGORY,
-    payload:category
+export function getFilterCategory(category) {
+  return async function (dispatch) {
+    const productFilter = (await axios.get(`${URL}/products?category=${category}`)).data
+    console.log(productFilter)
+    dispatch({
+      type:GET_FILTER_CATEGORY,
+      payload:productFilter
+    })
   }
-
 }
+
 
 export function createProduct(newproduct) {
   return async function (dispatch) {
@@ -189,35 +199,49 @@ export function getDetailTallaColor(name) {
 
 export function getOrderPrecio(order) {
   return async function(dispatch) {
-    const productorder=await axios.get(`${URL}/order/${order}`);
-    dispatch({
-      type:GET_ORDER_PRICE,
-      payload:productorder
-    });
-   
-  };
+      const productorder = (await axios.get(`${URL}/products?price=${order}`)).data;
+      console.log(productorder)
+       dispatch({
+        type:GET_ORDER_PRICE,
+        payload:productorder
+      })
+    
+  }
 }
+
 
 export function getFilterGenero(genero) {
-  return {
-    type: GET_FILTER_GENDER,
-    payload:genero
-  };
+  return async function (dispatch) {
+    const productFilter = (await axios.get(`${URL}/products?gender=${genero}`)).data
+    dispatch({
+      type: GET_FILTER_GENDER,
+      payload:productFilter
+    })
+  }
 }
+
 
 export function getFilterColor(color) {
-  return {
-    type: GET_FILTER_COLOR,
-    payload: color
-  };
+  return async function (dispatch) {
+    const productFilter = (await axios.get(`${URL}/products?color=${color}`)).data
+    dispatch({
+      type: GET_FILTER_COLOR,
+      payload: productFilter
+    })
+  }
 }
 
+
 export function getFilterTalla(talla) {
-  return {
-    type: GET_FILTER_SIZE,
-    payload:talla
+  return async function (dispatch) {
+    const productFilter = (await axios.get(`${URL}/products?size=${talla}`)).data
+    dispatch({
+      type: GET_FILTER_SIZE,
+      payload:productFilter
+    })
+  }
 }
-}
+
 
 export const pagination = (pageNumber) => {
   return async (dispatch) => {
