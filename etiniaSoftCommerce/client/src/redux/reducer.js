@@ -1,8 +1,25 @@
-import { GET_ALL_PRODUCTS, GET_DETAIL_SIZE_COLOR, GET_ORDER_PRICE,
-    GET_FILTER_GENDER, GET_FILTER_CATEGORY, GET_FILTER_COLOR, GET_FILTER_SIZE, ADD_FAVORITES,
-    REMOVE_FAVORITES, GET_FILTER_SALE, CREATE_PRODUCT, CREATE_USER, DELETE_PRODUCT,
-    GET_ALL_USERS, GET_USERS_BY_NAME,UPDATE_USER,GET_BY_ID,
-GET_PRODUCTS_BY_NAME} from "./actions";
+import { 
+    GET_ALL_PRODUCTS,
+    GET_DETAIL_SIZE_COLOR,
+    GET_ORDER_PRICE,
+    GET_FILTER_GENDER,
+    GET_FILTER_CATEGORY,
+    GET_FILTER_COLOR,
+    GET_FILTER_SIZE,
+    ADD_FAVORITES,
+    REMOVE_FAVORITES,
+    GET_FILTER_SALE,
+    CREATE_PRODUCT,
+    CREATE_USER,
+    DELETE_PRODUCT,
+    GET_ALL_USERS,
+    GET_USERS_BY_NAME,
+    UPDATE_USER,GET_BY_ID,
+    GET_PRODUCTS_BY_NAME,
+    CLEAR_ERRORS,
+    ERRORS,
+    PAGINATION} from "./actions";
+
 
 
 const initialState = {
@@ -11,6 +28,11 @@ const initialState = {
    allFavorites: [],
    productShow: [],
    allUsers: [],
+
+   errors:{},
+
+
+   page: null
 
 };
 
@@ -33,7 +55,6 @@ const reducer = (state = initialState, action) => {
                     productShow: action.payload
                     
                 }
-
 
         case GET_ALL_USERS:
             return {
@@ -88,39 +109,51 @@ const reducer = (state = initialState, action) => {
        case CREATE_PRODUCT:
            return {
                ...state,
-               allProducts: [...state.allProducts,action.payload]
+               errors:{}
            }
-
-       case GET_FILTER_GENDER:
-                let allProductsGenero = state.productShow.filter((product) =>product.gender === action.payload)
-                return {
-                    ...state, productShow: allProductsGenero
+           case CLEAR_ERRORS:
+            return{
+                ...state,
+                errors: {}
+            }    
+            case ERRORS:
+                const objError = action.payload
+                return{
+                    ...state,
+                    errors: {...state.errors, [objError.type]: objError.error}
                 }
-        
-        
+
+        case GET_FILTER_GENDER:
+                    return {
+                        ...state, productShow: action.payload
+                    }
+    
         case GET_FILTER_CATEGORY:
-            let allProductsCategory = state.productShow.filter((product) =>product.category === action.payload)
-            return {
-                ...state, productShow: allProductsCategory
-            }
+                return {
+                        ...state, productShow: action.payload
+                    }
+        
 
         case GET_FILTER_SIZE:
-            let allProductsTalla = state.productShow.filter((product) =>product.size === action.payload)
-            return {
-                ...state, productShow: allProductsTalla
-            }
+                return {
+                    ...state, productShow: action.payload
+                }
         
         case GET_FILTER_COLOR:
-            let allProductsColor = state.productShow.filter((product) =>product.color === action.payload)
-            return {
-                ...state, productShow: allProductsColor
-            }
-                              
+                return {
+                    ...state, productShow: action.payload
+                }
+                   
         case GET_FILTER_SALE:
-            let allProductsDescuento = state.productShow.filter((product) =>product.sale !== null)
             return {
-                ...state, productShow: allProductsDescuento
+                ...state, productShow: action.payload
             }
+        
+        case 'SET_PAGINATION':
+                return {
+                  ...state,
+                  pagination: action.payload, 
+                };
                    
        default:
            return {...state

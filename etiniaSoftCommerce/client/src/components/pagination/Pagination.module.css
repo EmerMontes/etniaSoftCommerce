@@ -1,0 +1,31 @@
+/* Pagination.module.css */
+.paginationcontainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .paginationbutton {
+    background-color: #71A611;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 8px 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    max-width: 7vh;
+  }
+  
+  .paginationbutton:hover {
+    background-color: #71A611;
+  }
+  
+  .paginationcurrent {
+    background-color: #71A611;
+  }
+  
+  .paginationbutton:not(.paginationcurrent):hover {
+    background-color: #71A611;
+  }
+  

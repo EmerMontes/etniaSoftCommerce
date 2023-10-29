@@ -1,0 +1,49 @@
+.productdetailcontainer {
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+}
+
+.productdetail {
+  background-color: grey;
+  border-radius: 3%;
+  display: flex;
+  justify-content: center;
+}
+
+.productimage {
+
+}
+
+.productinfo {
+  text-align: left;
+  align-items: left;
+}
+
+.productname {
+  /* Estilos para el nombre del producto, ajusta el tamaño y colores según tu diseño */
+}
+
+/* Estilos para el botón "Volver a Home" */
+.homeButton {
+  display: block;
+  margin-top: 20px;
+  background-color: #71A611;
+  color: #fff; /* Color del texto */
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  max-width: 10vh;
+}
+
+.homeButton:hover {
+  background-color: green;
+}
+
+.arrow {
+  max-width: 5vh; 
+}

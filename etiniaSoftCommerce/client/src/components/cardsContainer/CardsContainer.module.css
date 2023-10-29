@@ -1,0 +1,48 @@
+/* CardsContainer.module.css */
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around; /* Ajusta la alineación de las tarjetas según tus necesidades */
+  gap: 20px; /* Espacio entre las tarjetas */
+}
+
+/* Estilos para la tarjeta individual (tomando referencia de Card.css) */
+.card {
+  border: 1px solid #ccc;
+  padding: 10px;
+  text-align: center;
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s;
+  flex: 1; /* Para hacer que las tarjetas ocupen un espacio igual en la fila */
+  max-width: 300px; /* Establece un ancho máximo para las tarjetas */
+}
+
+.card:hover {
+  transform: scale(1.05);
+}
+
+.card a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.card img {
+  max-width: 100%;
+  height: auto;
+  margin-top: 10px;
+}
+
+.card h2 {
+  font-size: 1.2rem;
+  margin: 0;
+}
+
+.card .price {
+  color: #007bff; /* Cambia el color del precio según tu diseño */
+}
+
+.card .sale {
+  color: #ff0000; /* Cambia el color de la etiqueta de venta según tu diseño */
+}

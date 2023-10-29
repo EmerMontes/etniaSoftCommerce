@@ -1,20 +1,20 @@
 import React from 'react';
 import LogoEtniablanco from '../../assets/png/LogoEtniablanco.png';
 import Google from '../../assets/png/Google.png';
-import './LogIn.css'
+import styles from './LogIn.module.css';
 
 function LogIn(props) {
   return (
-    <div className="login-container">
+    <div className={styles['login-container']}>
       <h2>Welcome to</h2>
       <img src={LogoEtniablanco} alt="Etnia Logo" />
 
-      <form className="login-form">
-        <div className="form-group">
+      <form className={styles['login-form']}>
+        <div className={styles['form-group']}>
           <label htmlFor="email">Email</label>
           <input type="email" id="email" name="email" placeholder="Email" />
         </div>
-        <div className="form-group">
+        <div className={styles['form-group']}>
           <label htmlFor="password">Contraseña</label>
           <input type="password" id="password" name="password" placeholder="Contraseña" />
         </div>
@@ -24,7 +24,9 @@ function LogIn(props) {
 
       <p>¿No tienes cuenta? Regístrate</p>
 
-      <button className="google-login"><img className='googlelogo' src={Google} alt="google Logo" /> Iniciar con Google</button>
+      <button className={styles['google-login']}>
+        <img className={styles['googlelogo']} src={Google} alt="Google Logo" /> Iniciar con Google
+      </button>
     </div>
   );
 }

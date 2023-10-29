@@ -1,12 +1,18 @@
-import React from 'react';
+/* eslint-disable react/prop-types */
+/* eslint-disable no-unused-vars */
+import React, { useSelector } from 'react';
 import Card from '../card/Card';
-import './CardsContainer.css';
+import styles from './CardsContainer.module.css';
 
 function CardContainer(props) {
+
+  const productArray = props.products ? Object.values(props.products) : [];
+
+
   return (
-    <div className="card-container">
-      {props.products?.map(product => (
-        <Card 
+    <div className={styles['card-container']}>
+    {productArray[1]?.map(product => (
+      <Card 
           key={product.id}
           id={product.id}
           name={product.name}
@@ -18,7 +24,7 @@ function CardContainer(props) {
         />
       ))}
     </div>
-  );
+  ); 
 }
 
 export default CardContainer;
