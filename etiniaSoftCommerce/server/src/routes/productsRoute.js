@@ -1,14 +1,19 @@
 productsRouter = require("express").Router();
 
-const {getProductseHandler, getIdHandler, getProductsByName, createProductsHandler,deleteProductsHandler,updateProductsHandler,handleProductFilters,} = require("../handlers/productsHandler")
+const {getAllProductseHandler,getProductseHandler, getIdHandler, getProductsByName,
+      createProductsHandler,deleteProductsHandler,updateProductsHandler,} = require("../handlers/productsHandler")
 const {handOrderPrice}=require('../handlers/handOrderPrice')
 
 productsRouter.get("/", getProductseHandler);
-productsRouter.get("/next", getProductseHandler)
-productsRouter.get("/previous", getProductseHandler)
+productsRouter.get("/all-products",getAllProductseHandler);
+productsRouter.get("/all-products/filters",getAllProductsFiltersHandler);
+
 productsRouter.get("/:id", getIdHandler);
 productsRouter.get("/name/:name",getProductsByName);
 productsRouter.get("/order/:order",handOrderPrice);
+
+
+
 
 
 productsRouter.post("/",createProductsHandler);

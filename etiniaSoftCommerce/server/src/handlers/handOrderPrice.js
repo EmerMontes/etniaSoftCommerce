@@ -1,4 +1,4 @@
-const {getAllProducts} = require('../controllers/getAllProducts')
+const {getAllProducts} = require('../controllers/productsController')
 
 const  handOrderPrice = async (req, res) => {
 
