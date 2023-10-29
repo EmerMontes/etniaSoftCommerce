@@ -17,6 +17,7 @@ import {
 } from "../../redux/actions";
 import styles from "./Home.module.css";
 import { pagination } from "../../redux/actions";
+import Pagination from "../../components/pagination/Pagination";
 
 function Home(props) {
   let num = 1;
@@ -99,52 +100,53 @@ function Home(props) {
       <NavBar />
 
       <Header />
-      <Filters
+ 
+      <div className={styles.filterscontainer}>
+      <Filters className={styles.filters}
         name={"Gender"}
         options={genderOpt}
         handleChange={handleChange}
         state={null}
       />
-      <Filters
+      <Filters className={styles.filters}
         name={"Category"}
         options={categoryOpt}
         handleChange={handleChange}
         state={null}
       />
-      <Filters
+      <Filters className={styles.filters}
         name={"Color"}
         options={colorOpt}
         handleChange={handleChange}
         state={null}
       />
-      <Filters
+      <Filters className={styles.filters}
         name={"Sale"}
         options={saleOpt}
         handleChange={handleChange}
         state={null}
       />
-      <Filters
+      <Filters className={styles.filters}
         name={"Size"}
         options={sizeOpt}
         handleChange={handleChange}
         state={null}
       />
-      <Filters
+      <Filters className={styles.filters}
         name={"Price"}
         options={PriceOpt}
         handleChange={handleChange}
         state={null}
       />
-
+        <button className={styles.button}  onClick={() => dispatch(getAllProducts())}><img className={styles.reset} src='https://uxwing.com/wp-content/themes/uxwing/download/arrow-direction/reset-update-icon.png'/></button>
+      </div>
+      
       <CardContainer products={Page} />
       <br />
 
-      <div>
-        <button onClick={handlePreviousClick}>Previous</button>
-        <button onClick={handleNextClick}>Next</button>
-      </div>
+
       <br />
-      <button onClick={() => dispatch(getAllProducts())}>RESET</button>
+    <Pagination/>
     </div>
   );
 }
