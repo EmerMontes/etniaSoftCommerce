@@ -27,7 +27,7 @@ function Pagination() {
         className={`${styles.paginationbutton} ${num === 1 && styles.paginationcurrent}`}
         onClick={handlePreviousClick}
       >
-        Previous
+        {'<'}
       </button>
       {/* {[...Array(totalPages)].map((_, index) => (
         <button
@@ -42,7 +42,7 @@ function Pagination() {
         className={`${styles.paginationbutton} ${num === totalPages && styles.paginationcurrent}`}
         onClick={handleNextClick}
       >
-        Next
+       {'>'}
       </button>
     </div>
   );
