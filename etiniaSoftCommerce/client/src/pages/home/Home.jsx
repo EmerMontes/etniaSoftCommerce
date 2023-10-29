@@ -1,55 +1,145 @@
-import React from 'react';
-import Header from '../../components/header/Header';
-import CardContainer from '../../components/cardsContainer/CardsContainer';
-import NavBar from '../../components/navBar/NavBar';
-import products from "../../utils/db.json"
-import SearchBar from '../../components/searchBar/SearchBar';
-import Select from '../../components/sizeSelector/SizeSelector';
+/* eslint-disable no-unused-vars */
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import Header from "../../components/header/Header";
+import CardContainer from "../../components/cardsContainer/CardsContainer";
+import NavBar from "../../components/navBar/NavBar";
+import Filters from "../../components/filters/Filters";
+import {
+  getAllProducts,
+  getFilterGenero,
+  getFilterCategory,
+  getFilterColor,
+  getFilterTalla,
+  getOrderPrecio,
+  filtrarPorDescuento,
+} from "../../redux/actions";
+import styles from "./Home.module.css";
+import { pagination } from "../../redux/actions";
+import Pagination from "../../components/pagination/Pagination";
 
 function Home(props) {
+  let num = 1;
+  const Page = useSelector((state) => state.pagination);
+  const [initialPageSet, setInitialPageSet] = useState(false);
 
-  const handleChange = (event)=>{
-    const {name, value} = event.target
-    if(name === "Gender"){
-      console.log(value)
+  const dispatch = useDispatch();
+  if (Page && Page.info) {
+    num = Page.info.page;
+  }
+
+  useEffect(() => {
+    if (!initialPageSet) {
+      dispatch(pagination(1));
+      setInitialPageSet(true);
     }
-    if(name === "Category"){
+  }, [initialPageSet, dispatch]);
+
+  const Products = useSelector((state) => state.productShow);
+
+  const loadProducts = async () => {
+    if (!Products.length) {
+      await dispatch(getAllProducts());
+    }
+  };
+
+  useEffect(() => {
+    loadProducts();
+  }, [dispatch]);
+
+
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    if (name === "Gender") {
+      dispatch(getFilterGenero(value));
+    }
+    if (name === "Category") {
+      dispatch(getFilterCategory(value));
+    }
+    if (name === "Color") {
+      dispatch(getFilterColor(value));
+    }
+    if (name === "Sale") {
       console.log(value);
+      dispatch(filtrarPorDescuento(value));
     }
-    if(name === "Color"){
+    if (name === "Size") {
+      dispatch(getFilterTalla(value));
+    }
+    if (name === "Price") {
       console.log(value);
+      dispatch(getOrderPrecio(value));
     }
-    if(name === "Sale"){
-      console.log(value);
-    }
-    if(name === "Size"){
-      console.log(value);
-    }
-    if(name === "Price"){
-      console.log(value);
-    }
-    }
+  };
 
   const genderOpt = ["male", "female"];
-  const categoryOpt = ["Running", "Crossfit", "Gimnasio", "Ciclismo"];
-  const colorOpt = ["Azul", "Verde", "Negro", "Gris", "Rojo", "Blanco", "Rosa"];
-  const saleOpt = [ "5%", "10%", "15%", "30%" ];
-  const sizeOpt = [ "S", "L", "M", "XS", "XXL"];
-  const PriceOpt = ["highest", "lowest"]
-
+  const categoryOpt = [
+    "Camisetas",
+    "Licras",
+    "Tops",
+    "Faldas",
+    "Chaquetas",
+    "Blusas",
+  ];
+  const colorOpt = ["Gris Jasped", "Verde Menta", "Negro", "Gris Oscuro", "Mora en leche", "Blanco", "Palo de Rosa Claro"];
+  const saleOpt = ["Sale", "No Sale"];
+  const sizeOpt = ["S", "L", "M", "XS", "XXL"];
+  const PriceOpt = ["highest", "lowest"];
 
   return (
-    <div className="home">
-      <Header />
-      <Select name={"Gender"} options={genderOpt} handleChange={handleChange} state={null}/>
-      <Select name={"Category"} options={categoryOpt} handleChange={handleChange} state={null}/>
-      <Select name={"Color"} options={colorOpt} handleChange={handleChange} state={null}/>
-      <Select name={"Sale"} options={saleOpt} handleChange={handleChange} state={null}/>
-      <Select name={"Size"} options={sizeOpt} handleChange={handleChange} state={null}/>
-      <Select name={"Price"} options={PriceOpt} handleChange={handleChange} state={null}/>
-      <h2>Bienvenido al Home</h2>
+    <div className={styles.home}>
       <NavBar />
-      <CardContainer products={products}/>
+
+      <Header />
+ 
+      <div className={styles.filterscontainer}>
+      <Filters className={styles.filters}
+        name={"Gender"}
+        options={genderOpt}
+        handleChange={handleChange}
+        state={null}
+      />
+      <Filters className={styles.filters}
+        name={"Category"}
+        options={categoryOpt}
+        handleChange={handleChange}
+        state={null}
+      />
+      <Filters className={styles.filters}
+        name={"Color"}
+        options={colorOpt}
+        handleChange={handleChange}
+        state={null}
+      />
+      <Filters className={styles.filters}
+        name={"Sale"}
+        options={saleOpt}
+        handleChange={handleChange}
+        state={null}
+      />
+      <Filters className={styles.filters}
+        name={"Size"}
+        options={sizeOpt}
+        handleChange={handleChange}
+        state={null}
+      />
+      <Filters className={styles.filters}
+        name={"Price"}
+        options={PriceOpt}
+        handleChange={handleChange}
+        state={null}
+      />
+        <button className={styles.button}  onClick={() => dispatch(getAllProducts())}><img className={styles.reset} src='https://uxwing.com/wp-content/themes/uxwing/download/arrow-direction/reset-update-icon.png'/></button>
+      </div>
+      
+      <CardContainer products={Page} />
+      <br />
+
+
+      <br />
+    <Pagination/>
     </div>
   );
 }
