@@ -25,3 +25,5 @@ package.json
 *.njsproj
 *.sln
 *.sw?
+.env
+
