@@ -22,8 +22,27 @@ export const GET_FILTER_COLOR = "GET_FILTER_COLOR";
 export const GET_FILTER_SIZE = "GET_FILTER_SIZE";
 export const GET_FILTER_SALE = "GET_FILTER_SALE";
 export const REMOVE_FAVORITES="REMOVE_FAVORITES";
+export const CLEAR_ERRORS = "CLEAR_ERRORS";
+export const ERRORS = "ERRORS";
 
 const URL='http://localhost:3001'
+
+export function setNewErrors(obj){
+  return async function(dispatch){
+      dispatch({
+          type: ERRORS,
+          payload: obj
+      })
+  }
+};
+
+export function clearErrors(){
+  return async function(dispatch){
+      dispatch({
+          type: CLEAR_ERRORS
+      })
+  }
+};
 
 export function getProductsname(name){
   return async function(dispatch){
