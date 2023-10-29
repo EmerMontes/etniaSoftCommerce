@@ -23,7 +23,30 @@ export const GET_FILTER_SIZE = "GET_FILTER_SIZE";
 export const GET_FILTER_SALE = "GET_FILTER_SALE";
 export const REMOVE_FAVORITES="REMOVE_FAVORITES";
 
+export const CLEAR_ERRORS = "CLEAR_ERRORS";
+export const ERRORS = "ERRORS";
+
+
+export const PAGINATION ="SET_PAGINATION"
+
 const URL='http://localhost:3001'
+
+export function setNewErrors(obj){
+  return async function(dispatch){
+      dispatch({
+          type: ERRORS,
+          payload: obj
+      })
+  }
+};
+
+export function clearErrors(){
+  return async function(dispatch){
+      dispatch({
+          type: CLEAR_ERRORS
+      })
+  }
+};
 
 export function getProductsname(name){
   return async function(dispatch){
@@ -195,4 +218,17 @@ export function getFilterTalla(talla) {
 }
 }
 
-
+export const pagination = (pageNumber) => {
+  return async (dispatch) => {
+ console.log(`${URL}/products?page=${pageNumber}`);
+    try {
+      const response = await axios.get(`${URL}/products?page=${pageNumber}`);
+      dispatch({
+        type: PAGINATION,
+        payload: response.data, 
+      });
+    } catch (error) {
+      console.error('Error en la solicitud de paginación:', error);
+    }
+  };
+};

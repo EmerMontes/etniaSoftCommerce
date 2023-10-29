@@ -3,8 +3,8 @@ const {
     getProductByName,
     getAllProducts,
     createProducts,
-
     deleteProductById ,
+    paginateAllProducts
   } = require("../controllers/productsController");
 
   
@@ -20,8 +20,9 @@ const {
   
   const getProductseHandler = async (req, res) => {
     try {
-      const response = await getAllProducts();
-      res.status(200).json(response);
+      await getAllProducts(req, res, () => {
+        res.status(200).json(res.paginatedResults); 
+      });
     } catch (error) {
       res.status(400).json({ error: error.message });
     }
@@ -65,7 +66,15 @@ const {
       res.status(400).json({ error: error.message });
     }
   };
-
+  const paginateProductsHandler = async (req, res) => {
+    const id = req.params.id;
+    try {
+      const product = await paginateAllProducts();
+      res.status(201).json(product);
+    } catch (error) {
+      res.status(400).json({ error: error.message });
+    }
+  };
   
   // /:id = params si modifica
   // query === ? name&raza, no modifica la ruta
@@ -76,8 +85,8 @@ const {
     getProductsByName: getProductsByName,
     createProductsHandler: createProductsHandler,
     deleteProductsHandler:deleteProductsHandler,
-
-    updateProductsHandler: updateProductsHandler
+    updateProductsHandler: updateProductsHandler,
+    paginateProductsHandler:paginateProductsHandler
 
   };
   

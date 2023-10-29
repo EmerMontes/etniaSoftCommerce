@@ -2,7 +2,11 @@ import { GET_ALL_PRODUCTS, GET_DETAIL_SIZE_COLOR, GET_ORDER_PRICE,
     GET_FILTER_GENDER, GET_FILTER_CATEGORY, GET_FILTER_COLOR, GET_FILTER_SIZE, ADD_FAVORITES,
     REMOVE_FAVORITES, GET_FILTER_SALE, CREATE_PRODUCT, CREATE_USER, DELETE_PRODUCT,
     GET_ALL_USERS, GET_USERS_BY_NAME,UPDATE_USER,GET_BY_ID,
-GET_PRODUCTS_BY_NAME} from "./actions";
+
+GET_PRODUCTS_BY_NAME,CLEAR_ERRORS,ERRORS} from "./actions";
+
+GET_PRODUCTS_BY_NAME, PAGINATION} from "./actions";
+
 
 
 const initialState = {
@@ -11,6 +15,11 @@ const initialState = {
    allFavorites: [],
    productShow: [],
    allUsers: [],
+
+   errors:{}
+
+
+   page: null
 
 };
 
@@ -33,6 +42,7 @@ const reducer = (state = initialState, action) => {
                     productShow: action.payload
                     
                 }
+
 
 
         case GET_ALL_USERS:
@@ -88,8 +98,19 @@ const reducer = (state = initialState, action) => {
        case CREATE_PRODUCT:
            return {
                ...state,
-               allProducts: [...state.allProducts,action.payload]
+               errors:{}
            }
+           case CLEAR_ERRORS:
+            return{
+                ...state,
+                errors: {}
+            }    
+            case ERRORS:
+                const objError = action.payload
+                return{
+                    ...state,
+                    errors: {...state.errors, [objError.type]: objError.error}
+                }
 
        case GET_FILTER_GENDER:
                 let allProductsGenero = state.productShow.filter((product) =>product.gender === action.payload)
@@ -121,6 +142,12 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state, productShow: allProductsDescuento
             }
+        
+            case 'SET_PAGINATION':
+                return {
+                  ...state,
+                  pagination: action.payload, 
+                };
                    
        default:
            return {...state
