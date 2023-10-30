@@ -1,10 +1,10 @@
-import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { pagination } from '../../redux/actions';
+import { getFiltersAndPagination } from '../../redux/actions';
 import styles from './Pagination.module.css';
 
-function Pagination() {
-  const Page = useSelector((state) => state.pagination);
+function Pagination({ setInitialPageSet, initialPageSet, setinitialFilters, initialFilters }) {
+  const Page = useSelector((state) => state.indexProductShow);
+  console.log(Page);
   let num = 1;
   if (Page && Page.info) {
     num = Page.info.page;
@@ -14,11 +14,15 @@ function Pagination() {
   const totalPages = Page ? Page.info.pages : 1;
 
   const handlePreviousClick = () => {
-    dispatch(pagination(num - 1));
+    console.log(initialPageSet);
+    setInitialPageSet(initialPageSet - 1);
+    dispatch(getFiltersAndPagination(initialFilters, initialPageSet - 1));
   };
 
   const handleNextClick = () => {
-    dispatch(pagination(num + 1));
+    console.log(initialPageSet);
+    setInitialPageSet(initialPageSet + 1);
+    dispatch(getFiltersAndPagination(initialFilters, initialPageSet + 1));
   };
 
   return (
