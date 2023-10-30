@@ -162,17 +162,24 @@ function Home(props) {
           state={null}
         />
         <button
-          className={styles.button}
-          onClick={() => {
-            setInitialPageSet(1); // Reiniciar a la página 1 cuando se hace clic en el botón de reset
-            dispatch(getFiltersAndPagination({}, 1));
-          }}
-        >
+        className={styles.button}
+        onClick={() => {
+          setInitialPageSet(1); // Reiniciar a la página 1 cuando se hace clic en el botón de reset
+          dispatch(getFiltersAndPagination({}, 1));
+          setInitialFilters({});
+}}
+>
           <img
             className={styles.reset}
             src="https://uxwing.com/wp-content/themes/uxwing/download/arrow-direction/reset-update-icon.png"
           />
         </button>
+        {initialFilters?.gender && <h2>{initialFilters.gender + " >"}</h2>}
+        {initialFilters?.category && <h2>{initialFilters.category + " >"}</h2>}
+        {initialFilters?.color && <h2>{initialFilters.color + " >"}</h2>}
+        {initialFilters?.sale && <h2>{initialFilters.sale + " >"}</h2>}
+        {initialFilters?.size && <h2>{initialFilters.size + " >"}</h2>}
+        {initialFilters?.price && <h2>{initialFilters.price}</h2>}
       </div>
 
       <CardContainer products={Page} />
