@@ -1,30 +1,8 @@
-.productdetailcontainer {
-  justify-content: center;
-  text-align: center;
-  align-items: center;
+@font-face {
+  font-family: "Montserrat";
+  src: url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap");
 }
 
-.productdetail {
-  background-color: grey;
-  border-radius: 3%;
-  display: flex;
-  justify-content: center;
-}
-
-.productimage {
-
-}
-
-.productinfo {
-  text-align: left;
-  align-items: left;
-}
-
-.productname {
-  /* Estilos para el nombre del producto, ajusta el tamaño y colores según tu diseño */
-}
-
-/* Estilos para el botón "Volver a Home" */
 .homeButton {
   display: block;
   margin-top: 20px;
@@ -46,4 +24,54 @@
 
 .arrow {
   max-width: 5vh; 
+}
+
+.centrardiv {
+  margin-left: 10%;
+  margin-right: 10%;
+  justify-content: center;
+  align-items: center;
+}
+
+.productdetail {
+  font-family: "Montserrat";
+  width: 135vh;
+  padding: 2vh;
+  background-color: grey;
+  border-radius: 2vh;
+  display: flex;
+  justify-content: left;
+  align-items: left;
+}
+
+.productimage {
+  height: 80vh;
+  border-radius: 2vh;
+}
+
+.productinfo {
+  padding: 1vh;
+  font-size: 3.5vh;
+  text-align: left;
+  justify-content: left;
+  align-items: left;
+}
+
+.productname {
+  font-size: 4.5vh;
+}
+
+@media (max-width: 768px) {
+  .productdetail {
+    width: 75vw;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .productimage {
+    width: 65vh;
+    height: auto;
+    border-radius: 2vh;
+  }
 }

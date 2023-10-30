@@ -7,7 +7,7 @@ import PayForm from './pages/payForm/PayForm';
 import ShoppingCart from './pages/shoppingCart/ShoppingCart';
 import LogIn from './pages/logIn/LogIn';
 import NotFound404 from './pages/404/notFound';
-
+import './App.css';
 
 function App() {
 
