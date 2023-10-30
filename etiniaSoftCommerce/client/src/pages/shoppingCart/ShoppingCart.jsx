@@ -16,8 +16,8 @@ function ShoppingCart() {
             <img src={product.img} alt={product.name} />
             <div className={styles['product-details']}>
               <h2>{product.name}</h2>
-              <p>Precio: ${product.price}</p>
-              <p>Cantidad: {product.quantity}</p>
+              <p className={styles.precio}>Precio: ${product.price}</p>
+
             </div>
           </div>
         ))}
