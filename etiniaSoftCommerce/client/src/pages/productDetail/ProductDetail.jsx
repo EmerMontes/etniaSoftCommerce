@@ -60,13 +60,13 @@ export default function ProductDetail(props) {
               )}
             </div>
               </div>
+              {productAdded && (
+                <p className={styles.productAddedMessage}>añadido correctamente</p>
+              )}
 
               <button onClick={handleAddToCart} className={styles.addToCartButton}>
                 Agregar al carrito
               </button>
-              {productAdded && (
-                <p className={styles.productAddedMessage}>añadido correctamente</p>
-              )}
       </div>
     );
   }

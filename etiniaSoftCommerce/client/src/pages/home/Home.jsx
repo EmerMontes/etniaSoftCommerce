@@ -182,33 +182,15 @@ function Home(props) {
             src="https://uxwing.com/wp-content/themes/uxwing/download/arrow-direction/reset-update-icon.png"
           />
         </button>
-        <div></div>
-        <div>
-        {initialFilters?.gender && <div>
-        <button onClick={()=>onCloseFilters("gender")}>X</button>
-        <h2>{initialFilters.gender + " >"}</h2>
-        </div>}
-        </div>
-        {initialFilters?.category && <div>
-        <button onClick={()=>onCloseFilters("category")}>X</button>
-        <h2>{initialFilters.category + " >"}</h2>
-        </div>}
-        {initialFilters?.color && <div>
-        <button onClick={()=>onCloseFilters("color")}>X</button>
-        <h2>{initialFilters.color + " >"}</h2>
-        </div>}
-        {initialFilters?.sale && <div>
-        <button onClick={()=>onCloseFilters("sale")}>X</button>
-        <h2>{initialFilters.sale + " >"}</h2>
-        </div>}
-        {initialFilters?.size && <div>
-        <button onClick={()=>onCloseFilters("size")}>X</button>
-        <h2>{initialFilters.size + " >"}</h2>
-        </div>}
-        {initialFilters?.price && <div>
-        <button onClick={()=>onCloseFilters("price")}>X</button>
-        <h2>{initialFilters.price + " >"}</h2>
-        </div>}
+      </div>
+      <div className={styles.filtersText}>
+        {initialFilters?.gender && <p>{initialFilters.gender + " >"}</p>}
+        {initialFilters?.category && <p>{initialFilters.category + " >"}</p>}
+        {initialFilters?.color && <p>{initialFilters.color + " >"}</p>}
+        {initialFilters?.sale && <p>{initialFilters.sale + " >"}</p>}
+        {initialFilters?.size && <p>{initialFilters.size + " >"}</p>}
+        {initialFilters?.price && <p>{initialFilters.price}</p>}
+
       </div>
 
       <CardContainer products={Page} />
