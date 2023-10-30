@@ -9,6 +9,7 @@ import Filters from "../../components/filters/Filters";
 import { getFiltersAndPagination } from "../../redux/actions";
 import styles from "./Home.module.css";
 import Pagination from "../../components/pagination/Pagination";
+import resetView from "../home/clockwise.svg"
 
 function Home(props) {
   const Page = useSelector((state) => state.indexProductShow);
@@ -42,13 +43,13 @@ function Home(props) {
     dispatch(getFiltersAndPagination(initialFilters, initialPageSet));
   };
   
-  const onCloseFilters = (value)=>{
-    setInitialFilters({
-      ...initialFilters,
-      [value]: ""
-    })
-  }
-
+  const handleFilterRemove = (filterName) => {
+    const newInitialFilters = { ...initialFilters };
+    delete newInitialFilters[filterName];
+    setInitialFilters(newInitialFilters);
+    dispatch(getFiltersAndPagination(newInitialFilters, 1));
+  };
+  
   const genderOpt = ["male", "female"];
   const categoryOpt = [
     "Camisetas",
@@ -86,6 +87,7 @@ function Home(props) {
       dispatch(getFiltersAndPagination(initialFilters, initialPageSet - 1));
     };
 
+    
     const handleNextClick = () => {
       
       setInitialPageSet(initialPageSet + 1);
@@ -164,7 +166,7 @@ function Home(props) {
           state={null}
         />
         <Filters
-          className={styles.filters}
+          className="filters"
           name={"price"}
           options={PriceOpt}
           handleChange={handleChange}
@@ -179,19 +181,44 @@ function Home(props) {
 >
           <img
             className={styles.reset}
-            src="https://uxwing.com/wp-content/themes/uxwing/download/arrow-direction/reset-update-icon.png"
+            src={resetView}
           />
         </button>
       </div>
-      <div className={styles.filtersText}>
-        {initialFilters?.gender && <p>{initialFilters.gender + " >"}</p>}
-        {initialFilters?.category && <p>{initialFilters.category + " >"}</p>}
-        {initialFilters?.color && <p>{initialFilters.color + " >"}</p>}
-        {initialFilters?.sale && <p>{initialFilters.sale + " >"}</p>}
-        {initialFilters?.size && <p>{initialFilters.size + " >"}</p>}
-        {initialFilters?.price && <p>{initialFilters.price}</p>}
+      <div>
+  {initialFilters?.gender && (
+    <div className={styles["active-filter"]} onClick={() => handleFilterRemove('gender')}>
+      {initialFilters.gender  } 
+    </div>
+  )}
+  {initialFilters?.category && (
+    <div className={styles["active-filter"]} onClick={() => handleFilterRemove('category')}>
+      {initialFilters.category } 
+    </div>
+  )}
+  {initialFilters?.color && (
+    <div className={styles["active-filter"]} onClick={() => handleFilterRemove('color')}>
+      {initialFilters.color } 
+    </div>
+  )}
+  {initialFilters?.sale && (
+    <div className={styles["active-filter"]} onClick={() => handleFilterRemove('sale')}>
+      {initialFilters.sale } 
+    </div>
+  )}
+  {initialFilters?.size && (
+    <div className={styles["active-filter"]} onClick={() => handleFilterRemove('size')}>
+      {initialFilters.size  } 
+    </div>
+  )}
+  {initialFilters?.price && (
+    <div className={styles["active-filter"]} onClick={() => handleFilterRemove('price')}>
+      {initialFilters.price } 
+    </div>
+  )}
+</div>
 
-      </div>
+
 
       <CardContainer products={Page} />
       <br />

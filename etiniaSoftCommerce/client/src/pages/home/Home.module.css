@@ -1,46 +1,139 @@
 .home {
-    align-items: center;
-    align-content: center;
-    text-align: center;
-    justify-content: center;
-    background-color: rgb(196, 196, 196);
+  align-items: center;
+  align-content: center;
+  text-align: center;
+  justify-content: center;
+  background-color: rgb(196, 196, 196);
 }
 
 .filters {
-    padding: 0.5rem;
-    font-size: 1rem;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: white;
-    font-size: 1rem;
-    padding: 0.5rem;
+  padding: 1rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f0f0f0;
+  margin: 0.5rem;
+  min-width: 150px;
+  text-align: center;
+  transition: transform 0.2s ease-in-out, background-color 0.2s;
+  cursor: pointer;
+  position: relative; /* Permite posicionar los elementos internos */
+}
+
+.filters:before {
+  content: ""; /* Agrega un elemento pseudo ::before para detalles internos */
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: transparent; /* Color de fondo transparente por defecto */
+  transition: background-color 0.2s;
+  z-index: -1; /* Detrás del contenido real */
 }
 
 .filterscontainer {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
+  margin-top: 1rem;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
 }
 
-.filtersText {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    position: bottom;
+.filters:hover {
+  transform: translateY(-5px);
+}
+
+.filters:focus {
+  outline: none;
+}
+
+.filters:hover:before {
+  background-color: rgba(
+    0,
+    0,
+    0,
+    0.1
+  ); /* Cambia el color de fondo del elemento ::before al pasar el mouse por encima */
 }
 
 .button {
-    background-color: #71A611;
-    color: white;
-    border: none;
-    cursor: pointer;
-    align-items: center;
-    align-content: center;
-    text-align: center;
-    max-width: 10vh;
-    height: 7vh;
+  background-color: #71a611;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem 1rem; /* Agrega relleno para hacer el botón más grande y legible */
+  border-radius: 5px; /* Bordes redondeados */
+  font-size: 1rem;
+  transition: background-color 0.3s, transform 0.2s; /* Agrega una transición suave */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  max-width: 3rem; /* Cambia a un valor específico en píxeles en lugar de vh */
+  height: 2.5rem; /* Cambia la altura a un valor específico en píxeles */
+}
+
+.button:hover {
+  background-color: #47700ed8; /* Cambia el color de fondo al pasar el mouse por encima */
+  transform: translateY(-1px); /* Eleva ligeramente el botón */
 }
 
 .reset {
-    max-width: 1.3rem; 
+  min-width: 28px;
+  min-height: 10px;
+  transition: transform 0.3s ease-in-out;
+}
+
+.reset:hover {
+  transform: rotate(720deg); /* Rota 360 grados al pasar el mouse por encima */
+}
+
+/* Puedes ajustar el tamaño y otros estilos según tus preferencias */
+
+/* Pagination.module.css */
+.paginationcontainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.paginationbutton {
+  background-color: #71a611;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 8px 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  max-width: 7vh;
+}
+
+.paginationbutton:hover {
+  background-color: #71a611;
+}
+
+.paginationcurrent {
+  background-color: #71a611;
+}
+
+.paginationbutton:not(.paginationcurrent):hover {
+  background-color: #71a611;
+}
+
+/* filtros */
+.active-filter {
+  display: inline; /* Muestra los elementos en línea */
+  margin-right: 10px; /* Agrega un margen derecho para separar los elementos */
+  background-color: #f0f0f0; /* Color de fondo */
+  border: 1px solid #ccc; /* Borde sólido con color */
+  border-radius: 8px; /* Bordes redondeados */
+  padding: 5px 10px; /* Espaciado interno para el contenido */
+  cursor: pointer; /* Cambia el cursor al estilo de puntero al pasar el mouse */
+  /* Otros estilos que desees aplicar */
+
+  /* Estilos para el hover */
+  &:hover {
+    border: 2px solid rgba(161, 2, 2, 0.591); /* Cambia el borde a rojo en el hover */
   }
+}
