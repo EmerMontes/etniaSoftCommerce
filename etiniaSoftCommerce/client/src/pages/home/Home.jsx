@@ -32,6 +32,7 @@ function Home(props) {
 
   useEffect(() => {
     loadProducts();
+    console.log(initialFilters)
   }, [dispatch, initialFilters, initialPageSet]);
 
   const handleChange = (event) => {
@@ -40,6 +41,14 @@ function Home(props) {
     setInitialPageSet(1); // Reiniciar a la página 1 cuando se cambian los filtros
     dispatch(getFiltersAndPagination(initialFilters, initialPageSet));
   };
+  
+  const onCloseFilters = (value)=>{
+    setInitialFilters({
+      ...initialFilters,
+      [value]: ""
+    })
+  }
+
   const genderOpt = ["male", "female"];
   const categoryOpt = [
     "Camisetas",
@@ -165,8 +174,7 @@ function Home(props) {
         className={styles.button}
         onClick={() => {
           setInitialPageSet(1); // Reiniciar a la página 1 cuando se hace clic en el botón de reset
-          dispatch(getFiltersAndPagination({}, 1));
-          setInitialFilters({});
+          dispatch(getFiltersAndPagination({}, 1));setInitialFilters({});
 }}
 >
           <img
@@ -182,6 +190,7 @@ function Home(props) {
         {initialFilters?.sale && <p>{initialFilters.sale + " >"}</p>}
         {initialFilters?.size && <p>{initialFilters.size + " >"}</p>}
         {initialFilters?.price && <p>{initialFilters.price}</p>}
+
       </div>
 
       <CardContainer products={Page} />
