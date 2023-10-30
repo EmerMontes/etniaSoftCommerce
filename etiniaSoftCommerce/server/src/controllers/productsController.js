@@ -1,7 +1,6 @@
 const { Products } = require("../db");
 const { Op } = require("sequelize");
 
-
 const paginateAllProducts = async (req, res, next) => {
   const page = parseInt(req.query.page) || 1;
   const limit = parseInt(req.query.limit) || 10;
@@ -10,7 +9,8 @@ const paginateAllProducts = async (req, res, next) => {
 
   // Obtén los parámetros de consulta de la URL
   const { name, brand, color, sale, size, price, gender, category } = req.query;
-
+  console.log(price);
+  console.log(req.query);
   // Crea un objeto de condiciones vacío
   const whereConditions = {};
 
@@ -21,9 +21,9 @@ const paginateAllProducts = async (req, res, next) => {
     };
   }
   if (gender) {
-    whereConditions.gender = {
-      [Op.iLike]: `%${gender}%`,
-    };
+    if (gender) {
+      whereConditions.gender = gender;
+    }
   }
   if (category) {
     whereConditions.category = {
@@ -35,28 +35,27 @@ const paginateAllProducts = async (req, res, next) => {
       [Op.iLike]: `%${color}%`,
     };
   }
-  if (sale === "Sale") {
+
+  if (sale === "sale") {
     whereConditions.sale = {
-      [Op.iLike]: `%${sale}%` !== 0,
+      [Op.gt]: 0, // Filtra los productos con descuento (sale mayor que 0)
     };
   }
-  if (sale === "No Sale") {
-    whereConditions.sale = {
-      [Op.iLike]: `%${sale}%` == 0,
-    };
+  if (sale === "no-sale") {
+    whereConditions.sale = 0; // Filtra los productos sin descuento (sale igual a 0)
   }
   if (size) {
-    whereConditions.size = {
-      [Op.iLike]: `%${size}%`,
-    };
-  }
-  if (price) {
-    whereConditions.price = {
-      [Op.iLike]: `%${price}%`,
-    };
+    whereConditions.size = size;
   }
 
   try {
+    const order = [];
+    if (price === "highest") {
+      order.push(["price", "DESC"]);
+    } else if (price === "lowest") {
+      order.push(["price", "ASC"]);
+    }
+
     const count = await Products.count({
       where: whereConditions, // Aplica las condiciones de filtro
     });
@@ -68,6 +67,7 @@ const paginateAllProducts = async (req, res, next) => {
 
     const products = await Products.findAll({
       where: whereConditions, // Aplica las condiciones de filtro
+      order: order, // Aplica el ordenamiento por precio
       limit: limit,
       offset: startIndex,
     });
@@ -82,7 +82,6 @@ const paginateAllProducts = async (req, res, next) => {
 
 module.exports = paginateAllProducts;
 
-
 const getAllProducts = async () => {
   console.log("hola desde geAllProducts");
   const productsDB = await Products.findAll({
@@ -90,7 +89,6 @@ const getAllProducts = async () => {
   });
   return productsDB;
 };
-
 
 const getProductsById = async (id) => {
   const productDB = await Products.findByPk(id);
@@ -100,7 +98,7 @@ const getProductByName = async (name) => {
   const productDB = await Products.findAll({
     where: {
       name: {
-        [Op.iLike]: `%${name}%`, // Búsqueda de coincidencia parcial insensible a mayúsculas/minúsculas
+        [Op.iLike]: `%${name}%`, 
       },
     },
   });

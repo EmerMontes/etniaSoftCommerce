@@ -19,6 +19,14 @@
 .filterscontainer {
     display: flex;
     justify-content: center;
+    flex-wrap: wrap;
+}
+
+.filtersText {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    position: bottom;
 }
 
 .button {

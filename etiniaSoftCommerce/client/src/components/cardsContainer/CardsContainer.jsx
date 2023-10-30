@@ -8,6 +8,7 @@ function CardContainer(props) {
 
   const productArray = props.products ? Object.values(props.products) : [];
 
+ // console.log(productArray);
 
   return (
     <div className={styles['card-container']}>

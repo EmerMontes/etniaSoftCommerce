@@ -3,7 +3,8 @@ import Styles from './Filters.module.css';
 
 const Filters = ({ name, options, handleChange, state }) => {
   return (
-      <select name={name} onChange={handleChange} value={state || ""}>
+    <div className={Styles.selectcontainer}>
+      <select  name={name} onChange={handleChange} value={state || ""}>
         <option value="" disabled hidden>{name}</option>
         {options.map((option, index) => (
           <option key={index} value={option}>
@@ -11,6 +12,7 @@ const Filters = ({ name, options, handleChange, state }) => {
           </option>
         ))}
       </select>
+      </div>
   );
 };
 
