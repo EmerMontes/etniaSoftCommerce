@@ -23,16 +23,29 @@ export const GET_FILTER_SIZE = "GET_FILTER_SIZE";
 export const GET_FILTER_SALE = "GET_FILTER_SALE";
 export const REMOVE_FAVORITES = "REMOVE_FAVORITES";
 
+export const PAGINATION ="SET_PAGINATION"
+
 export const CLEAR_ERRORS = "CLEAR_ERRORS";
 export const ERRORS = "ERRORS";
+//carrito
+export const ADD_TO_CART ="ADD_TO_CART";
 
 export const FILTROS_AND_PAGINATION = "FILTROS_AND_PAGINATION";
 
 
 const URL = "http://localhost:3001";
 
+
+export function addToCart(product) {
+  return {
+    type: ADD_TO_CART,
+    payload: product,
+  };
+}
+
 export function setNewErrors(obj) {
   return async function (dispatch) {
+
     dispatch({
       type: ERRORS,
       payload: obj,

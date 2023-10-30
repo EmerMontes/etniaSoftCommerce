@@ -28,7 +28,7 @@ export default function UserDetail(props) {
       {user ? (
         <div>
           <img src={user.profileImage || "../../assets/p"} alt="User Profile" />
-          <h2>{user.name}</h2>
+          <p>{user.name}</p>
         </div>
       ) : (
         <div>Cargando...</div>

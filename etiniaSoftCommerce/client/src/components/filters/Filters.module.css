@@ -1,9 +1,10 @@
 /* Filters.module.css */
-.select-container {
+.selectcontainer {
     display: flex;
     align-items: center;
     align-content: center;
     text-align: center;
+    flex-wrap: wrap;
   }
   
   select {

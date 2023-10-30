@@ -25,10 +25,12 @@ const initialState = {
 
   errors: {},
 
+
   page: null,
 };
 
 const reducer = (state = initialState, action) => {
+
   switch (action.type) {
     case GET_ALL_PRODUCTS:
       return {

@@ -8,8 +8,8 @@ function Card({id, name, gender, sale, img, color, price}) {
     <div className={styles.card}>
       <Link to={`/product/${id}`}>
       <div>
-        <h2>{name}</h2>
         <img src={img} alt={name}/>
+        <h2>{name}</h2>
         <h2>${price}</h2>
         {sale > 0 && <h2>{sale}% OFF</h2>}
       </div>
