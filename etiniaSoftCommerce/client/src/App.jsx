@@ -8,7 +8,6 @@ import ShoppingCart from './pages/shoppingCart/ShoppingCart';
 import LogIn from './pages/logIn/LogIn';
 import NotFound404 from './pages/404/notFound';
 
-
 function App() {
 
   return (

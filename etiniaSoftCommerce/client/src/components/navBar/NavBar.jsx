@@ -26,7 +26,7 @@ function NavBar(props) {
       </button>
 
       <button>
-        <Link to="/home"><img className={styles.Home} src={Home} alt="Home" /></Link>
+        <Link to="/"><img className={styles.Home} src={Home} alt="Home" /></Link>
       </button>
 
       <button>

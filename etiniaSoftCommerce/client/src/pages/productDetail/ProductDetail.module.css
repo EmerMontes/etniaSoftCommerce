@@ -1,35 +1,60 @@
-.productdetailcontainer {
+@font-face {
+  font-family: "Montserrat";
+  src: url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap");
+}
+
+.centrardiv {
   justify-content: center;
-  text-align: center;
   align-items: center;
+  align-content: center;
+  text-align: center;
+  justify-content: center;
+  background-color: rgb(196, 196, 196);
+}
+
+.space {
+  height: 5vh;
 }
 
 .productdetail {
+  margin-top: 5vh;
+  font-family: "Montserrat";
+  width: 135vh;
+  padding: 2vh;
   background-color: grey;
-  border-radius: 3%;
+  border-radius: 2vh;
   display: flex;
-  justify-content: center;
+  margin: 0 auto;
+  align-items: left;
 }
 
 .productimage {
-
+  height: 80vh;
+  border-radius: 2vh;
 }
 
 .productinfo {
+  padding: 1vh;
+  font-size: 3.5vh;
   text-align: left;
+  justify-content: left;
   align-items: left;
 }
 
 .productname {
-  /* Estilos para el nombre del producto, ajusta el tamaño y colores según tu diseño */
+  font-size: 4.5vh;
 }
 
-/* Estilos para el botón "Volver a Home" */
-.homeButton {
+.productAddedMessage {
+  color: #71A611;
+  font-size: 1rem;
+  margin-top: 10px;
+}
+
+.addToCartButton {
   display: block;
-  margin-top: 20px;
   background-color: #71A611;
-  color: #fff; /* Color del texto */
+  color: #fff;
   border: none;
   border-radius: 5px;
   padding: 10px 20px;
@@ -37,13 +62,24 @@
   text-decoration: none;
   cursor: pointer;
   transition: background-color 0.3s;
-  max-width: 10vh;
+  width: 30vh;
+  margin: 0 auto;
+  margin-top: 20px;
 }
 
-.homeButton:hover {
-  background-color: green;
-}
 
-.arrow {
-  max-width: 5vh; 
+
+@media (max-width: 768px) {
+  .productdetail {
+    width: 75vw;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .productimage {
+    width: 65vh;
+    height: auto;
+    border-radius: 2vh;
+  }
 }
