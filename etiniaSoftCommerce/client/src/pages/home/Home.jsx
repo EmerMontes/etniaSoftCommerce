@@ -32,6 +32,7 @@ function Home(props) {
 
   useEffect(() => {
     loadProducts();
+    console.log(initialFilters)
   }, [dispatch, initialFilters, initialPageSet]);
 
   const handleChange = (event) => {
@@ -40,6 +41,14 @@ function Home(props) {
     setInitialPageSet(1); // Reiniciar a la página 1 cuando se cambian los filtros
     dispatch(getFiltersAndPagination(initialFilters, initialPageSet));
   };
+  
+  const onCloseFilters = (value)=>{
+    setInitialFilters({
+      ...initialFilters,
+      [value]: ""
+    })
+  }
+
   const genderOpt = ["male", "female"];
   const categoryOpt = [
     "Camisetas",
@@ -165,8 +174,7 @@ function Home(props) {
         className={styles.button}
         onClick={() => {
           setInitialPageSet(1); // Reiniciar a la página 1 cuando se hace clic en el botón de reset
-          dispatch(getFiltersAndPagination({}, 1));
-          setInitialFilters({});
+          dispatch(getFiltersAndPagination({}, 1));setInitialFilters({});
 }}
 >
           <img
@@ -174,12 +182,15 @@ function Home(props) {
             src="https://uxwing.com/wp-content/themes/uxwing/download/arrow-direction/reset-update-icon.png"
           />
         </button>
-        {initialFilters?.gender && <h2>{initialFilters.gender + " >"}</h2>}
-        {initialFilters?.category && <h2>{initialFilters.category + " >"}</h2>}
-        {initialFilters?.color && <h2>{initialFilters.color + " >"}</h2>}
-        {initialFilters?.sale && <h2>{initialFilters.sale + " >"}</h2>}
-        {initialFilters?.size && <h2>{initialFilters.size + " >"}</h2>}
-        {initialFilters?.price && <h2>{initialFilters.price}</h2>}
+      </div>
+      <div className={styles.filtersText}>
+        {initialFilters?.gender && <p>{initialFilters.gender + " >"}</p>}
+        {initialFilters?.category && <p>{initialFilters.category + " >"}</p>}
+        {initialFilters?.color && <p>{initialFilters.color + " >"}</p>}
+        {initialFilters?.sale && <p>{initialFilters.sale + " >"}</p>}
+        {initialFilters?.size && <p>{initialFilters.size + " >"}</p>}
+        {initialFilters?.price && <p>{initialFilters.price}</p>}
+
       </div>
 
       <CardContainer products={Page} />

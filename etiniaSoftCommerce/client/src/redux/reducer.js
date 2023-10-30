@@ -13,6 +13,7 @@ import {
   CLEAR_ERRORS,
   ERRORS,
   FILTROS_AND_PAGINATION,
+  ADD_TO_CART,
 } from "./actions";
 
 const initialState = {
@@ -22,14 +23,13 @@ const initialState = {
   productShow: [],
   indexProductShow: [],
   allUsers: [],
-
+  cart: [], 
   errors: {},
-
-
   page: null,
 };
 
 const reducer = (state = initialState, action) => {
+
 
   switch (action.type) {
     case GET_ALL_PRODUCTS:
@@ -37,6 +37,11 @@ const reducer = (state = initialState, action) => {
         ...state,
         allProducts: action.payload,
       };
+    case ADD_TO_CART:
+      return {
+      ...state,
+       cart: [...state.cart, action.payload], // Agrega el producto al carrito
+        };
     case GET_BY_ID:
       return {
         ...state,
