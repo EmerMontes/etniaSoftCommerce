@@ -1,34 +1,42 @@
 /* SearchBar.module.css */
 .searchbar {
-    display: flex;
-    align-items: center;
-    align-content: center;
-    text-align: center;
-  }
-  
-  input[type="search"] {
-    flex: 50; /* El input ocupa más espacio que el botón */
-    padding: 0.5rem;
-    font-size: 1rem;
-    height: 2rem; /* Misma altura que el botón */
-    min-width: 0;
-  }
-  
-  button {
-    flex: 5; /* El botón ocupa menos espacio que el input */
-    padding: 0.5rem;
-    background-color: #71A611;
-    color: white;
-    border: none;
-    cursor: pointer;
-    height: 2rem; /* Misma altura que el input */
-    align-items: center;
-    align-content: center;
-    text-align: center;
-  }
-  
-  .Lupa {
-    max-width: 1.3rem; /* Tamaño adecuado para la lupa en rem */
-  }
-  
-  
+  display: flex;
+  align-items: center;
+  text-align: center;
+}
+
+input[type="search"] {
+  flex: 1;
+  padding: 0.5rem;
+  font-size: 1rem;
+  height: 2rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  transition: border-color 0.3s; /* Agrega una transición al color del borde */
+}
+
+input[type="search"]:hover {
+  border-color: #71A611; /* Cambia el color del borde al pasar el mouse por encima */
+}
+
+button {
+  flex: 0.2;
+  padding: 0.5rem 1rem;
+  background-color: #71A611;
+  color: white;
+  border: none;
+  cursor: pointer;
+  height: 2rem;
+  border-radius: 5px;
+  width: 2rem;
+  transition: background-color 0.3s; /* Agrega una transición al color de fondo */
+}
+
+button:hover {
+  background-color: #5c9011; /* Cambia el color de fondo al pasar el mouse por encima */
+}
+
+.Lupa {
+  max-width: 1.3rem;
+  max-height: 1.3rem;
+}
