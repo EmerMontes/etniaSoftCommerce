@@ -149,7 +149,7 @@ const reducer = (state = initialState, action) => {
                 ...state, productShow: action.payload
             }
         
-        case 'SET_PAGINATION':
+        case PAGINATION:
                 return {
                   ...state,
                   pagination: action.payload, 

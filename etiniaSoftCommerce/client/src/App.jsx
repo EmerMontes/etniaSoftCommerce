@@ -1,5 +1,5 @@
 import { Routes, Route} from 'react-router-dom';
-import { useState } from 'react';
+//import { useState } from 'react';
 import Home from './pages/home/Home';
 import ProductDetail from './pages/productDetail/ProductDetail';
 import UserDetail from './components/userDetail/UserDetail';
@@ -7,7 +7,6 @@ import PayForm from './pages/payForm/PayForm';
 import ShoppingCart from './pages/shoppingCart/ShoppingCart';
 import LogIn from './pages/logIn/LogIn';
 import NotFound404 from './pages/404/notFound';
-import './App.css';
 
 function App() {
 

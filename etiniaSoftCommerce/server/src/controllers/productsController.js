@@ -100,7 +100,7 @@ const getProductByName = async (name) => {
   const productDB = await Products.findAll({
     where: {
       name: {
-        [Op.iLike]: `%${name}%`, // Búsqueda de coincidencia parcial insensible a mayúsculas/minúsculas
+        [Op.iLike]: `%${name}%`, 
       },
     },
   });
