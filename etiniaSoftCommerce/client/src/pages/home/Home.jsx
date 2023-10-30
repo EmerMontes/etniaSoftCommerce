@@ -32,6 +32,7 @@ function Home(props) {
 
   useEffect(() => {
     loadProducts();
+    console.log(initialFilters)
   }, [dispatch, initialFilters, initialPageSet]);
 
   const handleChange = (event) => {
@@ -40,6 +41,14 @@ function Home(props) {
     setInitialPageSet(1); // Reiniciar a la página 1 cuando se cambian los filtros
     dispatch(getFiltersAndPagination(initialFilters, initialPageSet));
   };
+  
+  const onCloseFilters = (value)=>{
+    setInitialFilters({
+      ...initialFilters,
+      [value]: ""
+    })
+  }
+
   const genderOpt = ["male", "female"];
   const categoryOpt = [
     "Camisetas",
@@ -165,8 +174,7 @@ function Home(props) {
         className={styles.button}
         onClick={() => {
           setInitialPageSet(1); // Reiniciar a la página 1 cuando se hace clic en el botón de reset
-          dispatch(getFiltersAndPagination({}, 1));
-          setInitialFilters({});
+          dispatch(getFiltersAndPagination({}, 1));setInitialFilters({});
 }}
 >
           <img
@@ -174,12 +182,33 @@ function Home(props) {
             src="https://uxwing.com/wp-content/themes/uxwing/download/arrow-direction/reset-update-icon.png"
           />
         </button>
-        {initialFilters?.gender && <h2>{initialFilters.gender + " >"}</h2>}
-        {initialFilters?.category && <h2>{initialFilters.category + " >"}</h2>}
-        {initialFilters?.color && <h2>{initialFilters.color + " >"}</h2>}
-        {initialFilters?.sale && <h2>{initialFilters.sale + " >"}</h2>}
-        {initialFilters?.size && <h2>{initialFilters.size + " >"}</h2>}
-        {initialFilters?.price && <h2>{initialFilters.price}</h2>}
+        <div></div>
+        <div>
+        {initialFilters?.gender && <div>
+        <button onClick={()=>onCloseFilters("gender")}>X</button>
+        <h2>{initialFilters.gender + " >"}</h2>
+        </div>}
+        </div>
+        {initialFilters?.category && <div>
+        <button onClick={()=>onCloseFilters("category")}>X</button>
+        <h2>{initialFilters.category + " >"}</h2>
+        </div>}
+        {initialFilters?.color && <div>
+        <button onClick={()=>onCloseFilters("color")}>X</button>
+        <h2>{initialFilters.color + " >"}</h2>
+        </div>}
+        {initialFilters?.sale && <div>
+        <button onClick={()=>onCloseFilters("sale")}>X</button>
+        <h2>{initialFilters.sale + " >"}</h2>
+        </div>}
+        {initialFilters?.size && <div>
+        <button onClick={()=>onCloseFilters("size")}>X</button>
+        <h2>{initialFilters.size + " >"}</h2>
+        </div>}
+        {initialFilters?.price && <div>
+        <button onClick={()=>onCloseFilters("price")}>X</button>
+        <h2>{initialFilters.price + " >"}</h2>
+        </div>}
       </div>
 
       <CardContainer products={Page} />
