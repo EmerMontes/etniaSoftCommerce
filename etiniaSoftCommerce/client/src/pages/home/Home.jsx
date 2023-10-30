@@ -9,6 +9,7 @@ import Filters from "../../components/filters/Filters";
 import { getFiltersAndPagination } from "../../redux/actions";
 import styles from "./Home.module.css";
 import Pagination from "../../components/pagination/Pagination";
+import resetView from "../home/clockwise.svg"
 
 function Home(props) {
   const Page = useSelector((state) => state.indexProductShow);
@@ -180,7 +181,7 @@ function Home(props) {
 >
           <img
             className={styles.reset}
-            src="http://127.0.0.1:5500/etiniaSoftCommerce/client/src/pages/home/clockwise.svg"
+            src={resetView}
           />
         </button>
         
