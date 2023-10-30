@@ -1,6 +1,10 @@
 .shopping-cart {
-    text-align: center;
-    padding: 20px;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  text-align: center;
+  justify-content: center;
+  padding: 20px;
   }
   
   .product-list {
@@ -18,8 +22,21 @@
     width: 250px;
   }
 
-  .precio {
+  .price {
     color: black;
+  }
+
+  .totalPrice {
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    text-align: center;
+    justify-content: center;
+    border-radius: 2vh;
+    background-color: rgba(0, 0, 0, 0.342);
+    width: 30vh;
+    margin-left: 42.5%;
+    margin-right: 42.5%;
   }
   
   .cart-item img {
@@ -43,9 +60,33 @@
     cursor: pointer;
     transition: background-color 0.3s;
     margin-top: 20px;
+    margin-left: 42.5%;
+    margin-right: 42.5%;
+    width: 30vh;
   }
   
   .checkout-button:hover {
     background-color: green;
+  }
+  
+  .title {
+    background-color: #71A611;
+    border-radius: 2ch;
+    font-size: 5vh;
+  }
+
+  @media (max-width: 768px) {
+    .checkout-button {
+      margin-left: 30%;
+      margin-right: 30%;
+    }
+    
+    .totalPrice {
+      margin-left: 30%;
+      margin-right: 30%;
+  }
+  .title {
+    font-size: 3vh;
+  }
   }
   
