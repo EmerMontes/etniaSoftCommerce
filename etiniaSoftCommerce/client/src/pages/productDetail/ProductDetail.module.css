@@ -3,44 +3,28 @@
   src: url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap");
 }
 
-.homeButton {
-  display: block;
-  margin-top: 20px;
-  background-color: #71A611;
-  color: #fff; /* Color del texto */
-  border: none;
-  border-radius: 5px;
-  padding: 10px 20px;
-  text-align: center;
-  text-decoration: none;
-  cursor: pointer;
-  transition: background-color 0.3s;
-  max-width: 10vh;
-}
-
-.homeButton:hover {
-  background-color: green;
-}
-
-.arrow {
-  max-width: 5vh; 
-}
-
 .centrardiv {
-  margin-left: 10%;
-  margin-right: 10%;
   justify-content: center;
   align-items: center;
+  align-content: center;
+  text-align: center;
+  justify-content: center;
+  background-color: rgb(196, 196, 196);
+}
+
+.space {
+  height: 5vh;
 }
 
 .productdetail {
+  margin-top: 5vh;
   font-family: "Montserrat";
   width: 135vh;
   padding: 2vh;
   background-color: grey;
   border-radius: 2vh;
   display: flex;
-  justify-content: left;
+  margin: 0 auto;
   align-items: left;
 }
 
@@ -60,6 +44,30 @@
 .productname {
   font-size: 4.5vh;
 }
+
+.productAddedMessage {
+  color: #71A611;
+  font-size: 1rem;
+  margin-top: 10px;
+}
+
+.addToCartButton {
+  display: block;
+  background-color: #71A611;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  width: 30vh;
+  margin: 0 auto;
+  margin-top: 20px;
+}
+
+
 
 @media (max-width: 768px) {
   .productdetail {

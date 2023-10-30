@@ -18,7 +18,9 @@ import {
     GET_PRODUCTS_BY_NAME,
     CLEAR_ERRORS,
     ERRORS,
-    PAGINATION} from "./actions";
+    PAGINATION,
+    ADD_TO_CART
+} from "./actions";
 
 
 
@@ -28,17 +30,20 @@ const initialState = {
    allFavorites: [],
    productShow: [],
    allUsers: [],
-
+   cart: [],
    errors:{},
-
-
    page: null
 
 };
 
 const reducer = (state = initialState, action) => {
    switch (action.type) {
-       case GET_ALL_PRODUCTS:
+           case ADD_TO_CART:
+           return {
+             ...state,
+             cart: [...state.cart, action.payload], // Agrega el producto al carrito
+           };
+           case GET_ALL_PRODUCTS:
            return {
                ...state,
                allProducts: action.payload,

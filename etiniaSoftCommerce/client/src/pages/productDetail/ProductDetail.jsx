@@ -2,13 +2,16 @@ import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from "react";
 import { getByID } from "../../redux/actions";
-import { Link } from "react-router-dom";
 import styles from './ProductDetail.module.css';
+import { addToCart } from "../../redux/actions";
+import { useState } from "react";
+import NavBar from '../../components/navBar/NavBar'
 
 export default function ProductDetail(props) {
     const dispatch = useDispatch();
     const Product = useSelector((state) => state.productDetail);
     const { id } = useParams();
+    const [productAdded, setProductAdded] = useState(false);
 
     const loadIdProduct = () => {
         if (id === Product.id) return;
@@ -19,12 +22,20 @@ export default function ProductDetail(props) {
         loadIdProduct()
     }, [])
 
+    const handleAddToCart = () => {
+      if (Product) {
+        dispatch(addToCart(Product));
+        setProductAdded(true);
+      }
+    }
+    
+
     return (
       <div className={styles.centrardiv}>
-        <div>
-          <Link to="/" className={styles.homeButton}>
-            <img className={styles.arrow} src="https://cdn1.iconfinder.com/data/icons/ionicons-fill-vol-2/512/return-up-back-128.png" alt="Back" />
-          </Link>
+        
+        <NavBar/>
+        <div className={styles.space}>
+        </div>
   
           <div className={styles.productdetail}>
             <div>
@@ -42,14 +53,20 @@ export default function ProductDetail(props) {
                   <p>{Product.description}</p>
                   <p>......................................................</p>
                   <p>Caracteristicas:</p>
-                  <p>Marca: {Product.brand} | Genero: {Product.gender}</p>
+                  <p>Marca: {Product.brand} | Categoria: {Product.category}</p>
                   <p>Talles: {Product.size} | Colores: {Product.color}</p>
-                  <p>Categoria: {Product.category} | Stock: {Product.quantity}</p>
+                  <p> Genero: {Product.gender} | Stock: {Product.quantity}</p>
                 </div>
               )}
             </div>
-          </div>
-        </div>
+              </div>
+
+              <button onClick={handleAddToCart} className={styles.addToCartButton}>
+                Agregar al carrito
+              </button>
+              {productAdded && (
+                <p className={styles.productAddedMessage}>añadido correctamente</p>
+              )}
       </div>
     );
   }
