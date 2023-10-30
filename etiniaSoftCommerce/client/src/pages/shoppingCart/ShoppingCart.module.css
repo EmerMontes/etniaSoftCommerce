@@ -17,6 +17,10 @@
     border-radius: 5px;
     width: 250px;
   }
+
+  .precio {
+    color: black;
+  }
   
   .cart-item img {
     max-width: 100px;
