@@ -33,6 +33,7 @@ function Home(props) {
 
   useEffect(() => {
     loadProducts();
+    console.log(initialFilters)
   }, [dispatch, initialFilters, initialPageSet]);
 
   const handleChange = (event) => {
@@ -175,8 +176,7 @@ function Home(props) {
         className={styles.button}
         onClick={() => {
           setInitialPageSet(1); // Reiniciar a la página 1 cuando se hace clic en el botón de reset
-          dispatch(getFiltersAndPagination({}, 1));
-          setInitialFilters({});
+          dispatch(getFiltersAndPagination({}, 1));setInitialFilters({});
 }}
 >
           <img
@@ -184,7 +184,6 @@ function Home(props) {
             src={resetView}
           />
         </button>
-        
       </div>
       <div>
   {initialFilters?.gender && (

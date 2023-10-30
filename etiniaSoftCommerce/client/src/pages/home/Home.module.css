@@ -57,8 +57,6 @@
   ); /* Cambia el color de fondo del elemento ::before al pasar el mouse por encima */
 }
 
-/* Puedes ajustar los colores y otras propiedades según tus preferencias */
-
 .button {
   background-color: #71a611;
   border: none;
