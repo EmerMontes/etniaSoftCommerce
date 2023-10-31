@@ -15,6 +15,9 @@ import {
   FILTROS_AND_PAGINATION,
   ADD_TO_CART,
    LOCALSTORAGE,
+   CREATE_BANK_ACCOUNT,
+   UPDATE_BANK_ACCOUNT,
+   DELETE_BANK_ACCOUNT
 } from "./actions";
 
 const initialState = {
@@ -28,6 +31,8 @@ const initialState = {
   errors: {},
   page: null,
   localstorage: [],
+  bankaccount:[]
+
 };
 
 const reducer = (state = initialState, action) => {
@@ -48,7 +53,12 @@ const reducer = (state = initialState, action) => {
         return {    
       ...state,          
         localstorage: [action.payload]        
-         };       
+         };    
+    case CREATE_BANK_ACCOUNT:
+      return{
+        ...state,
+        bankaccount:[...state.bankaccount,action.payload]
+      };        
     case GET_BY_ID:
       return {
         ...state,

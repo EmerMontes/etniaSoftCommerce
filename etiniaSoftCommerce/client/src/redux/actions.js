@@ -15,6 +15,11 @@ export const CREATE_PRODUCT = "CREATE_PRODUCT";
 export const CREATE_USER = "CREATE_USER";
 //routes Put
 export const UPDATE_USER = "UPDATE_USER";
+//bankaccount
+export const CREATE_BANK_ACCOUNT="CREATE_BANK_ACCOUNT";
+export const UPDATE_BANK_ACCOUNT="UPDATE_BANK_ACCOUNT";
+export const DELETE_BANK_ACCOUNT="DELETE_BANK_ACCOUNT";
+
 //Filters
 export const GET_FILTER_GENDER = "GET_FILTER_GENDER";
 export const GET_FILTER_CATEGORY = "GET_FILTER_CATEGORY";
@@ -33,7 +38,27 @@ export const ADD_TO_CART ="ADD_TO_CART";
 export const LOCALSTORAGE = "LOCALSTORAGE"
 
 const URL = "http://localhost:3001";
+export function deletebankaccount(idaccount){
+  return{
+    type:DELETE_BANK_ACCOUNT,
+    payload:idaccount,
+  }
+}
 
+export function updatebankaccount(idaccount,updatedata){
+  return{
+    type:UPDATE_BANK_ACCOUNT,
+    payload:{idaccount,updatedata}
+  }
+}
+
+
+export function createbankaccount(createaccount){
+return{
+  type:CREATE_BANK_ACCOUNT,
+  payload:createaccount,
+}
+}
 
 export function putLocalstorage() {
   if (localStorage.getItem('cart')) {
