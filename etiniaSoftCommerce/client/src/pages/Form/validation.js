@@ -15,15 +15,20 @@ if(input.size.length===0){errors.size="Choose at least one Size"};
 
 //Color
 if(input.color){errors.color="Your garment needs a color"};
-
+//Brand
+if (!data.brand.trim()) {errors.brand = 'Brand is required';}
 //Price
 if(!input.price){errors.price="select a price for your garment!"};
 if(input.price <=60.000){errors.price="enter a value greater than 60.000"};
 if(input.price >100.000){errors.price="you can only enter the price from '70.000' to '100.000'"}
-
+//Sale
+if (isNaN(data.sale)) {  errors.sale = 'Sale must be a number';}
 //Gender
-
 if(input.gender.length === 0){errors.gender= "Choose at least one Gender"};
-
+//Category
+if (!data.category.trim()) {  errors.category = 'Category is required';}
+ //Quantity
+if (isNaN(data.quantity)) {errors.quantity = 'Quantity must be a number';}
+    
 return errors;
 }

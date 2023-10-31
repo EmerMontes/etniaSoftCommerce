@@ -14,6 +14,7 @@ import {
   ERRORS,
   FILTROS_AND_PAGINATION,
   ADD_TO_CART,
+   LOCALSTORAGE,
 } from "./actions";
 
 const initialState = {
@@ -26,6 +27,7 @@ const initialState = {
   cart: [], 
   errors: {},
   page: null,
+  localstorage: [],
 };
 
 const reducer = (state = initialState, action) => {
@@ -42,6 +44,11 @@ const reducer = (state = initialState, action) => {
       ...state,
        cart: [...state.cart, action.payload], // Agrega el producto al carrito
         };
+    case LOCALSTORAGE:
+        return {    
+      ...state,          
+        localstorage: [action.payload]        
+         };       
     case GET_BY_ID:
       return {
         ...state,
@@ -81,6 +88,8 @@ const reducer = (state = initialState, action) => {
         ...state,
         allFavorites: [...state.allFavorites, action.payload],
       };
+      
+    
 
     case REMOVE_FAVORITES:
       let productRemove = state.allFavorites.filter(
