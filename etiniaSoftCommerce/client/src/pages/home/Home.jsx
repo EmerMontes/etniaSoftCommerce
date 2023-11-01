@@ -6,17 +6,24 @@ import Header from "../../components/header/Header";
 import CardContainer from "../../components/cardsContainer/CardsContainer";
 import NavBar from "../../components/navBar/NavBar";
 import Filters from "../../components/filters/Filters";
-import styles from "./Home.module.css";
-import Pagination from "../../components/pagination/Pagination";
 import Favorites from "../../components/favorites/Favorites";
 import { getFiltersAndPagination } from "../../redux/actions";
+import { getAllSelects } from "../../redux/actions";
+import styles from "./Home.module.css";
+import Pagination from "../../components/pagination/Pagination";
+import resetView from "../home/clockwise.svg"
 
 function Home(props) {
   const Page = useSelector((state) => state.indexProductShow);
+  const selects = useSelector ((state) => state.selectFilter)
   const [initialPageSet, setInitialPageSet] = useState(1);
   const [initialFilters, setInitialFilters] = useState({});
 
   const dispatch = useDispatch();
+  console.log(selects);
+
+
+
 
   useEffect(() => {
     if (!initialPageSet) {
@@ -33,6 +40,7 @@ function Home(props) {
 
   useEffect(() => {
     loadProducts();
+    dispatch(getAllSelects())
   }, [dispatch, initialFilters, initialPageSet]);
 
   const handleChange = (event) => {
@@ -42,33 +50,37 @@ function Home(props) {
     dispatch(getFiltersAndPagination(initialFilters, initialPageSet));
   };
   
-  const onCloseFilters = (value)=>{
-    setInitialFilters({
-      ...initialFilters,
-      [value]: ""
-    })
-  }
+  const handleFilterRemove = (filterName) => {
+    const newInitialFilters = { ...initialFilters };
+    delete newInitialFilters[filterName];
+    setInitialFilters(newInitialFilters);
+    dispatch(getFiltersAndPagination(newInitialFilters, 1));
+  };
+  
 
   const genderOpt = ["male", "female"];
-  const categoryOpt = [
-    "Camisetas",
-    "Licras",
-    "Tops",
-    "Faldas",
-    "Chaquetas",
-    "Blusas",
-  ];
-  const colorOpt = [
-    "gris jasped",
-    "verde menta",
-    "negro",
-    "gris Oscuro",
-    "mora en leche",
-    "blanco",
-    "palo de rosa claro",
-  ];
+  const categoryOpt = selects.category;
+  // const categoryOpt = [
+  //   "Camisetas",
+  //   "Licras",
+  //   "Tops",
+  //   "Faldas",
+  //   "Chaquetas",
+  //   "Blusas",
+  // ];
+  const colorOpt = selects.color;
+  // const colorOpt = [
+  //   "gris jasped",
+  //   "verde menta",
+  //   "negro",
+  //   "gris Oscuro",
+  //   "mora en leche",
+  //   "blanco",
+  //   "palo de rosa claro",
+  // ];
   const saleOpt = ["sale", "no-sale"];
-  const sizeOpt = ["S", "L", "M", "XS", "XXL"];
+  const sizeOpt = selects.size;
+  //const sizeOpt = ["S", "L", "M", "XS", "XXL"];
   const PriceOpt = ["highest", "lowest"];
 
   function Pagination() {
@@ -86,6 +98,7 @@ function Home(props) {
       dispatch(getFiltersAndPagination(initialFilters, initialPageSet - 1));
     };
 
+    
     const handleNextClick = () => {
       
       setInitialPageSet(initialPageSet + 1);
@@ -164,7 +177,7 @@ function Home(props) {
           state={null}
         />
         <Filters
-          className={styles.filters}
+          className="filters"
           name={"price"}
           options={PriceOpt}
           handleChange={handleChange}
@@ -179,19 +192,44 @@ function Home(props) {
 >
           <img
             className={styles.reset}
-            src="https://uxwing.com/wp-content/themes/uxwing/download/arrow-direction/reset-update-icon.png"
+            src={resetView}
           />
         </button>
       </div>
-      <div className={styles.filtersText}>
-        {initialFilters?.gender && <p>{initialFilters.gender + " >"}</p>}
-        {initialFilters?.category && <p>{initialFilters.category + " >"}</p>}
-        {initialFilters?.color && <p>{initialFilters.color + " >"}</p>}
-        {initialFilters?.sale && <p>{initialFilters.sale + " >"}</p>}
-        {initialFilters?.size && <p>{initialFilters.size + " >"}</p>}
-        {initialFilters?.price && <p>{initialFilters.price}</p>}
+      <div>
+  {initialFilters?.gender && (
+    <div className={styles["active-filter"]} onClick={() => handleFilterRemove('gender')}>
+      {initialFilters.gender  } 
+    </div>
+  )}
+  {initialFilters?.category && (
+    <div className={styles["active-filter"]} onClick={() => handleFilterRemove('category')}>
+      {initialFilters.category } 
+    </div>
+  )}
+  {initialFilters?.color && (
+    <div className={styles["active-filter"]} onClick={() => handleFilterRemove('color')}>
+      {initialFilters.color } 
+    </div>
+  )}
+  {initialFilters?.sale && (
+    <div className={styles["active-filter"]} onClick={() => handleFilterRemove('sale')}>
+      {initialFilters.sale } 
+    </div>
+  )}
+  {initialFilters?.size && (
+    <div className={styles["active-filter"]} onClick={() => handleFilterRemove('size')}>
+      {initialFilters.size  } 
+    </div>
+  )}
+  {initialFilters?.price && (
+    <div className={styles["active-filter"]} onClick={() => handleFilterRemove('price')}>
+      {initialFilters.price } 
+    </div>
+  )}
+</div>
 
-      </div>
+
 
       <CardContainer products={Page} />
       <br />

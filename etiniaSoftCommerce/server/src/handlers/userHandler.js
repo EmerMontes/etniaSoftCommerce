@@ -5,6 +5,7 @@ const {
   createusers,
   deleteUserById,
   updateUserById,
+  loginUser,
 } = require("../controllers/userControllers");
 
 const getUsersByName = async (req, res) => {
@@ -62,6 +63,16 @@ const updateUserHandler = async (req, res) => {
     res.status(400).json({ error: error.message });
   }
 };
+const loginUserHandler = async (req, res) => {
+  const { email, password } = req.body;
+  try {
+    const token = await loginUser(email, password);
+    res.status(200).json({ token });
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+    
+  }
+};
 
 // /:id = params si modifica
 // query === ? name&raza, no modifica la ruta
@@ -73,4 +84,5 @@ module.exports = {
   createUsersHandler: createUsersHandler,
   deleteUserHandler: deleteUserHandler,
   updateUserHandler: updateUserHandler,
+  loginUserHandler: loginUserHandler,
 };

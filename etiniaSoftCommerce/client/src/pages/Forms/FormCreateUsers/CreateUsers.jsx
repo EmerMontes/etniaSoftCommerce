@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { createUser, clearErrors } from '../../redux/actions'; 
+import { createUser, clearErrors } from '../../../redux/actions'; 
 import style from './formUser.module.css';
 import { validateUserInput } from './validation';
 
