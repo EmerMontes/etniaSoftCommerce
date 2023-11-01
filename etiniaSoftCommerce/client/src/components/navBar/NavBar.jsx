@@ -36,6 +36,10 @@ function NavBar(props) {
       <button>
         <Link to="/home"><img className={styles.Configuraciones} src={Configuraciones} alt="Configuraciones" /></Link>
       </button>
+      
+      <button>
+        <Link to="/favorites"> FAVORITES </Link>
+      </button>
     </div>
   );
 }

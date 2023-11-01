@@ -6,9 +6,10 @@ import Header from "../../components/header/Header";
 import CardContainer from "../../components/cardsContainer/CardsContainer";
 import NavBar from "../../components/navBar/NavBar";
 import Filters from "../../components/filters/Filters";
-import { getFiltersAndPagination } from "../../redux/actions";
 import styles from "./Home.module.css";
 import Pagination from "../../components/pagination/Pagination";
+import Favorites from "../../components/favorites/Favorites";
+import { getFiltersAndPagination } from "../../redux/actions";
 
 function Home(props) {
   const Page = useSelector((state) => state.indexProductShow);
