@@ -33,7 +33,6 @@ function Home(props) {
 
   useEffect(() => {
     loadProducts();
-    console.log(initialFilters)
   }, [dispatch, initialFilters, initialPageSet]);
 
   const handleChange = (event) => {

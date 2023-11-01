@@ -11,12 +11,7 @@ export default function Favorites(props){
     const favorites = useSelector((state)=> state.allFavorites);
     const dispatch = useDispatch();
 
-    useEffect(()=>{
-        console.log(favorites)
-    },[favorites])
-
     const handleFavorite = (id) => {
-        console.log(id)
         dispatch(removeFav(id))
      };
 

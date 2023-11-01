@@ -147,7 +147,6 @@ export function getAddFavorites(product) {
   return async (dispatch) => {
     try {
       // const { data } = await axios.get(`${URL}/favorites`);
-      console.log(product)
       return dispatch({
         type: ADD_FAVORITES,
         payload: product,
@@ -159,7 +158,6 @@ export function getAddFavorites(product) {
 }
 
 export function removeFav(id) {
-  console.log(id)
   return {
     type: REMOVE_FAVORITES,
     payload: id,
