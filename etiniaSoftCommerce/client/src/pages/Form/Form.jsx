@@ -17,11 +17,15 @@ const Form=()=>{
     const [input,setInput]=useState({
         name:"",
         description:"",
+        brand:"",
+        sale:0,
+        category:"",
         size:[],
         color:"",
         price:60.000,
         genders:[],
-        image:""
+        image:"",
+        quantity:0
         
     });
 
@@ -105,13 +109,17 @@ const Form=()=>{
 
           if(!postError){
             setInput({
-                name:"",
-                description:"",
-                size:[],
-                color:"",
-                price:60.000,
-                genders:[],
-                image:""
+              name:"",
+        description:"",
+        brand:"",
+        sale:0,
+        category:"",
+        size:[],
+        color:"",
+        price:60.000,
+        genders:[],
+        image:"",
+        quantity:0
             })
             dispatch(getAllProducts())
             alert("Created Width Success")
@@ -138,6 +146,51 @@ const Form=()=>{
               />
               <p className={style.errores} style={{visibility: errors.name ? 'visible' : 'hidden' }}>{errors.name}</p>
             </div>
+            <div className={style.name}>
+            <label>Brand</label>
+            <input
+              type="text"
+              placeholder="Enter a brand"
+              name="brand"
+              value={input.brand}
+              onChange={handleChange}
+            />
+             <p className={style.errores} style={{visibility: errors.brand ? 'visible' : 'hidden' }}>{errors.brand}</p>
+          </div>
+          <div className={style.description}>
+            <label>Category</label>
+            <input
+              type="text"
+              placeholder="Enter category"
+              name="category"
+              value={input.category}
+              onChange={handleChange}
+            />
+             <p className={style.errores} style={{visibility: errors.category ? 'visible' : 'hidden' }}>{errors.category}</p>
+          </div>
+
+          <div className={style.size}>
+            <label>Quantity</label>
+            <input
+              type="number"
+              placeholder="Enter quantity"
+              name="quantity"
+              value={input.quantity}
+              onChange={handleChange}
+            />
+             <p className={style.errores} style={{visibility: errors.quantity ? 'visible' : 'hidden' }}>{errors.quantity}</p>
+          </div>
+          <div className={style.color}>
+            <label>Sale</label>
+            <input
+              type="number"
+              placeholder="Enter sale"
+              name="sale"
+              value={input.sale}
+              onChange={handleChange}
+            />
+            <p className={style.errores} style={{visibility: errors.sale ? 'visible' : 'hidden' }}>{errors.sale}</p>
+          </div>
 
             <div className={style.desc}>
           <label>Description</label>

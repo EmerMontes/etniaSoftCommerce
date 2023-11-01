@@ -24,19 +24,36 @@ export const GET_FILTER_COLOR = "GET_FILTER_COLOR";
 export const GET_FILTER_SIZE = "GET_FILTER_SIZE";
 export const GET_FILTER_SALE = "GET_FILTER_SALE";
 export const REMOVE_FAVORITES = "REMOVE_FAVORITES";
-
+export const FILTROS_AND_PAGINATION = "FILTROS_AND_PAGINATION";
 export const PAGINATION ="SET_PAGINATION"
-
+//errors
 export const CLEAR_ERRORS = "CLEAR_ERRORS";
 export const ERRORS = "ERRORS";
 //carrito
 export const ADD_TO_CART ="ADD_TO_CART";
-
-export const FILTROS_AND_PAGINATION = "FILTROS_AND_PAGINATION";
-
+//LocalStorage
+export const LOCALSTORAGE = "LOCALSTORAGE"
 
 const URL = "http://localhost:3001";
 
+
+export function putLocalstorage() {
+  if (localStorage.getItem('cart')) {
+      let cart = JSON.parse(localStorage.getItem('cart'));
+      return {
+          type: LOCALSTORAGE,
+          payload: cart
+      }
+  }
+  else {
+      let cart = []
+      return {
+          type: LOCALSTORAGE,
+          payload: cart
+      }
+  }
+
+}
 
 export function addToCart(product) {
   return {
@@ -155,18 +172,11 @@ export function getAllProducts() {
   };
 }
 
-export function getAddFavorites(id) {
-  return async (dispatch) => {
-    try {
-      const { data } = await axios.get(`${URL}/favorites`);
-      return dispatch({
-        type: ADD_FAVORITES,
-        payload: data,
-      });
-    } catch (error) {
-      console.log(error);
-    }
-  };
+export function getAddFavorites(item) {
+  return{
+    type:ADD_FAVORITES,
+    payload:item
+  }
 }
 
 export function removeFav(id) {
