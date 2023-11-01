@@ -7,16 +7,22 @@ import CardContainer from "../../components/cardsContainer/CardsContainer";
 import NavBar from "../../components/navBar/NavBar";
 import Filters from "../../components/filters/Filters";
 import { getFiltersAndPagination } from "../../redux/actions";
+import { getAllSelects } from "../../redux/actions";
 import styles from "./Home.module.css";
 import Pagination from "../../components/pagination/Pagination";
 import resetView from "../home/clockwise.svg"
 
 function Home(props) {
   const Page = useSelector((state) => state.indexProductShow);
+  const selects = useSelector ((state) => state.selectFilter)
   const [initialPageSet, setInitialPageSet] = useState(1);
   const [initialFilters, setInitialFilters] = useState({});
 
   const dispatch = useDispatch();
+  console.log(selects);
+
+
+
 
   useEffect(() => {
     if (!initialPageSet) {
@@ -33,7 +39,7 @@ function Home(props) {
 
   useEffect(() => {
     loadProducts();
-    console.log(initialFilters)
+    dispatch(getAllSelects())
   }, [dispatch, initialFilters, initialPageSet]);
 
   const handleChange = (event) => {
@@ -50,26 +56,30 @@ function Home(props) {
     dispatch(getFiltersAndPagination(newInitialFilters, 1));
   };
   
+
   const genderOpt = ["male", "female"];
-  const categoryOpt = [
-    "Camisetas",
-    "Licras",
-    "Tops",
-    "Faldas",
-    "Chaquetas",
-    "Blusas",
-  ];
-  const colorOpt = [
-    "gris jasped",
-    "verde menta",
-    "negro",
-    "gris Oscuro",
-    "mora en leche",
-    "blanco",
-    "palo de rosa claro",
-  ];
+  const categoryOpt = selects.category;
+  // const categoryOpt = [
+  //   "Camisetas",
+  //   "Licras",
+  //   "Tops",
+  //   "Faldas",
+  //   "Chaquetas",
+  //   "Blusas",
+  // ];
+  const colorOpt = selects.color;
+  // const colorOpt = [
+  //   "gris jasped",
+  //   "verde menta",
+  //   "negro",
+  //   "gris Oscuro",
+  //   "mora en leche",
+  //   "blanco",
+  //   "palo de rosa claro",
+  // ];
   const saleOpt = ["sale", "no-sale"];
-  const sizeOpt = ["S", "L", "M", "XS", "XXL"];
+  const sizeOpt = selects.size;
+  //const sizeOpt = ["S", "L", "M", "XS", "XXL"];
   const PriceOpt = ["highest", "lowest"];
 
   function Pagination() {

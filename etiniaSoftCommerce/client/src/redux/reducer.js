@@ -14,6 +14,7 @@ import {
   ERRORS,
   FILTROS_AND_PAGINATION,
   ADD_TO_CART,
+  GET_ALL_SELECTS,
    LOCALSTORAGE,
 } from "./actions";
 
@@ -26,6 +27,7 @@ const initialState = {
   allUsers: [],
   cart: [], 
   errors: {},
+  selectFilter: {},
   page: null,
   localstorage: [],
 };
@@ -121,6 +123,12 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         indexProductShow: action.payload,
+      };
+
+    case GET_ALL_SELECTS:
+      return {
+          ...state,
+          selectFilter: action.payload,
       };
 
     default:

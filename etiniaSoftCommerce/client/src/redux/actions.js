@@ -1,6 +1,8 @@
 import axios from "axios";
+import getFindSelects from "../functions/getFindSelects"
 //Routes Get
 export const GET_ALL_PRODUCTS = "GET_ALL_PRODUCTS";
+export const GET_ALL_SELECTS = 'GET_ALL_SELECTS';
 export const GET_DETAIL_SIZE_COLOR = "GET_DETAIL_SIZE_COLOR";
 export const GET_ORDER_PRICE = "GET_ORDER_PRICE";
 export const GET_ALL_USERS = "GET_ALL_USERS";
@@ -149,10 +151,20 @@ export function createUser(payload) {
 }
 
 
+export function getAllSelects() {
+  return async function (dispatch) {
+    const productsInfo = await getFindSelects();
+    dispatch({
+      type: GET_ALL_SELECTS,
+      payload: productsInfo,
+    });
+  };
+}
+
 export function getAllProducts() {
   return async function (dispatch) {
     const productsInfo = await axios.get(`${URL}/products`);
-
+    console.log(productsInfo)
     dispatch({
       type: GET_ALL_PRODUCTS,
       payload: productsInfo.data.results,
