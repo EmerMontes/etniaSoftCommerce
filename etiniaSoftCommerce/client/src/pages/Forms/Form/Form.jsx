@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {useNavigate} from 'react-router-dom';
 import Validation from './validation';
-import { getFilterGenero,createProduct,clearErrors,getAllProducts,setNewErrors } from '../../redux/actions';
+import { getFilterGenero,createProduct,clearErrors,getAllProducts,setNewErrors } from '../../../redux/actions';
 import style from "./form.module.css";
 
 
