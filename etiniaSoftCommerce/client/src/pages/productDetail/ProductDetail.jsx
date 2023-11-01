@@ -29,7 +29,6 @@ export default function ProductDetail(props) {
       }
     }
     
-
     return (
       <div className={styles.centrardiv}>
         

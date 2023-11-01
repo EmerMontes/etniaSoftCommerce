@@ -6,6 +6,7 @@ import Header from "../../components/header/Header";
 import CardContainer from "../../components/cardsContainer/CardsContainer";
 import NavBar from "../../components/navBar/NavBar";
 import Filters from "../../components/filters/Filters";
+import Favorites from "../../components/favorites/Favorites";
 import { getFiltersAndPagination } from "../../redux/actions";
 import { getAllSelects } from "../../redux/actions";
 import styles from "./Home.module.css";

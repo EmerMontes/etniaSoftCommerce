@@ -203,11 +203,18 @@ export function getAllProducts() {
   };
 }
 
-export function getAddFavorites(item) {
-  return{
-    type:ADD_FAVORITES,
-    payload:item
-  }
+export function getAddFavorites(product) {
+  return async (dispatch) => {
+    try {
+      // const { data } = await axios.get(`${URL}/favorites`);
+      return dispatch({
+        type: ADD_FAVORITES,
+        payload: product,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
 }
 
 export function removeFav(id) {
@@ -242,7 +249,6 @@ export const getFiltersAndPagination = (filtros, pageNumber) => {
       // Construye la cadena de consulta de la URL para filtros y paginación
       const queryString = new URLSearchParams(filtrosValidos).toString();
       const url = `${URL}/products?${queryString}&page=${pageNumber}`;
-      console.log(url);
       const response = await axios.get(url);
    
       dispatch({
