@@ -16,6 +16,9 @@ import {
   ADD_TO_CART,
   GET_ALL_SELECTS,
    LOCALSTORAGE,
+   REMOVE_SHIPPING,
+   UPDATE_SHIPPING,
+   ADD_SHIPPING,
 } from "./actions";
 
 const initialState = {
@@ -30,6 +33,7 @@ const initialState = {
   selectFilter: {},
   page: null,
   localstorage: [],
+  shipments:[]
 };
 
 const reducer = (state = initialState, action) => {
@@ -50,7 +54,34 @@ const reducer = (state = initialState, action) => {
         return {    
       ...state,          
         localstorage: [action.payload]        
-         };       
+         };    
+    case ADD_SHIPPING:
+      return{
+       ...state,
+       shipments:[...state.shipments,action.payload] 
+      };
+    case UPDATE_SHIPPING:
+      const{shippingID,update}=action.payload;
+      const updatedshipping=state.shipments.map((shipment)=>{
+        if(shippingID===shippingID){
+          return{...shipment,...update};
+        }else{
+          return shipment;
+        }
+      });
+      return{
+        ...state,
+        shipments:updatedshipping,
+      }
+      case REMOVE_SHIPPING:
+        const sendtodeleteID=action.payload;
+        const filteredshipments=state.shipments.filter((shipment)=>shipment.ID !==sendtodeleteID);
+        return{
+          ...state,
+          shipments:filteredshipments,
+        }
+
+      
     case GET_BY_ID:
       return {
         ...state,

@@ -33,8 +33,33 @@ export const ERRORS = "ERRORS";
 export const ADD_TO_CART ="ADD_TO_CART";
 //LocalStorage
 export const LOCALSTORAGE = "LOCALSTORAGE"
+//logistics
+export const ADD_SHIPPING="ADD_SHIPPING";
+export const UPDATE_SHIPPING="UPDATE_SHIPPING";
+export const REMOVE_SHIPPING="REMOVE_SHIPPING";
 
 const URL = "http://localhost:3001";
+
+
+export function addshipping(envio){
+  return{
+    type:ADD_SHIPPING,
+    payload:envio
+  }
+}
+export function updateshipping(shippingID,update){
+  return{
+    type:UPDATE_SHIPPING,
+    payload:{shippingID,update},
+  }
+}
+export function removeshipping(shippingID){
+  return{
+    type:REMOVE_SHIPPING,
+    payload:shippingID,
+  }
+}
+
 
 
 export function putLocalstorage() {
