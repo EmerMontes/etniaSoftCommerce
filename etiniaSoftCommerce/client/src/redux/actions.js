@@ -38,7 +38,13 @@ export const ADD_SHIPPING="ADD_SHIPPING";
 export const UPDATE_SHIPPING="UPDATE_SHIPPING";
 export const REMOVE_SHIPPING="REMOVE_SHIPPING";
 
+export const FILTROS_AND_PAGINATION = "FILTROS_AND_PAGINATION";
+//login/out
+export const USER_LOGIN = "USER_LOGIN";
+export const USER_LOGOUT = "USER_LOGOUT";
+=======
 const URL = "http://localhost:3001";
+
 
 
 export function addshipping(envio){
@@ -248,3 +254,16 @@ export const getFiltersAndPagination = (filtros, pageNumber) => {
     }
   };
 };
+
+export function userLogin(userData) {
+  return {
+    type: USER_LOGIN,
+    payload: userData,
+  };
+}
+
+export function userLogout() {
+  return {
+    type: USER_LOGOUT,
+  };
+}

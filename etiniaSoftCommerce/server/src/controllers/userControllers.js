@@ -1,6 +1,8 @@
 const { User } = require("../db");
 console.log(User);
 const { Op } = require("sequelize");
+const jwt = require('jsonwebtoken');
+const bcrypt = require('bcrypt');
 
 const getAllUser = async () => {
   const usuariotDB = await User.findAll();
@@ -40,6 +42,8 @@ const createusers = async (userData) => {
       password,
     } = userData;
 
+    const hashedPassword = await bcrypt.hash(password, 10);
+
     const newuser = await User.create({
       id,
       name,
@@ -49,7 +53,7 @@ const createusers = async (userData) => {
       admin,
       employee,
       email,
-      password,
+      password: hashedPassword,
     });
 
     return newuser;
@@ -89,6 +93,32 @@ const updateUserById = async (id, newData) => {
       throw error;
     }
   };
+  const loginUser = async (req, res) => {
+    console.log(req.body);
+    const { email, password } = req.body;
+  
+    try {
+      const user = await User.findOne({ where: { email } });
+  
+      if (!user) {
+        return res.status(400).json({ error: 'Invalid email or password' });
+      }
+  
+      const passwordMatch = await bcrypt.compare(password, user.password);
+  
+      if (!passwordMatch) {
+        return res.status(400).json({ error: 'Invalid email or password' });
+      }
+  
+      const token = jwt.sign({ userId: user.id }, 'your_jwt_secret'); // replace 'your_jwt_secret' with your actual JWT secret
+  
+      res.json({ token });
+    } catch (err) {
+      console.error(err);
+      res.status(500).json({ error: 'Internal server error' });
+    }
+  };
+  
   
 
 module.exports = {
@@ -97,5 +127,6 @@ module.exports = {
   getUserByName,
   createusers,
   deleteUserById,
-  updateUserById
+  updateUserById,
+  loginUser,
 };

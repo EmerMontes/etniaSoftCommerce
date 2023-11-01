@@ -14,11 +14,14 @@ import {
   ERRORS,
   FILTROS_AND_PAGINATION,
   ADD_TO_CART,
+  USER_LOGIN,
+  USER_LOGOUT,
   GET_ALL_SELECTS,
    LOCALSTORAGE,
    REMOVE_SHIPPING,
    UPDATE_SHIPPING,
    ADD_SHIPPING,
+  
 } from "./actions";
 
 const initialState = {
@@ -164,6 +167,30 @@ const reducer = (state = initialState, action) => {
 
     default:
       return { ...state };
+
+    case USER_LOGIN:
+  return {
+    ...state,
+    user: action.payload,
+  };
+
+case USER_LOGOUT:
+  return {
+    ...state,
+    user: null,
+
+  };
+  case USER_LOGIN:
+    return {
+      ...state,
+      user: action.payload,
+    };
+  
+  case USER_LOGOUT:
+    return {
+      ...state,
+      user: null,
+    };    
   }
 };
 
