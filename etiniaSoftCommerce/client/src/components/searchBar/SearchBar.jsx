@@ -1,12 +1,11 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { getFiltersAndPagination } from '../../redux/actions';
-import { useLocalStorage } from '../../functions/useLocalStorage';
 import styles from './SearchBar.module.css';
 import Lupa from '../../assets/png/Lupa.png';
 
-function SearchBar() {
-  const [name, setName] = useLocalStorage("name", "")
+function SearchBar({initialFilters, setInitialFilters, initialPageSet, setInitialPageSet}) {
+  const [name, setName] = useState("");
   const dispatch = useDispatch();
 
   const handleSearch = () => {
@@ -15,17 +14,10 @@ function SearchBar() {
 
   const handleChange = (event) => {
     setName(event.target.value);
-
-    const initialFilters = {
-      name,
-    };
-
-    dispatch(getFiltersAndPagination(initialFilters, 1));
+    setInitialFilters({ ...initialFilters, name });
+    setInitialPageSet(1);
+    dispatch(getFiltersAndPagination(initialFilters, initialPageSet));
   };
-
-  useEffect(()=>{
-    console.log(name)
-  },[])
 
   return (
     <div className={styles.searchbar}>
