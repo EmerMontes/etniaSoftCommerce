@@ -45,7 +45,7 @@ function Home(props) {
   const handleChange = (event) => {
     const { name, value } = event.target;
     setInitialFilters({ ...initialFilters, [name]: value });
-    setInitialPageSet(1); // Reiniciar a la página 1 cuando se cambian los filtros
+    setInitialPageSet(1); 
     dispatch(getFiltersAndPagination(initialFilters, initialPageSet));
   };
   
@@ -119,7 +119,7 @@ function Home(props) {
   return (
     <div className={styles.home}>
       <NavBar />
-      <Header />
+      <Header initialFilters={initialFilters} setInitialFilters={setInitialFilters} initialPageSet={initialPageSet} setInitialPageSet={setInitialPageSet}/>
 
       <div className={styles.filterscontainer}>
         <Filters

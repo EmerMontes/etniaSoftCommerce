@@ -4,7 +4,7 @@ import { getFiltersAndPagination } from '../../redux/actions';
 import styles from './SearchBar.module.css';
 import Lupa from '../../assets/png/Lupa.png';
 
-function SearchBar() {
+function SearchBar({initialFilters, setInitialFilters, initialPageSet, setInitialPageSet}) {
   const [name, setName] = useState("");
   const dispatch = useDispatch();
 
@@ -14,12 +14,9 @@ function SearchBar() {
 
   const handleChange = (event) => {
     setName(event.target.value);
-
-    const initialFilters = {
-      name,
-    };
-
-    dispatch(getFiltersAndPagination(initialFilters, 1));
+    setInitialFilters({ ...initialFilters, name });
+    setInitialPageSet(1);
+    dispatch(getFiltersAndPagination(initialFilters, initialPageSet));
   };
 
   return (

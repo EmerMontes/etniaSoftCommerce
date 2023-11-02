@@ -10,8 +10,7 @@ function Card({id, name, gender, sale, img, color, price}) {
   const favorites = useSelector((state)=> state.allFavorites)
   const dispatch = useDispatch();
 
-  // const [isFav, setIsFav] = useState(false);
-  const [isFav, setIsFav] = useLocalStorage(`isFav_${id}`, false);
+  const [isFav, setIsFav] = useState(false);
 
 
   const product = {id, name, gender, sale, img, color, price};
@@ -33,7 +32,6 @@ function Card({id, name, gender, sale, img, color, price}) {
         setIsFav(true);
      }
   });
-  console.log(favorites)
 }, [id, favorites]);
 
   return (

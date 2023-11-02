@@ -6,7 +6,7 @@ import NavBar from '../../components/navBar/NavBar'
 import { useLocalStorage } from "../../functions/useLocalStorage";
 import styles from './ProductDetail.module.css';
 
-export default function ProductDetail(props) {
+export default function ProductDetail({handleChange}) {
     const dispatch = useDispatch();
     const Product = useSelector((state) => state.productDetail);
     const { id } = useParams();
