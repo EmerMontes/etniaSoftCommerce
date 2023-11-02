@@ -2,13 +2,13 @@ import React, {useEffect, useState} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {useNavigate} from 'react-router-dom';
 import Validation from './validation';
-import { getFilterGenero,createProduct,clearErrors,getAllProducts,setNewErrors } from '../../../redux/actions';
-import style from "./form.module.css";
+import { createProduct,clearErrors,getAllProducts,setNewErrors } from '../../../redux/actions';
+import "./form.css";
 
 
 const Form=()=>{
     const dispatch=useDispatch();
-    const genders=useSelector((state)=>state.genders);
+    const genders =useSelector((state)=>state.genders)
     const navigate=useNavigate()
     const gErrors=useSelector((state)=>state.errors)
     
@@ -30,7 +30,6 @@ const Form=()=>{
     });
 
     useEffect(()=>{
-        dispatch(getFilterGenero())
         return()=>dispatch(clearErrors())
     },[dispatch])
 
@@ -68,7 +67,7 @@ const Form=()=>{
 
       const handleSize=(event)=>{
         event.preventDefault();
-        const rep=input.talla.find(size=> size===event.target.value)
+        const rep=input.talla?.find(size=> size===event.target.value)
 
         if(event.target.value !== "default" && !rep){
             setInput({
@@ -132,104 +131,126 @@ const Form=()=>{
     };
 
     return(
-      <div className={style.globalCont}>
-        <div className={style.formContenedor}>
-          <h3 className={style.formTitle}>Create your own Product</h3>
-          <form onSubmit={(event)=>handleSubmit(event)} className={style.labelsInputs}>
-            <div className={style.name}>
-              <label> Name</label>
-              <input
-              type="text"
+      <div >
+          <form className="globalCont" onSubmit={(event)=>handleSubmit(event)} >
+          <h3 className="formTitle">Crear nuevo producto</h3>
+          <br>
+          </br>
+
+          <div>
+          <label> Nombre</label>
+          <input className="input1" type="text"
               placeholder="enter a name"
               name="name"
               onChange={handleChange} 
-              />
-              <p className={style.errores} style={{visibility: errors.name ? 'visible' : 'hidden' }}>{errors.name}</p>
-            </div>
-            <div className={style.name}>
-            <label>Brand</label>
-            <input
+          />  
+              <p className="errores" style={{visibility: errors.name ? 'visible' : 'hidden' }}>{errors.name}</p>
+         
+          </div>
+             
+          <div>
+            <label>Marca</label>
+            <input className="input1"
               type="text"
-              placeholder="Enter a brand"
+              placeholder="enter a brand"
               name="brand"
               value={input.brand}
               onChange={handleChange}
             />
-             <p className={style.errores} style={{visibility: errors.brand ? 'visible' : 'hidden' }}>{errors.brand}</p>
+            <p className="errores" style={{visibility: errors.brand ? 'visible' : 'hidden' }}>{errors.brand}</p>
           </div>
-          <div className={style.description}>
-            <label>Category</label>
-            <input
+             
+          <div>
+            <label>Categoria</label>
+            <input className="input1"
               type="text"
-              placeholder="Enter category"
+              placeholder="enter a category"
               name="category"
               value={input.category}
               onChange={handleChange}
             />
-             <p className={style.errores} style={{visibility: errors.category ? 'visible' : 'hidden' }}>{errors.category}</p>
+             <p className="errores" style={{visibility: errors.category ? 'visible' : 'hidden' }}>{errors.category}</p>
           </div>
 
-          <div className={style.size}>
-            <label>Quantity</label>
-            <input
-              type="number"
-              placeholder="Enter quantity"
-              name="quantity"
-              value={input.quantity}
-              onChange={handleChange}
-            />
-             <p className={style.errores} style={{visibility: errors.quantity ? 'visible' : 'hidden' }}>{errors.quantity}</p>
-          </div>
-          <div className={style.color}>
-            <label>Sale</label>
-            <input
-              type="number"
-              placeholder="Enter sale"
-              name="sale"
-              value={input.sale}
-              onChange={handleChange}
-            />
-            <p className={style.errores} style={{visibility: errors.sale ? 'visible' : 'hidden' }}>{errors.sale}</p>
-          </div>
-
-            <div className={style.desc}>
-          <label>Description</label>
+          <div>
+          <label>Descripción</label>
           <br/>
           <textarea
           placeholder="add a description"
           name="description"
           onChange={handleChange}
           />
-          <p className={style.errores} style={{ visibility: errors.description ? 'visible' : 'hidden' }}>{errors.description}</p>
+          <p className="errores" style={{ visibility: errors.description ? 'visible' : 'hidden' }}>{errors.description}</p>
           </div>
 
-          <div className={style.colRat}>
+          <div>
             <label>Color</label>
-            <input type="date"
+            <input className="input1" type="text"
             name="color"
             onChange={handleChange}
              />
-             <p className={style.errores} style={{ visibility: errors.color ? 'visible' : 'hidden' }}>{errors.color}</p>
-         
-          <div className={style.price}>
-            <label>Price</label>
-            <input type="number"
+             <p className="errores" style={{ visibility: errors.color ? 'visible' : 'hidden' }}>{errors.color}</p>
+          </div>
+
+          <div>
+            <label>Cantidad</label>
+            <input className="input2"
+              type="number"
+              placeholder="Enter quantity"
+              name="quantity"
+              value={input.quantity}
+              onChange={handleChange}
+            />
+            <p className="errores" style={{visibility: errors.quantity ? 'visible' : 'hidden' }}>{errors.quantity}</p>
+          </div>
+          <div>  
+            <label>Descuento</label>
+            <input className="input2"
+              type="number"
+              placeholder="Enter sale"
+              name="sale"
+              value={input.sale}
+              onChange={handleChange}
+            />
+            <p className="errores" style={{visibility: errors.sale ? 'visible' : 'hidden' }}>{errors.sale}</p>
+                    
+          </div>
+             
+          <div>
+          <label>Precio</label>
+            <input className="input2" type="number"
             name="price"
-            min={60.000}
-            max={100.000}
             onChange={handleChange}
              />
-             <p className={style.errores}  style={{ visibility: errors.price ? 'visible' : 'hidden' }}>{errors.price}</p>
+            <p className="errores"  style={{ visibility: errors.price ? 'visible' : 'hidden' }}>{errors.price}</p>
           </div>
+             
+          <div>
+              <label> Genero</label>
+              <select onChange={(event)=>handleGenders(event)}>
+              <option value="default">Seleccione Genero</option>
+              <option value={"female"}>Mujer</option>
+              <option value={"male"}>Hombre</option>
+              </select>
+              <p className="errores" style={{visibility:errors.genders ?'visible' : 'hidden'}}>{errors.genders}</p>
+      
+            </div>
+           
+        <div>
+          <label>URL de Imagen</label>
+          <input className="input3"
+          type= "url"
+          placeholder="send the URL of the image"
+          name="image"
+          onChange={handleChange}
+          />
+          
+        </div>
 
-          </div>
-
-          <div className={style.sizeGen}>
-
-            <div className={style.size}>
-              <label>Size</label>
+          <div>
+              <label>Talla</label>
               <select onChange={(event)=>handleSize(event)}>
-                <option value="default">choose size</option>
+                <option value="default">Seleccione Talla</option>
                 <option value={"S/M"}>S/M</option>
                 <option value={"M/L"}>M/L</option>
                 <option value={"S"}>S</option>
@@ -237,66 +258,21 @@ const Form=()=>{
                 <option value={"L"}>L</option>
                 <option value={"XL"}>XL</option>
               </select>
-              <p className={style.errores} style={{ visibility: errors.size ? 'visible' : 'hidden' }}>{errors.size}</p>
+              <p className="errores" style={{ visibility: errors.size ? 'visible' : 'hidden' }}>{errors.size}</p>
             </div>
-            
-            <div className={style.gen}>
-              <label> Genders</label>
-              <select onClick={(event)=>handleGenders(event)}>
-              <option value="default">Choose Genders</option>
-              {genders.map((g)=>{
-                return <option value={g.name}>{g.name}</option>
-              })}
-              </select>
-              <p className={style.errores} style={{visibility:errors.genders ?'visible' : 'hidden'}}>{errors.genders}</p>
-
-            </div>
+      
+     
+        <div className="previewImage">
+            <h5>Imagen Previa:</h5>
+            <img className="img" src={input.image} alt="" />
           </div>
-
-          <div className={style.imageInput}>
-          <label>Image</label>
-          <input
-          type= "url"
-          placeholder="send the URL of the image"
-          name="image"
-          onChange={handleChange}
-          />
+        
+        <div className="buttonDiv">
+          <button className="btn" disabled={isSubmitDisabled} style={isSubmitDisabled ? {opacity: "0.6", cursor: "not-allowed"}:null} type="submit">Crear Producto</button>
         </div>
-
-        <br/>
-          <br/>
-        <div className={style.buttonDiv}>
-          <button className={style.btn} disabled={isSubmitDisabled} style={isSubmitDisabled ? {opacity: "0.6", cursor: "not-allowed"}:null} type="submit">Create</button>
-        </div>
-          <p className={style.errores} style={{ visibility: gErrors?.createProduct?.error ? 'visible' : 'hidden' }}>{gErrors?.createProduct?.error}</p>
-          </form>
-        </div>
-        <div className={style.previewCont}>
-          <h5>Select size:</h5>
-          <div className={style.previewSize}>
-            {input.size.map((siz)=>{
-              return <div className={style.size} key={siz}>{siz}
-              <button className={style.btnDelete} value={siz} onClick={(e)=>handleDeleteSize(e)}>x</button>
-              </div>
-            })}
-          </div>
-
-
-          <h5>Selected Genders:</h5>
-          <div className={style.previewGender}>
-            {input.genders.map((gen)=>{
-              return <div key={gen} className={style.genders}>{gen}
-              <button className={style.btnDelete} value={gen} onClick={(e)=> handleDeleteGen(e)}>x</button>
-              </div>
-            })}
-          </div>
-
-          <div className={style.previewImage}>
-            <h5>Image Preview:</h5>
-            <img className={style.img} src={input.image} alt="not found" />
-          </div>
-        </div>
-
+          <p className="errores" style={{ visibility: gErrors?.createProduct?.error ? 'visible' : 'hidden' }}>{gErrors?.createProduct?.error}</p>
+                    
+            </form>
       </div>
     )
 
