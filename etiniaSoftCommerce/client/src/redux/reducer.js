@@ -14,8 +14,14 @@ import {
   ERRORS,
   FILTROS_AND_PAGINATION,
   ADD_TO_CART,
+  USER_LOGIN,
+  USER_LOGOUT,
   GET_ALL_SELECTS,
    LOCALSTORAGE,
+   REMOVE_SHIPPING,
+   UPDATE_SHIPPING,
+   ADD_SHIPPING,
+  
 } from "./actions";
 
 const initialState = {
@@ -30,6 +36,7 @@ const initialState = {
   selectFilter: {},
   page: null,
   localstorage: [],
+  shipments:[]
 };
 
 const reducer = (state = initialState, action) => {
@@ -50,7 +57,34 @@ const reducer = (state = initialState, action) => {
         return {    
       ...state,          
         localstorage: [action.payload]        
-         };       
+         };    
+    case ADD_SHIPPING:
+      return{
+       ...state,
+       shipments:[...state.shipments,action.payload] 
+      };
+    case UPDATE_SHIPPING:
+      const{shippingID,update}=action.payload;
+      const updatedshipping=state.shipments.map((shipment)=>{
+        if(shippingID===shippingID){
+          return{...shipment,...update};
+        }else{
+          return shipment;
+        }
+      });
+      return{
+        ...state,
+        shipments:updatedshipping,
+      }
+      case REMOVE_SHIPPING:
+        const sendtodeleteID=action.payload;
+        const filteredshipments=state.shipments.filter((shipment)=>shipment.ID !==sendtodeleteID);
+        return{
+          ...state,
+          shipments:filteredshipments,
+        }
+
+      
     case GET_BY_ID:
       return {
         ...state,
@@ -77,7 +111,7 @@ const reducer = (state = initialState, action) => {
     case CREATE_USER:
       return {
         ...state,
-        allUsers: [...allUsers, action.payload],
+        allUsers: [...state.allUsers, action.payload],
       };
     case UPDATE_USER:
       return action.payload;
@@ -94,6 +128,7 @@ const reducer = (state = initialState, action) => {
     
 
     case REMOVE_FAVORITES:
+      // eslint-disable-next-line no-case-declarations
       let productRemove = state.allFavorites.filter(
         (product) => product.id !== action.payload
       );
@@ -113,6 +148,7 @@ const reducer = (state = initialState, action) => {
         errors: {},
       };
     case ERRORS:
+      // eslint-disable-next-line no-case-declarations
       const objError = action.payload;
       return {
         ...state,
@@ -133,6 +169,30 @@ const reducer = (state = initialState, action) => {
 
     default:
       return { ...state };
+
+    case USER_LOGIN:
+  return {
+    ...state,
+    user: action.payload,
+  };
+
+case USER_LOGOUT:
+  return {
+    ...state,
+    user: null,
+
+  };
+  case USER_LOGIN:
+    return {
+      ...state,
+      user: action.payload,
+    };
+  
+  case USER_LOGOUT:
+    return {
+      ...state,
+      user: null,
+    };    
   }
 };
 

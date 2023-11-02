@@ -6,6 +6,7 @@ import Header from "../../components/header/Header";
 import CardContainer from "../../components/cardsContainer/CardsContainer";
 import NavBar from "../../components/navBar/NavBar";
 import Filters from "../../components/filters/Filters";
+import Favorites from "../../components/favorites/Favorites";
 import { getFiltersAndPagination } from "../../redux/actions";
 import { getAllSelects } from "../../redux/actions";
 import styles from "./Home.module.css";
@@ -19,10 +20,6 @@ function Home(props) {
   const [initialFilters, setInitialFilters] = useState({});
 
   const dispatch = useDispatch();
-  console.log(selects);
-
-
-
 
   useEffect(() => {
     if (!initialPageSet) {
@@ -59,27 +56,9 @@ function Home(props) {
 
   const genderOpt = ["male", "female"];
   const categoryOpt = selects.category;
-  // const categoryOpt = [
-  //   "Camisetas",
-  //   "Licras",
-  //   "Tops",
-  //   "Faldas",
-  //   "Chaquetas",
-  //   "Blusas",
-  // ];
   const colorOpt = selects.color;
-  // const colorOpt = [
-  //   "gris jasped",
-  //   "verde menta",
-  //   "negro",
-  //   "gris Oscuro",
-  //   "mora en leche",
-  //   "blanco",
-  //   "palo de rosa claro",
-  // ];
   const saleOpt = ["sale", "no-sale"];
   const sizeOpt = selects.size;
-  //const sizeOpt = ["S", "L", "M", "XS", "XXL"];
   const PriceOpt = ["highest", "lowest"];
 
   function Pagination() {

@@ -33,8 +33,35 @@ export const ERRORS = "ERRORS";
 export const ADD_TO_CART ="ADD_TO_CART";
 //LocalStorage
 export const LOCALSTORAGE = "LOCALSTORAGE"
-
+//logistics
+export const ADD_SHIPPING="ADD_SHIPPING";
+export const UPDATE_SHIPPING="UPDATE_SHIPPING";
+export const REMOVE_SHIPPING="REMOVE_SHIPPING";
+export const USER_LOGIN = "USER_LOGIN";
+export const USER_LOGOUT = "USER_LOGOUT";
 const URL = "http://localhost:3001";
+
+
+
+export function addshipping(envio){
+  return{
+    type:ADD_SHIPPING,
+    payload:envio
+  }
+}
+export function updateshipping(shippingID,update){
+  return{
+    type:UPDATE_SHIPPING,
+    payload:{shippingID,update},
+  }
+}
+export function removeshipping(shippingID){
+  return{
+    type:REMOVE_SHIPPING,
+    payload:shippingID,
+  }
+}
+
 
 
 export function putLocalstorage() {
@@ -172,11 +199,18 @@ export function getAllProducts() {
   };
 }
 
-export function getAddFavorites(item) {
-  return{
-    type:ADD_FAVORITES,
-    payload:item
-  }
+export function getAddFavorites(product) {
+  return async (dispatch) => {
+    try {
+      // const { data } = await axios.get(`${URL}/favorites`);
+      return dispatch({
+        type: ADD_FAVORITES,
+        payload: product,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
 }
 
 export function removeFav(id) {
@@ -211,7 +245,6 @@ export const getFiltersAndPagination = (filtros, pageNumber) => {
       // Construye la cadena de consulta de la URL para filtros y paginación
       const queryString = new URLSearchParams(filtrosValidos).toString();
       const url = `${URL}/products?${queryString}&page=${pageNumber}`;
-      console.log(url);
       const response = await axios.get(url);
    
       dispatch({
@@ -223,3 +256,16 @@ export const getFiltersAndPagination = (filtros, pageNumber) => {
     }
   };
 };
+
+export function userLogin(userData) {
+  return {
+    type: USER_LOGIN,
+    payload: userData,
+  };
+}
+
+export function userLogout() {
+  return {
+    type: USER_LOGOUT,
+  };
+}

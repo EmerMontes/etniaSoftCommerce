@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { createUser, clearErrors } from '../../redux/actions'; 
-import style from './formUser.module.css';
+import { createUser, clearErrors } from '../../../redux/actions'; 
+import  "./User.css"
 import { validateUserInput } from './validation';
 
 
@@ -75,13 +75,12 @@ const UserForm = () => {
       };
 
       return (
-        <div className={style.globalCont}>
-          <div className={style.formContenedor}>
-            <h3 className={style.formTitle}>Create a User</h3>
-            <form onSubmit={(event) => handleSubmit(event)} className={style.labelsInputs}>
-              <div className={style.name}>
+        <div >
+            <form className="globalCont" onSubmit={(event) => handleSubmit(event)} >
+              <h3 className="formTitle">Crear Nuevo Usuario</h3>
+              <div>
                 <label>Name</label>
-                <input
+                <input className="input1"
                   type="text"
                   placeholder="Enter a name"
                   name="name"
@@ -91,11 +90,11 @@ const UserForm = () => {
                 <p className={style.errores} style={{ visibility: errors.name ? 'visible' : 'hidden' }}>
                   {errors.name}
                 </p>
-              </div>
+                </div>
     
-              <div className={style.desc}>
+              <div >
                 <label>Last Name</label>
-                <input
+                <input className="input1"
                   type="text"
                   placeholder="Enter the last name"
                   name="last_name"
@@ -107,9 +106,9 @@ const UserForm = () => {
                 </p>
               </div>
     
-              <div className={style.colRat}>
+              <div >
                 <label>Phone Number</label>
-                <input
+                <input className="input1"
                   type="tel"
                   placeholder="Enter phone number"
                   name="phone_number"
@@ -121,10 +120,9 @@ const UserForm = () => {
                 </p>
               </div>
     
-              <div className={style.sizeGen}>
-                <div className={style.size}>
+              <div >
                   <label>Address</label>
-                  <input
+                  <input className="input1"
                     type="text"
                     placeholder="Enter address"
                     name="address"
@@ -134,10 +132,9 @@ const UserForm = () => {
                   <p className={style.errores} style={{ visibility: errors.address ? 'visible' : 'hidden' }}>
                     {errors.address}
                   </p>
-                </div>
               </div>
     
-              <div className={style.colRat}>
+              <div >
                 <label>Email</label>
                 <input
                   type="email"
@@ -151,9 +148,9 @@ const UserForm = () => {
                 </p>
               </div>
     
-              <div className={style.colRat}>
+              <div >
                 <label>Password</label>
-                <input
+                <input className="input1"
                   type="password"
                   placeholder="Enter password"
                   name="password"
@@ -165,32 +162,32 @@ const UserForm = () => {
                 </p>
               </div>
     
-              <div className={style.sizeGen}>
-                <div className={style.size}>
+              
+                <div >
                   <label>Admin</label>
-                  <input
+                  <input className="input2"
                     type="checkbox"
                     name="admin"
                     checked={userData.admin}
                     onChange={handleChange}
                   />
                 </div>
-                <div className={style.size}>
+                <div >
                   <label>Employee</label>
-                  <input
+                  <input className="input2"
                     type="checkbox"
                     name="employee"
                     checked={userData.employee}
                     onChange={handleChange}
                   />
                 </div>
-              </div>
+              
     
               <br />
               <br />
-              <div className={style.buttonDiv}>
+              <div className="buttonDiv">
                 <button
-                  className={style.btn}
+                  className="btn"
                   disabled={isSubmitDisabled}
                   style={isSubmitDisabled ? { opacity: '0.6', cursor: 'not-allowed' } : null}
                   type="submit"
@@ -198,11 +195,11 @@ const UserForm = () => {
                   Create
                 </button>
               </div>
-              <p className={style.errores} style={{ visibility: userErrors?.createUser?.error ? 'visible' : 'hidden' }}>
+              <p className="errores" style={{ visibility: userErrors?.createUser?.error ? 'visible' : 'hidden' }}>
                 {userErrors?.createUser?.error}
               </p>
             </form>
-          </div>
+          
           {/* Add any additional user-related information or preview here if needed */}
         </div>
       );

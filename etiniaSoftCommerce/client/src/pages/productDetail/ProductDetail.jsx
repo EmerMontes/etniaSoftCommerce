@@ -36,7 +36,6 @@ export default function ProductDetail(props) {
       setInputCantidad(event.target.value)
       setInputSelect(event.target.name)
     }
-    console.log(inputCantidad)
 
     const [isHovered, setIsHovered] = useState(false);
 
@@ -53,8 +52,7 @@ export default function ProductDetail(props) {
     }
     return
    }
-    console.log(isHovered)
-    
+
     return (
       <div className={styles.centrardiv}>
         
