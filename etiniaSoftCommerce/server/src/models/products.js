@@ -19,10 +19,6 @@ module.exports = (sequelize) => {
         type: DataTypes.ENUM("male", "female"),
         allowNull: false,
       },
-      size: {
-        type: DataTypes.ENUM("XS", "S", "M", "L", "XL", "XXL"),
-        allowNull: false
-      },
       color: {
         type: DataTypes.STRING,
         allowNull: false
@@ -44,13 +40,17 @@ module.exports = (sequelize) => {
         allowNull: false,
       },
       price: {
-        type: DataTypes.DECIMAL,
+        type: DataTypes.INTEGER,
         allowNull: false,
       },
-      quantity: {
-        type: DataTypes.DECIMAL,
-        allowNull: false,
+      size: {
+        type: DataTypes.JSONB,
+        allowNull: false
       },
+       quantity: {
+         type: DataTypes.INTEGER,
+        allowNull: false,
+       },
     },
     {timestamps: false}
   );

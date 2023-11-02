@@ -35,7 +35,6 @@ const paginateAllProducts = async (req, res, next) => {
       [Op.iLike]: `%${color}%`,
     };
   }
-
   if (sale === "sale") {
     whereConditions.sale = {
       [Op.gt]: 0, // Filtra los productos con descuento (sale mayor que 0)
@@ -45,9 +44,12 @@ const paginateAllProducts = async (req, res, next) => {
     whereConditions.sale = 0; // Filtra los productos sin descuento (sale igual a 0)
   }
   if (size) {
-    whereConditions.size = size;
-  }
-
+    console.log(size) 
+     whereConditions.size = {
+     [Op.contained] :  size
+    }
+ }
+  
   try {
     const order = [];
     if (price === "highest") {
