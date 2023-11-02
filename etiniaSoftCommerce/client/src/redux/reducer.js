@@ -111,7 +111,7 @@ const reducer = (state = initialState, action) => {
     case CREATE_USER:
       return {
         ...state,
-        allUsers: [...allUsers, action.payload],
+        allUsers: [...state.allUsers, action.payload],
       };
     case UPDATE_USER:
       return action.payload;
@@ -128,6 +128,7 @@ const reducer = (state = initialState, action) => {
     
 
     case REMOVE_FAVORITES:
+      // eslint-disable-next-line no-case-declarations
       let productRemove = state.allFavorites.filter(
         (product) => product.id !== action.payload
       );
@@ -147,6 +148,7 @@ const reducer = (state = initialState, action) => {
         errors: {},
       };
     case ERRORS:
+      // eslint-disable-next-line no-case-declarations
       const objError = action.payload;
       return {
         ...state,

@@ -7,7 +7,8 @@ import PayForm from './pages/payForm/PayForm';
 import ShoppingCart from './pages/shoppingCart/ShoppingCart';
 import LogIn from './pages/logIn/LogIn';
 import NotFound404 from './pages/404/notFound';
-
+import Favorites from './components/favorites/Favorites';
+import Form from './pages/Forms/Form/Form';
 function App() {
 
   return (
@@ -18,7 +19,9 @@ function App() {
       <Route exact path='/user' element={<LogIn />} />
       <Route exact path='/user/:id' element={<UserDetail />}/>
       <Route exact path='/payform' element={<PayForm />}/>
-      <Route exact path='/carrito' element={<ShoppingCart />} />   
+      <Route exact path='/carrito' element={<ShoppingCart />} /> 
+      <Route exact path='favorites' element={<Favorites/>} />  
+      <Route exact path='/Form' element={<Form/>}/>
       <Route exact path='*' element={<NotFound404/>}/>
     </Routes>
    </div>

@@ -10,7 +10,6 @@ const getFindSelects = async () => {
         let allSize = [];
        
         const productsInfo = (await axios.get(`${URL}/products/all-products`)).data;
-        console.log(productsInfo)
         //obtiene todos los selects y quita espacios
         for (let i=0; i<productsInfo.length; i++){
             allCategories.push(productsInfo[i].category?.trim());
@@ -30,11 +29,9 @@ const getFindSelects = async () => {
 
         //los organiza alfabeticamente
         let sortedCategories = categoriesSinRepetidos.sort();
-        console.log(sortedCategories)
         
 
         let sortedColors=colorsSinRepetidos.sort();
-        console.log(sizesSinRepetidos)
         
         //los organiza talla menor a mayor
         let sortedSize = [];
@@ -56,8 +53,6 @@ const getFindSelects = async () => {
         for (let size of sizesSinRepetidos){
             if (size === 'XXL') sortedSize.push(size)
         }
-
-        console.log(sortedSize)
 
        return ({category: sortedCategories, color: sortedColors, size: sortedSize});
             
