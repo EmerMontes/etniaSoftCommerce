@@ -8,9 +8,10 @@ import "./form.css";
 
 const Form=()=>{
     const dispatch=useDispatch();
-    const genders =useSelector((state)=>state.genders)
+    const [selectedGender, setSelectedGender] = useState('default');
     const navigate=useNavigate()
     const gErrors=useSelector((state)=>state.errors)
+    const [selectedSize, setSelectedSize] = useState('default');
     
     const [errors, setErrors] = useState({});
 
@@ -52,6 +53,7 @@ const Form=()=>{
 
 
       const handleGenders=(event)=>{
+        setSelectedGender(event.target.value);
         event.preventDefault();
         const rep=input.genders.find(gender=>gender===event.target.value)
         if(event.target.value !=="default" && !rep){
@@ -66,6 +68,7 @@ const Form=()=>{
       };
 
       const handleSize=(event)=>{
+        setSelectedSize(event.target.value);
         event.preventDefault();
         const rep=input.talla?.find(size=> size===event.target.value)
 
@@ -80,24 +83,6 @@ const Form=()=>{
             })
         }
       };
-      const handleDeleteGen=(event)=>{
-        const filteredGen=input.genders.filter(gender=>gender !==event.target.value)
-        setInput({
-            ...input,
-            genders:filteredGen
-        })
-        validateInput({...input,genders:filteredGen})
-      }
-
-      const handleDeleteSize =(event)=>{
-        const filteredSize= input.size.filter(size =>size !==event.target.value)
-        setInput({
-            ...input,
-            size:filteredSize
-        })
-    validateInput({...input,size:filteredSize})
-    }
-    
     const isSubmitDisabled=Object.keys(errors).length > 0;
 
     const handleSubmit=(event)=>{
@@ -227,13 +212,15 @@ const Form=()=>{
              
           <div>
               <label> Genero</label>
-              <select onChange={(event)=>handleGenders(event)}>
+              <select onChange={handleGenders} value={selectedGender}>
               <option value="default">Seleccione Genero</option>
               <option value={"female"}>Mujer</option>
               <option value={"male"}>Hombre</option>
               </select>
               <p className="errores" style={{visibility:errors.genders ?'visible' : 'hidden'}}>{errors.genders}</p>
-      
+              {selectedGender !== 'default' && (
+        <p >Genero seleccionado: {selectedGender}</p>
+      )}
             </div>
            
         <div>
@@ -249,7 +236,7 @@ const Form=()=>{
 
           <div>
               <label>Talla</label>
-              <select onChange={(event)=>handleSize(event)}>
+              <select onChange={handleSize} value={selectedSize}>
                 <option value="default">Seleccione Talla</option>
                 <option value={"S/M"}>S/M</option>
                 <option value={"M/L"}>M/L</option>
@@ -259,6 +246,9 @@ const Form=()=>{
                 <option value={"XL"}>XL</option>
               </select>
               <p className="errores" style={{ visibility: errors.size ? 'visible' : 'hidden' }}>{errors.size}</p>
+              {selectedSize !== 'default' && (
+        <p>Talla seleccionada: {selectedSize}</p>
+      )}
             </div>
       
      
