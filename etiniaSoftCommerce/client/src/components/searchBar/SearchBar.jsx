@@ -1,11 +1,12 @@
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { getFiltersAndPagination } from '../../redux/actions';
+import { useLocalStorage } from '../../functions/useLocalStorage';
 import styles from './SearchBar.module.css';
 import Lupa from '../../assets/png/Lupa.png';
 
 function SearchBar() {
-  const [name, setName] = useState('');
+  const [name, setName] = useLocalStorage("name", "")
   const dispatch = useDispatch();
 
   const handleSearch = () => {
@@ -16,12 +17,15 @@ function SearchBar() {
     setName(event.target.value);
 
     const initialFilters = {
-      name, // Agrega el filtro de nombre
+      name,
     };
 
-    // Llama a la acción para obtener productos con los filtros
     dispatch(getFiltersAndPagination(initialFilters, 1));
   };
+
+  useEffect(()=>{
+    console.log(name)
+  },[])
 
   return (
     <div className={styles.searchbar}>
