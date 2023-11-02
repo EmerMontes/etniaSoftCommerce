@@ -4,7 +4,6 @@ import styles from './Pagination.module.css';
 
 function Pagination({ setInitialPageSet, initialPageSet, setinitialFilters, initialFilters }) {
   const Page = useSelector((state) => state.indexProductShow);
-  console.log(Page);
   let num = 1;
   if (Page && Page.info) {
     num = Page.info.page;

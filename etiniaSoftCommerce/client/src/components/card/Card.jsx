@@ -1,7 +1,8 @@
-import { useState, useEffect } from "react";
-import { getAddFavorites, removeFav } from '../../redux/actions';
-import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getAddFavorites, removeFav } from '../../redux/actions';
+import { useLocalStorage } from "../../functions/useLocalStorage";
 import styles from './Card.module.css';
 
 
@@ -9,7 +10,9 @@ function Card({id, name, gender, sale, img, color, price}) {
   const favorites = useSelector((state)=> state.allFavorites)
   const dispatch = useDispatch();
 
-  const [isFav, setIsFav] = useState(false);
+  // const [isFav, setIsFav] = useState(false);
+  const [isFav, setIsFav] = useLocalStorage(`isFav_${id}`, false);
+
 
   const product = {id, name, gender, sale, img, color, price};
 
@@ -30,6 +33,7 @@ function Card({id, name, gender, sale, img, color, price}) {
         setIsFav(true);
      }
   });
+  console.log(favorites)
 }, [id, favorites]);
 
   return (

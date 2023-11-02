@@ -10,14 +10,16 @@ import Favorites from "../../components/favorites/Favorites";
 import { getFiltersAndPagination } from "../../redux/actions";
 import { getAllSelects } from "../../redux/actions";
 import styles from "./Home.module.css";
+import { useLocalStorage } from "../../functions/useLocalStorage";
 import Pagination from "../../components/pagination/Pagination";
 import resetView from "../home/clockwise.svg"
 
 function Home(props) {
   const Page = useSelector((state) => state.indexProductShow);
   const selects = useSelector ((state) => state.selectFilter)
+  // const [initialPageSet, setInitialPageSet] = useLocalStorage("initialPageSet", 1);
   const [initialPageSet, setInitialPageSet] = useState(1);
-  const [initialFilters, setInitialFilters] = useState({});
+  const [initialFilters, setInitialFilters] = useLocalStorage("initialFilters", {})
 
   const dispatch = useDispatch();
 
@@ -37,6 +39,7 @@ function Home(props) {
   useEffect(() => {
     loadProducts();
     dispatch(getAllSelects())
+    console.log(Page?.info?.page)
   }, [dispatch, initialFilters, initialPageSet]);
 
   const handleChange = (event) => {
@@ -213,6 +216,7 @@ function Home(props) {
       <br />
       <br />
       <Pagination />
+      <button>{Page?.info?.page}</button> {/* {"boton de ejemplo para hacer el paginado + friendLy"} */}
     </div>
   );
 }

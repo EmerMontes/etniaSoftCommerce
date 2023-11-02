@@ -1,11 +1,10 @@
+import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
-import { useEffect } from "react";
-import { getByID } from "../../redux/actions";
-import styles from './ProductDetail.module.css';
-import { addToCart } from "../../redux/actions";
-import { useState } from "react";
+import { getByID, addToCart } from "../../redux/actions";
 import NavBar from '../../components/navBar/NavBar'
+import { useLocalStorage } from "../../functions/useLocalStorage";
+import styles from './ProductDetail.module.css';
 
 export default function ProductDetail(props) {
     const dispatch = useDispatch();
