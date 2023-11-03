@@ -26,5 +26,6 @@ module.exports = (sequelize) => {
         allowNull: false
       }
     },
+    {paranoid: true}
   );
 };

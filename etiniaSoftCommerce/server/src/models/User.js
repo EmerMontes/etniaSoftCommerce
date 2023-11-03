@@ -45,6 +45,7 @@ module.exports = (sequelize) => {
         is: [/\d/],
       },
     },
-    {timestamps: false}
+    {timestamps: false},
+    {paranoid: true}
   );
 };

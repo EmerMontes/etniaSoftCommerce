@@ -3,23 +3,27 @@ const {Products} = require('../db')
 
 module.exports = async(req,res) =>{
     try {
-        console.log('running')
-            const prenda = prendas.map(prenda => (
-                {
-                 id: prenda.id,
-                 name: prenda.name,
-                 brand: prenda.brand,
-                 gender: prenda.gender,
-                 size: prenda.size,
-                 color: prenda.color,
-                 sale: prenda.sale,
-                 category: prenda.category,
-                 img: prenda.image,
-                 description: prenda.description,
-                 price: prenda.price,
-                 quantity: prenda.quantity
-             }));
-             await Products.bulkCreate(prenda)
+        //  console.log('running')
+        //    const prenda = prendas.map(prend => {
+        // //       const cantidad =  prenda.size.reduce((sum, size) => sum + size.cantidad, 0);     
+        // //       console.log(prenda.size)
+        //        return {
+        //              id: prend.id,
+        //              name: prend.name,
+        //             brand: prend.brand,
+        //             gender: prend.gender,
+        //             color: prend.color,
+        //             sale: prend.sale,
+        //             category: prend.category,
+        //             img: prend.image,
+        //            description: prend.description,
+        //            price: prend.price,
+        //            size: prend.size,
+        //            quantity: prend.quantity
+        //      } 
+        //  }
+        //  );
+        await Products.bulkcreate(prendas)
             console.log('Prendas saved in Db')
     } catch (error) {
         console.log('error')
