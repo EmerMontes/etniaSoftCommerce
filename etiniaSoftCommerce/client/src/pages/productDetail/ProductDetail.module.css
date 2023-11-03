@@ -2,7 +2,9 @@
   font-family: "Montserrat";
   src: url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap");
 }
-
+.error{
+  color: red;
+}
 .centrardiv {
   justify-content: center;
   align-items: center;
@@ -50,7 +52,11 @@
   font-size: 1rem;
   margin-top: 10px;
 }
-
+.contentLabel{
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
 .addToCartButton {
   display: block;
   background-color: #71A611;
@@ -66,7 +72,50 @@
   margin: 0 auto;
   margin-top: 20px;
 }
+.addToCartButton:disabled{
+  background-color: red;
+  cursor: not-allowed;
+}
+.inputSelect {
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #30cfd0;
+  border-radius: 5px;
+  background-color: transparent;
+  display: inline-block;
+  position: relative;
+  margin-right: 10px;
+  cursor: pointer;
+}
 
+.inputSelect:before {
+  content: "";
+  background-color: #30cfd0;
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  width: 10px;
+  height: 10px;
+  border-radius: 3px;
+  transition: all 0.3s ease-in-out;
+}
+
+.inputSelect:checked:before {
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.label {
+  font-size: 20px;
+  color: #fff;
+  cursor: pointer;
+  user-select: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
 
 @media (max-width: 768px) {

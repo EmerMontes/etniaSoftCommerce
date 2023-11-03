@@ -1,8 +1,8 @@
 const { User } = require("../db");
 console.log(User);
 const { Op } = require("sequelize");
-const jwt = require('jsonwebtoken');
-const bcrypt = require('bcrypt');
+const jwt = require("jsonwebtoken");
+const bcrypt = require("bcrypt");
 
 const getAllUser = async () => {
   const usuariotDB = await User.findAll();
@@ -31,7 +31,7 @@ const getUserByName = async (name) => {
 const createusers = async (userData) => {
   try {
     const {
-      id,
+
       name,
       last_name,
       phone_number,
@@ -45,7 +45,7 @@ const createusers = async (userData) => {
     const hashedPassword = await bcrypt.hash(password, 10);
 
     const newuser = await User.create({
-      id,
+  
       name,
       last_name,
       phone_number,
@@ -78,48 +78,49 @@ const deleteUserById = async (id) => {
   }
 };
 const updateUserById = async (id, newData) => {
-    try {
-      const userToUpdate = await User.findByPk(id);
-  
-      if (!userToUpdate) {
-        throw new Error(`Usuario con ID ${id} no encontrado.`);
-      }
-  
-      // Actualiza los campos del usuario con los nuevos datos
-      await userToUpdate.update(newData);
-  
-      return userToUpdate;
-    } catch (error) {
-      throw error;
+  try {
+    const userToUpdate = await User.findByPk(id);
+
+    if (!userToUpdate) {
+      throw new Error(`Usuario con ID ${id} no encontrado.`);
     }
-  };
-  const loginUser = async (req, res) => {
-    console.log(req.body);
-    const { email, password } = req.body;
-  
-    try {
-      const user = await User.findOne({ where: { email } });
-  
-      if (!user) {
-        return res.status(400).json({ error: 'Invalid email or password' });
-      }
-  
-      const passwordMatch = await bcrypt.compare(password, user.password);
-  
-      if (!passwordMatch) {
-        return res.status(400).json({ error: 'Invalid email or password' });
-      }
-  
-      const token = jwt.sign({ userId: user.id }, 'your_jwt_secret'); // replace 'your_jwt_secret' with your actual JWT secret
-  
+
+    // Actualiza los campos del usuario con los nuevos datos
+    await userToUpdate.update(newData);
+
+    return userToUpdate;
+  } catch (error) {
+    throw error;
+  }
+};
+
+const loginUser = async (req, res) => {
+  const { password, email } = req.body;
+
+  try {
+    const user = await User.findOne({ where: { email } });
+
+    if (!user) {
+      return res
+        .status(400)
+        .json({ error: "Correo electrónico o contraseña inválidos" });
+    }
+    // Debes implementar la comparación segura de contraseñas aquí
+    if (password === user.dataValues.password) {
+      // La contraseña proporcionada coincide con la contraseña almacenada en la base de datos
+      const token = jwt.sign({ userId: user.dataValues.id }, "your_jwt_secret"); // Reemplaza 'your_jwt_secret' por tu clave JWT real
       res.json({ token });
-    } catch (err) {
-      console.error(err);
-      res.status(500).json({ error: 'Internal server error' });
+    } else {
+      // Las contraseñas no coinciden
+      return res
+        .status(400)
+        .json({ error: "Correo electrónico o contraseña inválidos" });
     }
-  };
-  
-  
+  } catch (err) {
+    console.error(err);
+    return res.status(500).json({ error: "Error interno del servidor" });
+  }
+};
 
 module.exports = {
   getAllUser,
