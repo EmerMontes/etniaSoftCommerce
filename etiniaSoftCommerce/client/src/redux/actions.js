@@ -1,8 +1,9 @@
+/* eslint-disable no-useless-catch */
 import axios from "axios";
-import getFindSelects from "../functions/getFindSelects"
+import getFindSelects from "../functions/getFindSelects";
 //Routes Get
 export const GET_ALL_PRODUCTS = "GET_ALL_PRODUCTS";
-export const GET_ALL_SELECTS = 'GET_ALL_SELECTS';
+export const GET_ALL_SELECTS = "GET_ALL_SELECTS";
 export const GET_DETAIL_SIZE_COLOR = "GET_DETAIL_SIZE_COLOR";
 export const GET_ORDER_PRICE = "GET_ORDER_PRICE";
 export const GET_ALL_USERS = "GET_ALL_USERS";
@@ -25,61 +26,55 @@ export const GET_FILTER_SIZE = "GET_FILTER_SIZE";
 export const GET_FILTER_SALE = "GET_FILTER_SALE";
 export const REMOVE_FAVORITES = "REMOVE_FAVORITES";
 export const FILTROS_AND_PAGINATION = "FILTROS_AND_PAGINATION";
-export const PAGINATION ="SET_PAGINATION"
+export const PAGINATION = "SET_PAGINATION";
 //errors
 export const CLEAR_ERRORS = "CLEAR_ERRORS";
 export const ERRORS = "ERRORS";
 //carrito
-export const ADD_TO_CART ="ADD_TO_CART";
+export const ADD_TO_CART = "ADD_TO_CART";
 //LocalStorage
-export const LOCALSTORAGE = "LOCALSTORAGE"
+export const LOCALSTORAGE = "LOCALSTORAGE";
 //logistics
-export const ADD_SHIPPING="ADD_SHIPPING";
-export const UPDATE_SHIPPING="UPDATE_SHIPPING";
-export const REMOVE_SHIPPING="REMOVE_SHIPPING";
+export const ADD_SHIPPING = "ADD_SHIPPING";
+export const UPDATE_SHIPPING = "UPDATE_SHIPPING";
+export const REMOVE_SHIPPING = "REMOVE_SHIPPING";
 export const USER_LOGIN = "USER_LOGIN";
 export const USER_LOGOUT = "USER_LOGOUT";
 const URL = "http://localhost:3001";
 
-
-
-export function addshipping(envio){
-  return{
-    type:ADD_SHIPPING,
-    payload:envio
-  }
+export function addshipping(envio) {
+  return {
+    type: ADD_SHIPPING,
+    payload: envio,
+  };
 }
-export function updateshipping(shippingID,update){
-  return{
-    type:UPDATE_SHIPPING,
-    payload:{shippingID,update},
-  }
+export function updateshipping(shippingID, update) {
+  return {
+    type: UPDATE_SHIPPING,
+    payload: { shippingID, update },
+  };
 }
-export function removeshipping(shippingID){
-  return{
-    type:REMOVE_SHIPPING,
-    payload:shippingID,
-  }
+export function removeshipping(shippingID) {
+  return {
+    type: REMOVE_SHIPPING,
+    payload: shippingID,
+  };
 }
-
-
 
 export function putLocalstorage() {
-  if (localStorage.getItem('cart')) {
-      let cart = JSON.parse(localStorage.getItem('cart'));
-      return {
-          type: LOCALSTORAGE,
-          payload: cart
-      }
+  if (localStorage.getItem("cart")) {
+    let cart = JSON.parse(localStorage.getItem("cart"));
+    return {
+      type: LOCALSTORAGE,
+      payload: cart,
+    };
+  } else {
+    let cart = [];
+    return {
+      type: LOCALSTORAGE,
+      payload: cart,
+    };
   }
-  else {
-      let cart = []
-      return {
-          type: LOCALSTORAGE,
-          payload: cart
-      }
-  }
-
 }
 
 export function addToCart(product) {
@@ -91,7 +86,6 @@ export function addToCart(product) {
 
 export function setNewErrors(obj) {
   return async function (dispatch) {
-
     dispatch({
       type: ERRORS,
       payload: obj,
@@ -177,7 +171,6 @@ export function createUser(payload) {
   };
 }
 
-
 export function getAllSelects() {
   return async function (dispatch) {
     const productsInfo = await getFindSelects();
@@ -191,7 +184,7 @@ export function getAllSelects() {
 export function getAllProducts() {
   return async function (dispatch) {
     const productsInfo = await axios.get(`${URL}/products`);
-    console.log(productsInfo)
+    console.log(productsInfo);
     dispatch({
       type: GET_ALL_PRODUCTS,
       payload: productsInfo.data.results,
@@ -220,7 +213,6 @@ export function removeFav(id) {
   };
 }
 
-
 export function createProduct(newproduct) {
   return async function (dispatch) {
     const info = await axios.post(`${URL}/products`, newproduct);
@@ -246,7 +238,7 @@ export const getFiltersAndPagination = (filtros, pageNumber) => {
       const queryString = new URLSearchParams(filtrosValidos).toString();
       const url = `${URL}/products?${queryString}&page=${pageNumber}`;
       const response = await axios.get(url);
-   
+
       dispatch({
         type: FILTROS_AND_PAGINATION,
         payload: response.data,
@@ -257,10 +249,23 @@ export const getFiltersAndPagination = (filtros, pageNumber) => {
   };
 };
 
-export function userLogin(userData) {
-  return {
-    type: USER_LOGIN,
-    payload: userData,
+export function userLogin(email, password) {
+  return async function (dispatch) {
+    try {
+      const response = await axios.post(`${URL}/users/login`, {
+        email: email,
+        password: password,
+      });
+      const data = response.data; // Obtener los datos de la respuesta
+      dispatch({
+        type: USER_LOGIN,
+        payload: data,
+      });
+      return data; // Devolver los datos de inicio de sesión
+    } catch (error) {
+      
+      throw error; // Re-lanzar el error para manejarlo en el componente
+    }
   };
 }
 
