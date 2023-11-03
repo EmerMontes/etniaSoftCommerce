@@ -15,6 +15,7 @@ export const DELETE_PRODUCT = "DELETE_PRODUCT";
 //Routes Post
 export const CREATE_PRODUCT = "CREATE_PRODUCT";
 export const CREATE_USER = "CREATE_USER";
+export const RESTORE_PRODUCT = "RESTORE_PRODUCT";
 //routes Put
 export const UPDATE_USER = "UPDATE_USER";
 //Filters
@@ -228,6 +229,23 @@ export function createProduct(newproduct) {
       type: CREATE_PRODUCT,
       payload: info.data,
     });
+  };
+}
+
+export function restoreProduct(id) {
+  return async function (dispatch) {
+    try {
+      await axios.post(`${URL}/products/restore/${id}`);
+      dispatch({
+        type: RESTORE_PRODUCT,
+        payload: id,
+      });
+    } catch (error) {
+      dispatch({
+        type: ERRORS,
+        payload: error.message,
+      });
+    }
   };
 }
 
