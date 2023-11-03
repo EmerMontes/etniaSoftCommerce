@@ -9,7 +9,15 @@ import LogIn from './pages/logIn/LogIn';
 import NotFound404 from './pages/404/notFound';
 import Favorites from './components/favorites/Favorites';
 import Form from './pages/Forms/Form/Form';
+<<<<<<< HEAD
 import CreateEmpresa from './pages/Forms/FormEmpresa/CreateEmpresa';
+=======
+import ConfirmTokenForm from './pages/logIn/ConfirmTokenForm';
+import RegisterForm from './pages/logIn/registerForm';
+
+
+
+>>>>>>> 83312272cd0a4235da6da505d227e6afb67ef47c
 function App() {
 
   return (
@@ -23,7 +31,14 @@ function App() {
       <Route exact path='/carrito' element={<ShoppingCart />} /> 
       <Route exact path='favorites' element={<Favorites/>} />  
       <Route exact path='/Form' element={<Form/>}/>
+<<<<<<< HEAD
       <Route exact path='/crearempresa' element={<CreateEmpresa/>}/>
+=======
+      <Route exact path='/RegisterForm' element={<RegisterForm/>}/>
+      <Route exact path='/ConfirmTokenForm' element={<ConfirmTokenForm/>}/>
+
+
+>>>>>>> 83312272cd0a4235da6da505d227e6afb67ef47c
       <Route exact path='*' element={<NotFound404/>}/>
     </Routes>
    </div>

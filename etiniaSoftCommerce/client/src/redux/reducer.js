@@ -1,3 +1,4 @@
+/* eslint-disable no-case-declarations */
 import {
   GET_ALL_PRODUCTS,
   ADD_FAVORITES,
@@ -17,11 +18,10 @@ import {
   USER_LOGIN,
   USER_LOGOUT,
   GET_ALL_SELECTS,
-   LOCALSTORAGE,
-   REMOVE_SHIPPING,
-   UPDATE_SHIPPING,
-   ADD_SHIPPING,
-  
+  LOCALSTORAGE,
+  REMOVE_SHIPPING,
+  UPDATE_SHIPPING,
+  ADD_SHIPPING,
 } from "./actions";
 
 const initialState = {
@@ -31,17 +31,16 @@ const initialState = {
   productShow: [],
   indexProductShow: [],
   allUsers: [],
-  cart: [], 
+  cart: [],
   errors: {},
   selectFilter: {},
   page: null,
   localstorage: [],
-  shipments:[]
+  shipments: [],
+  user: null, // Agregar el estado del usuario
 };
 
 const reducer = (state = initialState, action) => {
-
-
   switch (action.type) {
     case GET_ALL_PRODUCTS:
       return {
@@ -50,41 +49,42 @@ const reducer = (state = initialState, action) => {
       };
     case ADD_TO_CART:
       return {
-      ...state,
-       cart: [...state.cart, action.payload], // Agrega el producto al carrito
-        };
+        ...state,
+        cart: [...state.cart, action.payload], // Agrega el producto al carrito
+      };
     case LOCALSTORAGE:
-        return {    
-      ...state,          
-        localstorage: [action.payload]        
-         };    
+      return {
+        ...state,
+        localstorage: [action.payload],
+      };
     case ADD_SHIPPING:
-      return{
-       ...state,
-       shipments:[...state.shipments,action.payload] 
+      return {
+        ...state,
+        shipments: [...state.shipments, action.payload],
       };
     case UPDATE_SHIPPING:
-      const{shippingID,update}=action.payload;
-      const updatedshipping=state.shipments.map((shipment)=>{
-        if(shippingID===shippingID){
-          return{...shipment,...update};
-        }else{
+      const { shippingID, update } = action.payload;
+      const updatedshipping = state.shipments.map((shipment) => {
+        if (shippingID === shippingID) {
+          return { ...shipment, ...update };
+        } else {
           return shipment;
         }
       });
-      return{
+      return {
         ...state,
-        shipments:updatedshipping,
-      }
-      case REMOVE_SHIPPING:
-        const sendtodeleteID=action.payload;
-        const filteredshipments=state.shipments.filter((shipment)=>shipment.ID !==sendtodeleteID);
-        return{
-          ...state,
-          shipments:filteredshipments,
-        }
+        shipments: updatedshipping,
+      };
+    case REMOVE_SHIPPING:
+      const sendtodeleteID = action.payload;
+      const filteredshipments = state.shipments.filter(
+        (shipment) => shipment.ID !== sendtodeleteID
+      );
+      return {
+        ...state,
+        shipments: filteredshipments,
+      };
 
-      
     case GET_BY_ID:
       return {
         ...state,
@@ -124,8 +124,6 @@ const reducer = (state = initialState, action) => {
         ...state,
         allFavorites: [...state.allFavorites, action.payload],
       };
-      
-    
 
     case REMOVE_FAVORITES:
       // eslint-disable-next-line no-case-declarations
@@ -163,36 +161,24 @@ const reducer = (state = initialState, action) => {
 
     case GET_ALL_SELECTS:
       return {
-          ...state,
-          selectFilter: action.payload,
+        ...state,
+        selectFilter: action.payload,
+      };
+
+    case USER_LOGIN:
+      return {
+        ...state,
+        user: action.payload,
+      };
+
+    case USER_LOGOUT:
+      return {
+        ...state,
+        user: null,
       };
 
     default:
       return { ...state };
-
-    case USER_LOGIN:
-  return {
-    ...state,
-    user: action.payload,
-  };
-
-case USER_LOGOUT:
-  return {
-    ...state,
-    user: null,
-
-  };
-  case USER_LOGIN:
-    return {
-      ...state,
-      user: action.payload,
-    };
-  
-  case USER_LOGOUT:
-    return {
-      ...state,
-      user: null,
-    };    
   }
 };
 

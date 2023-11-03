@@ -134,6 +134,7 @@ const createProducts = async (productData) => {
     const nextID = model.length + 2;
     id = nextID
     const newProduct = await Products.create({
+
       id,
       name,
       brand,
@@ -169,6 +170,14 @@ const deleteProductById = async (id) => {
     throw error;
   }
 };
+const restoreProductById = async (id) => {
+  try {
+    const restoredProduct = await Products.restore({ where: { id } });
+    return restoredProduct; 
+  } catch (error) {
+    throw error; 
+  }
+};
 const updateProductById = async (id, newData) => {
   try {
     const productToUpdate = await Products.findByPk(id);
@@ -194,4 +203,5 @@ module.exports = {
   createProducts,
   deleteProductById,
   updateProductById,
+  restoreProductById
 };
