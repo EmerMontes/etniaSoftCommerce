@@ -64,15 +64,15 @@ const updateUserHandler = async (req, res) => {
   }
 };
 const loginUserHandler = async (req, res) => {
-  const { email, password } = req.body;
   try {
-    const token = await loginUser(email, password);
-    res.status(200).json({ token });
+    const token = await loginUser(req, res);
+    // loginUser ya se encarga de enviar la respuesta, por lo que no es necesario enviarla de nuevo aquí
   } catch (error) {
-    res.status(400).json({ error: error.message });
-    
+    // Si ocurriera un error inesperado, podrías manejarlo aquí
+    res.status(500).json({ error: 'Internal server error' });
   }
 };
+;
 
 // /:id = params si modifica
 // query === ? name&raza, no modifica la ruta

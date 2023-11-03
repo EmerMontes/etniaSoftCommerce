@@ -9,6 +9,11 @@ import LogIn from './pages/logIn/LogIn';
 import NotFound404 from './pages/404/notFound';
 import Favorites from './components/favorites/Favorites';
 import Form from './pages/Forms/Form/Form';
+import ConfirmTokenForm from './pages/logIn/ConfirmTokenForm';
+import RegisterForm from './pages/logIn/registerForm';
+
+
+
 function App() {
 
   return (
@@ -22,6 +27,10 @@ function App() {
       <Route exact path='/carrito' element={<ShoppingCart />} /> 
       <Route exact path='favorites' element={<Favorites/>} />  
       <Route exact path='/Form' element={<Form/>}/>
+      <Route exact path='/RegisterForm' element={<RegisterForm/>}/>
+      <Route exact path='/ConfirmTokenForm' element={<ConfirmTokenForm/>}/>
+
+
       <Route exact path='*' element={<NotFound404/>}/>
     </Routes>
    </div>
