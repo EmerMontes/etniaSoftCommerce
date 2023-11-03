@@ -12,6 +12,7 @@
   "license": "ISC",
   "dependencies": {
     "@auth0/auth0-react": "^2.2.1",
+    "@sendgrid/mail": "^7.7.0",
     "axios": "^1.4.0",
     "bcrypt": "^5.1.1",
     "concurrently": "^8.0.1",
