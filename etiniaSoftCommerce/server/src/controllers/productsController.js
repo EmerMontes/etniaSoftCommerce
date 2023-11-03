@@ -116,7 +116,6 @@ const createProducts = async (productData) => {
   try {
     const {
       name,
-      id,
       brand,
       gender,
       size,
@@ -131,7 +130,6 @@ const createProducts = async (productData) => {
 
     const newProduct = await Products.create({
       name,
-      id,
       brand,
       gender,
       size,
