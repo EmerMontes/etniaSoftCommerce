@@ -66,3 +66,9 @@ p {
   margin-top: 10px;
   color: white;
 }
+/* LogIn.module.css */
+.error-message {
+  color: #ff0000; /* Color rojo para los mensajes de error */
+  font-size: 14px; /* Tamaño de fuente */
+  margin-top: 5px; /* Espacio superior para separar el mensaje de otros elementos */
+}

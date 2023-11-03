@@ -5,7 +5,7 @@ const {
   getAllProducts,
   createProducts,
   deleteProductById,
- 
+  restoreProductById
 } = require("../controllers/productsController");
 
 
@@ -57,7 +57,19 @@ const createProductsHandler = async (req, res) => {
     res.status(400).json({ error: error.message });
   }
 };
-
+const restoreProductHandler = async (req, res) => {
+  const id = req.params.id;
+  try {
+    const product = await restoreProductById(id);
+    if (product) {
+      res.status(200).json(product);
+    } else {
+      res.status(404).json({ error: 'Product not found' });
+    }
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
 const deleteProductsHandler = async (req, res) => {
   const id = req.params.id;
   try {
@@ -89,5 +101,6 @@ module.exports = {
   createProductsHandler: createProductsHandler,
   deleteProductsHandler: deleteProductsHandler,
   updateProductsHandler: updateProductsHandler,
-  getAllProductseHandler:getAllProductseHandler
+  getAllProductseHandler:getAllProductseHandler,
+  restoreProductHandler : restoreProductHandler
 };

@@ -35,7 +35,6 @@ const paginateAllProducts = async (req, res, next) => {
       [Op.iLike]: `%${color}%`,
     };
   }
-
   if (sale === "sale") {
     whereConditions.sale = {
       [Op.gt]: 0, // Filtra los productos con descuento (sale mayor que 0)
@@ -45,9 +44,12 @@ const paginateAllProducts = async (req, res, next) => {
     whereConditions.sale = 0; // Filtra los productos sin descuento (sale igual a 0)
   }
   if (size) {
-    whereConditions.size = size;
-  }
-
+    console.log(size) 
+     whereConditions.size = {
+     [Op.contained] :  size
+    }
+ }
+  
   try {
     const order = [];
     if (price === "highest") {
@@ -114,7 +116,6 @@ const createProducts = async (productData) => {
   try {
     const {
       name,
-      id,
       brand,
       gender,
       size,
@@ -129,7 +130,6 @@ const createProducts = async (productData) => {
 
     const newProduct = await Products.create({
       name,
-      id,
       brand,
       gender,
       size,
@@ -162,6 +162,14 @@ const deleteProductById = async (id) => {
     throw error;
   }
 };
+const restoreProductById = async (id) => {
+  try {
+    const restoredProduct = await Products.restore({ where: { id } });
+    return restoredProduct; 
+  } catch (error) {
+    throw error; 
+  }
+};
 const updateProductById = async (id, newData) => {
   try {
     const productToUpdate = await Products.findByPk(id);
@@ -187,4 +195,5 @@ module.exports = {
   createProducts,
   deleteProductById,
   updateProductById,
+  restoreProductById
 };

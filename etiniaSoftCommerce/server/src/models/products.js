@@ -4,7 +4,7 @@ module.exports = (sequelize) => {
   sequelize.define("Products",{
       id: {
         type: DataTypes.INTEGER,
-        allowNull: false,
+        autoIncrement: true,
         primaryKey: true,
       },
       name:{
@@ -18,10 +18,6 @@ module.exports = (sequelize) => {
       gender:{
         type: DataTypes.ENUM("male", "female"),
         allowNull: false,
-      },
-      size: {
-        type: DataTypes.ENUM("XS", "S", "M", "L", "XL", "XXL"),
-        allowNull: false
       },
       color: {
         type: DataTypes.STRING,
@@ -44,14 +40,19 @@ module.exports = (sequelize) => {
         allowNull: false,
       },
       price: {
-        type: DataTypes.DECIMAL,
+        type: DataTypes.INTEGER,
         allowNull: false,
       },
-      quantity: {
-        type: DataTypes.DECIMAL,
-        allowNull: false,
+      size: {
+        type: DataTypes.JSONB,
+        allowNull: false
       },
+       quantity: {
+         type: DataTypes.INTEGER,
+        allowNull: false,
+       },
     },
-    {timestamps: false}
+    {timestamps: false},
+    {paranoid: true}
   );
 };
