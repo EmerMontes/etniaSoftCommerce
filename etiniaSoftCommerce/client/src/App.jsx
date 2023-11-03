@@ -9,6 +9,7 @@ import LogIn from './pages/logIn/LogIn';
 import NotFound404 from './pages/404/notFound';
 import Favorites from './components/favorites/Favorites';
 import Form from './pages/Forms/Form/Form';
+import CreateEmpresa from './pages/Forms/FormEmpresa/CreateEmpresa';
 function App() {
 
   return (
@@ -22,6 +23,7 @@ function App() {
       <Route exact path='/carrito' element={<ShoppingCart />} /> 
       <Route exact path='favorites' element={<Favorites/>} />  
       <Route exact path='/Form' element={<Form/>}/>
+      <Route exact path='/crearempresa' element={<CreateEmpresa/>}/>
       <Route exact path='*' element={<NotFound404/>}/>
     </Routes>
    </div>

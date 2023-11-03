@@ -115,8 +115,8 @@ const getProductByName = async (name) => {
 const createProducts = async (productData) => {
   try {
     const {
+      
       name,
-      id,
       brand,
       gender,
       size,
@@ -129,9 +129,13 @@ const createProducts = async (productData) => {
       quantity,
     } = productData;
 
+    const model = await Products.findAll();
+    console.log(model.length)
+    const nextID = model.length + 2;
+    id = nextID
     const newProduct = await Products.create({
-      name,
       id,
+      name,
       brand,
       gender,
       size,
@@ -143,9 +147,10 @@ const createProducts = async (productData) => {
       price,
       quantity,
     });
-
+    console.log(newProduct)
     return newProduct;
   } catch (error) {
+    console.log(error)
     throw error;
   }
 };
