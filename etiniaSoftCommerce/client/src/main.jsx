@@ -1,11 +1,11 @@
+// import ReactDOM from 'react-dom';
 import React from 'react';
-import ReactDOM from 'react-dom';
 import { createRoot } from 'react-dom/client';
 import { Auth0Provider } from '@auth0/auth0-react';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import { PersistGate } from 'redux-persist/integration/react'; // Importa PersistGate
-import { store, persistor } from './redux/store'; // Importa store y persistor
+import { PersistGate } from 'redux-persist/integration/react';
+import { store, persistor } from './redux/store';
 import App from './App';
 
 const rootElement = document.getElementById('root');
@@ -19,7 +19,7 @@ const renderApp = () => {
         redirectUri={window.location.origin}
       >
         <Provider store={store}>
-          <PersistGate loading={<div>Loading...</div>} persistor={persistor}> {/* Usa PersistGate */}
+          <PersistGate loading={<div>Loading...</div>} persistor={persistor}>
             <BrowserRouter>
               <App />
             </BrowserRouter>
@@ -30,5 +30,4 @@ const renderApp = () => {
   );
 };
 
-// Llamamos renderApp una vez para representar la aplicación
 renderApp();
