@@ -53,20 +53,7 @@ const Form = () => {
   }
 
 
-  // const handleGenders = (event) => {
-  //   setSelectedGender(event.target.value);
-  //   event.preventDefault();
-  //   const rep = input.gender.find(gender => gender === event.target.value)
-  //   if (event.target.value !== "default" && !rep) {
-  //     setInput({
-  //       ...input, gender: [...input.gender, event.target.value]
-  //     })
-  //     event.target.value = "default"
-  //     validateInput({
-  //       ...input, gender: [...input.gender, event.target.value]
-  //     })
-  //   } event.target.value = "default"
-  // };
+
 
   const handleSize = (event) => {
     setSelectedSize(event.target.value);
@@ -325,8 +312,6 @@ const Form = () => {
           
 
         </div>
-
-
         
         <div className="buttonDiv">
           <button className="btn" disabled={isSubmitDisabled} style={isSubmitDisabled ? { opacity: "0.6", cursor: "not-allowed" } : null} type="submit">Crear Producto</button>
@@ -341,12 +326,3 @@ const Form = () => {
 
 export default Form
 
-/*<label>Cantidad Total</label>
-          <input className="input2"
-            type="number"
-            placeholder="Enter quantity"
-            name="quantity"
-            value={input.quantity}
-            onChange={handleChange}
-          />
-          <p className="errores" style={{ visibility: errors.quantity ? 'visible' : 'hidden' }}>{errors.quantity}</p>*/
