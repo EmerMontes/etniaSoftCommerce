@@ -19,10 +19,13 @@ import {
   USER_LOGOUT,
   GET_ALL_SELECTS,
   LOCALSTORAGE,
+
   REMOVE_SHIPPING,
   UPDATE_SHIPPING,
   ADD_SHIPPING,
-  REGISTER_USER
+  REGISTER_USER,
+  UPDATE_PRODUCT,
+
 } from "./actions";
 
 const initialState = {
@@ -37,7 +40,6 @@ const initialState = {
   selectFilter: {},
   page: null,
   localstorage: [],
-  shipments: [],
   user: null, // Agregar el estado del usuario
 };
 
@@ -57,40 +59,14 @@ const reducer = (state = initialState, action) => {
     case ADD_TO_CART:
       return {
         ...state,
-        cart: [...state.cart, action.payload], // Agrega el producto al carrito
+        cart: [...state.cart, action.payload],
       };
     case LOCALSTORAGE:
       return {
         ...state,
         localstorage: [action.payload],
       };
-    case ADD_SHIPPING:
-      return {
-        ...state,
-        shipments: [...state.shipments, action.payload],
-      };
-    case UPDATE_SHIPPING:
-      const { shippingID, update } = action.payload;
-      const updatedshipping = state.shipments.map((shipment) => {
-        if (shippingID === shippingID) {
-          return { ...shipment, ...update };
-        } else {
-          return shipment;
-        }
-      });
-      return {
-        ...state,
-        shipments: updatedshipping,
-      };
-    case REMOVE_SHIPPING:
-      const sendtodeleteID = action.payload;
-      const filteredshipments = state.shipments.filter(
-        (shipment) => shipment.ID !== sendtodeleteID
-      );
-      return {
-        ...state,
-        shipments: filteredshipments,
-      };
+   
 
     case GET_BY_ID:
       return {
@@ -102,6 +78,8 @@ const reducer = (state = initialState, action) => {
         ...state,
         productShow: action.payload,
       };
+      case UPDATE_PRODUCT:
+        return action.payload;
 
     case GET_ALL_USERS:
       return {
