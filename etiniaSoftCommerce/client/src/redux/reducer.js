@@ -19,9 +19,7 @@ import {
   USER_LOGOUT,
   GET_ALL_SELECTS,
   LOCALSTORAGE,
-  REMOVE_SHIPPING,
-  UPDATE_SHIPPING,
-  ADD_SHIPPING,
+  UPDATE_PRODUCT,
 } from "./actions";
 
 const initialState = {
@@ -36,7 +34,6 @@ const initialState = {
   selectFilter: {},
   page: null,
   localstorage: [],
-  shipments: [],
   user: null, // Agregar el estado del usuario
 };
 
@@ -57,33 +54,7 @@ const reducer = (state = initialState, action) => {
         ...state,
         localstorage: [action.payload],
       };
-    case ADD_SHIPPING:
-      return {
-        ...state,
-        shipments: [...state.shipments, action.payload],
-      };
-    case UPDATE_SHIPPING:
-      const { shippingID, update } = action.payload;
-      const updatedshipping = state.shipments.map((shipment) => {
-        if (shippingID === shippingID) {
-          return { ...shipment, ...update };
-        } else {
-          return shipment;
-        }
-      });
-      return {
-        ...state,
-        shipments: updatedshipping,
-      };
-    case REMOVE_SHIPPING:
-      const sendtodeleteID = action.payload;
-      const filteredshipments = state.shipments.filter(
-        (shipment) => shipment.ID !== sendtodeleteID
-      );
-      return {
-        ...state,
-        shipments: filteredshipments,
-      };
+   
 
     case GET_BY_ID:
       return {
@@ -95,6 +66,8 @@ const reducer = (state = initialState, action) => {
         ...state,
         productShow: action.payload,
       };
+      case UPDATE_PRODUCT:
+        return action.payload;
 
     case GET_ALL_USERS:
       return {
