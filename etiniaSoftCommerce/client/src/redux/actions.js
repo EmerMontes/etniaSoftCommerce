@@ -41,7 +41,8 @@ export const USER_LOGIN = "USER_LOGIN";
 export const USER_LOGOUT = "USER_LOGOUT";
 export const REGISTER_USER = "REGISTER_USER";
 
-const URL = "http://localhost:3001";
+//const URL = "http://localhost:3001";
+const URL = "https://etniasoftcommerce.up.railway.app";
 
 
 export function registerUser(payload) {

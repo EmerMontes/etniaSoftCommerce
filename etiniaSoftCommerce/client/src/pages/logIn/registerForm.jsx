@@ -33,10 +33,10 @@ function RegisterForm(props) {
         setError("Por favor, ingresa un correo electrónico válido.");
         return;
       }
-      if () {
-        setError("Por favor, ingresa un correo electrónico válido.");
-        return;
-      }
+      // if () {
+      //   setError("Por favor, ingresa un correo electrónico válido.");
+      //   return;
+      // }
       //correo ya existe - iniciar sesion? 
 
       if (!password) {
