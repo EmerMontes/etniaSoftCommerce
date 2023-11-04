@@ -12,7 +12,6 @@ function Card({id, name, gender, sale, img, color, price}) {
 
   const [isFav, setIsFav] = useState(false);
 
-
   const product = {id, name, gender, sale, img, color, price};
 
   const handleFavorite = () => {

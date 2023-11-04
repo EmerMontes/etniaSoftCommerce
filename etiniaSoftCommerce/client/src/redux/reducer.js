@@ -40,6 +40,7 @@ const initialState = {
   user: null, // Agregar el estado del usuario
 };
 
+
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_ALL_PRODUCTS:

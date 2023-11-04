@@ -39,7 +39,6 @@ function Home(props) {
   useEffect(() => {
     loadProducts();
     dispatch(getAllSelects())
-    console.log(Page?.info?.page)
   }, [dispatch, initialFilters, initialPageSet]);
 
   const handleChange = (event) => {
