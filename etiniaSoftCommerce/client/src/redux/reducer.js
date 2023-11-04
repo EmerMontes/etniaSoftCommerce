@@ -19,7 +19,13 @@ import {
   USER_LOGOUT,
   GET_ALL_SELECTS,
   LOCALSTORAGE,
+
+  REMOVE_SHIPPING,
+  UPDATE_SHIPPING,
+  ADD_SHIPPING,
+  REGISTER_USER,
   UPDATE_PRODUCT,
+
 } from "./actions";
 
 const initialState = {
@@ -40,6 +46,11 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
+    case REGISTER_USER:
+      return {
+        ...state,
+        allProducts: action.payload,
+      };
     case GET_ALL_PRODUCTS:
       return {
         ...state,
