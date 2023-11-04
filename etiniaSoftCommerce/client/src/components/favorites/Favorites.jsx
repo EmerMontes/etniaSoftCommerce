@@ -21,7 +21,7 @@ export default function Favorites(props){
         <h2>FAVORITES</h2>
         <div className={stylesContainer['card-container']}>
 
-        {favorites.length > 0 && favorites.map(fav => (
+        {favorites?.length > 0 && favorites?.map(fav => (
             <div key={fav.id} className={styles.card}>
                 <button onClick={()=> handleFavorite(fav.id)}>{"❤️"}</button>
                 <Link to={`/product/${fav.id}`}>
