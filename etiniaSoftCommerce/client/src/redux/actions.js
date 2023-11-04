@@ -41,7 +41,20 @@ export const UPDATE_SHIPPING = "UPDATE_SHIPPING";
 export const REMOVE_SHIPPING = "REMOVE_SHIPPING";
 export const USER_LOGIN = "USER_LOGIN";
 export const USER_LOGOUT = "USER_LOGOUT";
+export const REGISTER_USER = "REGISTER_USER";
+
 const URL = "http://localhost:3001";
+
+
+export function registerUser(payload) {
+  return async function (dispatch) {
+    const { data } = await axios.post(`${URL}/register`, payload);
+    dispatch({
+      type: REGISTER_USER,
+      payload: data,
+    });
+  };
+}
 
 export function addshipping(envio) {
   return {

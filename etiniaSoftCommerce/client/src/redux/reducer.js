@@ -22,6 +22,7 @@ import {
   REMOVE_SHIPPING,
   UPDATE_SHIPPING,
   ADD_SHIPPING,
+  REGISTER_USER
 } from "./actions";
 
 const initialState = {
@@ -43,6 +44,11 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
+    case REGISTER_USER:
+      return {
+        ...state,
+        allProducts: action.payload,
+      };
     case GET_ALL_PRODUCTS:
       return {
         ...state,
