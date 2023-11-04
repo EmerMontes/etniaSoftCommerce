@@ -17,9 +17,10 @@ import resetView from "../home/clockwise.svg"
 function Home(props) {
   const Page = useSelector((state) => state.indexProductShow);
   const selects = useSelector ((state) => state.selectFilter)
-  // const [initialPageSet, setInitialPageSet] = useLocalStorage("initialPageSet", 1);
   const [initialPageSet, setInitialPageSet] = useState(1);
   const [initialFilters, setInitialFilters] = useLocalStorage("initialFilters", {})
+  const maxPages = Math.ceil(Page?.info?.total / 10);
+  const currentPage = Page?.info?.page;
 
   const dispatch = useDispatch();
 
@@ -40,6 +41,7 @@ function Home(props) {
     loadProducts();
     dispatch(getAllSelects())
   }, [dispatch, initialFilters, initialPageSet]);
+
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -80,9 +82,10 @@ function Home(props) {
 
     
     const handleNextClick = () => {
-      
-      setInitialPageSet(initialPageSet + 1);
-      dispatch(getFiltersAndPagination(initialFilters, initialPageSet + 1));
+      if (currentPage < maxPages) {
+        setInitialPageSet(initialPageSet + 1);
+        dispatch(getFiltersAndPagination(initialFilters, initialPageSet + 1));
+      }
     };
 
     return (
@@ -115,6 +118,12 @@ function Home(props) {
       </div>
     );
   }
+  
+  useEffect(()=>{
+    console.log(Page?.info?.total)
+  },[handleChange])
+  const textPaginado = currentPage + " of " + maxPages;
+
   return (
     <div className={styles.home}>
       <NavBar />
@@ -214,8 +223,8 @@ function Home(props) {
       <CardContainer products={Page} />
       <br />
       <br />
-      <Pagination />
-      <button>{Page?.info?.page}</button> {/* {"boton de ejemplo para hacer el paginado + friendLy"} */}
+      <Pagination textPaginado={textPaginado}/>
+      <h2>{textPaginado}</h2>
     </div>
   );
 }

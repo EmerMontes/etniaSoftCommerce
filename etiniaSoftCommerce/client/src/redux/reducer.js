@@ -48,7 +48,7 @@ const reducer = (state = initialState, action) => {
     case ADD_TO_CART:
       return {
         ...state,
-        cart: [...state.cart, action.payload], // Agrega el producto al carrito
+        cart: [...state.cart, action.payload],
       };
     case LOCALSTORAGE:
       return {
