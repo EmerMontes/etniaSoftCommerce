@@ -1,9 +1,9 @@
-import React, { useState } from 'react'; // Import useState
+import React, { useEffect, useState } from 'react'; // Import useState
 import { useDispatch, useSelector } from 'react-redux';
 import { getFiltersAndPagination } from '../../redux/actions';
 import styles from './Pagination.module.css';
 
-function Pagination({ setInitialPageSet, initialPageSet, setInitialFilters, initialFilters }) {
+function Pagination({ setInitialPageSet, initialPageSet, initialFilters, textPaginado }) {
   const Page = useSelector((state) => state.indexProductShow);
   let num = 1;
   if (Page && Page.info) {
@@ -50,7 +50,6 @@ function Pagination({ setInitialPageSet, initialPageSet, setInitialFilters, init
           {pageNumber}
         </button>
       ))}
-
       <button
         className={`${styles.paginationbutton} ${num === totalPages && styles.paginationcurrent}`}
         onClick={handleNextClick}
