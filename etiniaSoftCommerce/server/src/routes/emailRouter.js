@@ -2,7 +2,6 @@ const express = require('express');
 const emailRouter = express.Router();
 const sgMail = require('@sendgrid/mail');
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
-
 emailRouter.post('/send-email', (req, res) => {
     const { email, subject, text } = req.body;
   

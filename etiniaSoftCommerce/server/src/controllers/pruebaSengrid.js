@@ -1,22 +1,20 @@
-//require('dotenv').config();
-
-//const sgMail = require('@sendgrid/mail');
-//sgMail.setApiKey('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');
-////const msg = {
-//  to: 'edueliasxez@gmail.com', // Cambia a tu destinatario
- // from: 'clickyticketg18pf@gmail.com', // Cambia a tu remitente verificado
-//  subject: 'Enviar con SendGrid es divertido',
-//  text: 'y fácil de hacer en cualquier lugar, incluso con Node.js',
-//  html: '<strong>y fácil de hacer en cualquier lugar, incluso con Node.js</strong>',
-//};
-//sgMail
-//  .send(msg)
-//  .then(() => {
-//    console.log('Email enviado')
-//  })
-//  .catch((error) => {
-//    console.error(error)
-//  });//
+const sgMail = require('@sendgrid/mail')
+sgMail.setApiKey(process.env.SENDGRID_API_KEY)
+const msg = {
+  to: 'edueliasxez@gmail.com', // Change to your recipient
+  from: 'clickyticketg18pf@gmail.com', // Change to your verified sender
+  subject: 'Sending with SendGrid is Fun',
+  text: 'and easy to do anywhere, even with Node.js',
+  html: '<strong>and easy to do anywhere, even with Node.js</strong>',
+}
+sgMail
+  .send(msg)
+  .then(() => {
+    console.log('Email sent')
+  })
+  .catch((error) => {
+    console.error(error)
+  })
 
 // como enviar un email con sendgrid
 
