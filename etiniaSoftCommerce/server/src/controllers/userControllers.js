@@ -81,10 +81,12 @@ const getAllUser = async () => {
   console.log("lista de todos los usuarios");
   return usuariotDB;
 };
+
 const getUsuarById = async (id) => {
   const userDB = await User.findByPk(id);
   return userDB;
 };
+
 const getUserByName = async (name) => {
   const userDB = await User.findAll({
     where: {
