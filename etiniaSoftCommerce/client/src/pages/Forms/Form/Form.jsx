@@ -1,20 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
 import Validation from './validation';
-import { createProduct, clearErrors, getAllProducts, setNewErrors } from '../../../redux/actions';
+import primeraMayuscula from '../../../functions/primeraMayuscula';
+import { createProduct, clearErrors } from '../../../redux/actions';
 import "./form.css";
 
 
 const Form = () => {
   const dispatch = useDispatch();
- //const [selectedGender, setSelectedGender] = useState('default');
-  const navigate = useNavigate()
+
+  const [errorSubmit,setErrorSubmit] = useState("")
   const gErrors = useSelector((state) => state.errors)
-  const [selectedSize, setSelectedSize] = useState('default');
-
   const [errors, setErrors] = useState({});
-
   const [input, setInput] = useState({
     name: "",
     description: "",
@@ -23,11 +20,16 @@ const Form = () => {
     category: "",
     size: [],
     color: "",
-    price: "",
+    price: 0,
     gender: "",
     img: "",
-    quantity: 0
-
+    quantity: 0,
+    quantityXS: null,
+    quantityS: null,
+    quantityM: null,
+    quantityL: null,
+    quantityXL: null,
+    quantityXXL: null,
   });
 
   useEffect(() => {
@@ -36,7 +38,7 @@ const Form = () => {
 
 
   const handleChange = (event) => {
-    console.log(input)
+    
     setInput({
       ...input,
       [event.target.name]: event.target.value  
@@ -45,14 +47,17 @@ const Form = () => {
       ...input,
       [event.target.name]: event.target.value
     }))
+    setErrorSubmit("");
   };
 
-  const validateInput = (inputData) => {
-    const errors = Validation(inputData)
-    setErrors(errors)
-  }
+  // const validateInput = (inputData) => {
+  //   const errors = Validation(inputData)
+  //   setErrors(errors)
+  // }
 
 
+
+  let isSubmitDisabled = Object.keys(errors).length > 0;
 
 
   const handleSize = (event) => {
@@ -72,11 +77,11 @@ const Form = () => {
       })
     }
   };
-  const isSubmitDisabled = Object.keys(errors).length > 0;
+
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log(document.querySelector("#quantityXS").value)
+    
     // para armar el muñeco
     let selected = [];
     if (document.querySelector("#quantityXS").value != 0 && document.querySelector("#quantityXS").disabled === false) {
@@ -104,10 +109,16 @@ const Form = () => {
       suma= suma + parseInt(Object.values(option))
     }
     input.quantity = suma;
-    console.log(input.size)
-    console.log(input.quantity)
+    input.name = input.name.toUpperCase();
+    input.brand = input.brand.toUpperCase();
+    input.category = primeraMayuscula(input.category);
+    input.color = primeraMayuscula(input.color);
 
-    dispatch(createProduct(input))
+    console.log(input)
+    
+    if (input.quantity === 0) setErrorSubmit("Debe escoger una talla y una cantidad")
+    else {
+    //dispatch(createProduct(input))
 
         setInput({
           name: "",
@@ -117,47 +128,73 @@ const Form = () => {
           category: "",
           size: [],
           color: "",
-          price: "",
-          gender: "",
-          image: "",
-          quantity: 0
+          price: 0,
+          gender: "default",
+          img: "",
+          quantity: 0,
+          quantityXS: 0,
+          quantityS: 0,
+          quantityM: 0,
+          quantityL: 0,
+          quantityXL: 0,
+          quantityXXL: 0,
+          
         })
-      dispatch(getAllProducts())
+      console.log(input)
+      document.querySelector("#submit").disabled = true;
       alert("Producto creado con exito")
       dispatch(clearErrors())
-    
+    }
   };
 
   const habilitar = (event) => {
     switch (event.target.value){
       case "XS":
         if (document.querySelector("#quantityXS").disabled) document.querySelector("#quantityXS").disabled = false;
-        else if (!document.querySelector("#quantityXS").disabled) document.querySelector("#quantityXS").disabled = true;
+        else if (!document.querySelector("#quantityXS").disabled) {
+          document.querySelector("#quantityXS").disabled = true;
+          document.querySelector("#quantityXS").value = null;
+        }
         break;
 
       case"S":
         if (document.querySelector("#quantityS").disabled) document.querySelector("#quantityS").disabled = false;
-        else if (!document.querySelector("#quantityS").disabled) document.querySelector("#quantityS").disabled = true;
+        else if (!document.querySelector("#quantityS").disabled) {
+          document.querySelector("#quantityS").disabled = true;
+          document.querySelector("#quantityS").value = null;
+        }
         break;
 
       case "M":
         if (document.querySelector("#quantityM").disabled) document.querySelector("#quantityM").disabled = false;
-        else if (!document.querySelector("#quantityM").disabled) document.querySelector("#quantityM").disabled = true;
+        else if (!document.querySelector("#quantityM").disabled){
+          document.querySelector("#quantityM").disabled = true;
+          document.querySelector("#quantityM").value = null;
+        }
         break;
 
       case "L":
         if (document.querySelector("#quantityL").disabled) document.querySelector("#quantityL").disabled = false;
-        else if (!document.querySelector("#quantityL").disabled) document.querySelector("#quantityL").disabled = true;
+        else if (!document.querySelector("#quantityL").disabled) {
+          document.querySelector("#quantityL").disabled = true;
+          document.querySelector("#quantityL").value = null;
+        }
         break;
 
       case "XL":
         if (document.querySelector("#quantityXL").disabled) document.querySelector("#quantityXL").disabled = false;
-        else if (!document.querySelector("#quantityXL").disabled) document.querySelector("#quantityXL").disabled = true;
+        else if (!document.querySelector("#quantityXL").disabled) {
+          document.querySelector("#quantityXL").disabled = true;
+          document.querySelector("#quantityXL").value = null;
+        }
         break; 
 
       case "XXL":
         if (document.querySelector("#quantityXXL").disabled) document.querySelector("#quantityXXL").disabled = false;
-        else if (!document.querySelector("#quantityXXL").disabled) document.querySelector("#quantityXXL").disabled = true;
+        else if (!document.querySelector("#quantityXXL").disabled){
+          document.querySelector("#quantityXXL").disabled = true;
+          document.querySelector("#quantityXXL").value = null;
+        }
     }
       
   }
@@ -166,14 +203,13 @@ const Form = () => {
     <div >
       <form onSubmit={(event) => handleSubmit(event)} >
       <div className="globalCont"> 
-        <h3 className="formTitle">Crear nuevo producto</h3>
+        <h3 className="formTitle">+ Crear nuevo producto</h3>
         <br>
         </br>
 
         <div>
           <label> Nombre</label>
           <input className="input1" type="text"
-            placeholder="enter a name"
             name="name"
             value={input.name}
             onChange={handleChange}
@@ -186,7 +222,6 @@ const Form = () => {
           <label>Marca</label>
           <input className="input1"
             type="text"
-            placeholder="enter a brand"
             name="brand"
             value={input.brand}
             onChange={handleChange}
@@ -198,7 +233,6 @@ const Form = () => {
           <label>Categoria</label>
           <input className="input1"
             type="text"
-            placeholder="enter a category"
             name="category"
             value={input.category}
             onChange={handleChange}
@@ -210,7 +244,6 @@ const Form = () => {
           <label>Descripción</label>
           <br />
           <textarea
-            placeholder="add a description"
             name="description"
             value={input.description}
             onChange={handleChange}
@@ -222,6 +255,7 @@ const Form = () => {
           <label>Color</label>
           <input className="input1" type="text"
             name="color"
+            value={input.color}
             onChange={handleChange}
           />
           <p className="errores" style={{ visibility: errors.color ? 'visible' : 'hidden' }}>{errors.color}</p>
@@ -231,8 +265,9 @@ const Form = () => {
 
         <div>
           <label>Precio</label>
-          <input className="input2" type="number"
+          <input className="input2" type="number" min="0"
             name="price"
+            value={input.price}
             onChange={handleChange}
           />
           <p className="errores" style={{ visibility: errors.price ? 'visible' : 'hidden' }}>{errors.price}</p>
@@ -241,8 +276,7 @@ const Form = () => {
         <div>
           <label>Descuento</label>
           <input className="input2"
-            type="number"
-            placeholder="Enter sale"
+            type="number" min = "0"
             name="sale"
             value={input.sale}
             onChange={handleChange}
@@ -252,12 +286,12 @@ const Form = () => {
 
         <div>
           <label> Genero</label>
-          <select name="gender" onChange={handleChange}>
+          <select name="gender" onChange={handleChange} value={input.gender}>
           <option value="default">Seleccione Genero</option>
             <option value="female">Mujer</option>
             <option value="male">Hombre</option>
           </select>
-          <p className="errores" style={{ visibility: errors.genders ? 'visible' : 'hidden' }}>{errors.genders}</p>
+          <p className="errores" style={{ visibility: errors.gender ? 'visible' : 'hidden' }}>{errors.gender}</p>
          
         </div>
 
@@ -265,14 +299,16 @@ const Form = () => {
           <label>URL de Imagen</label>
           <input className="input3"
             type="url"
-            placeholder="send the URL of the image"
-            name="image"
+            name="img"
+            value={input.img}
             onChange={handleChange}
           />
+          <p className="errores" style={{ visibility: errors.image ? 'visible' : 'hidden' }}>{errors.image}</p>
+          <p className= "errores">{errorSubmit}</p>
         </div>
         <div className="previewImage">
           <h5>Imagen Previa:</h5>
-          <img className="img" src={input.img} alt="" />
+          <img className="img" src={input.img} width="50px" height="80px" alt="" wi/>
         </div>
 
         </div>
@@ -281,43 +317,40 @@ const Form = () => {
             <label>Tallas:</label> 
         
           
-            <input type="checkbox" id="XS" value="XS"onChange={habilitar}/>
+            <input type="checkbox" name="xs" id="XS" value="XS"onChange={habilitar}/>
             <label for="XS">XS</label>
-            <input disabled className="input2"type="number" id="quantityXS"/>
+            <input disabled className="input2"type="number" min="0" id="quantityXS" name="quantityXS" value={input.quantityXS} onChange={handleChange}/>
 
-            <input type="checkbox" id="S" value="S"onChange={habilitar}/>
+            <input type="checkbox" name="s" id="S" value="S"onChange={habilitar}/>
             <label for="S">S</label>
-            <input disabled className="input2"type="number" id="quantityS"/>
+            <input disabled className="input2"type="number" min="0" id="quantityS" name="quantityS" value={input.quantityS} onChange={handleChange}/>
 
-            <input type="checkbox" id="M" value="M"onChange={habilitar}/>
+            <input type="checkbox" name= "m" id="M" value="M"onChange={habilitar}/>
             <label for="M">M</label>
-            <input disabled className="input2"type="number" id="quantityM"/>
+            <input disabled className="input2"type="number" min="0" id="quantityM" name="quantityM" value={input.quantityM} onChange={handleChange}/>
 
-            <input type="checkbox" id="L" value="L"onChange={habilitar}/>
+            <input type="checkbox" name="l" id="L" value="L"onChange={habilitar}/>
             <label for="L">L</label>
-            <input disabled className="input2"type="number" id="quantityL"/>
+            <input disabled className="input2"type="number" min="0" id="quantityL" name= "quantityL"value={input.quantityL} onChange={handleChange}/>
 
-            <input type="checkbox" id="XL" value="XL"onChange={habilitar}/>
+            <input type="checkbox" name="xl"id="XL" value="XL"onChange={habilitar}/>
             <label for="XL">XL</label>
-            <input disabled className="input2"type="number" id="quantityXL"/>
+            <input disabled className="input2"type="number" min="0" id="quantityXL" name= "quantityXL" value={input.quantityXL} onChange={handleChange}/>
 
-            <input type="checkbox"id="XXL" value="XXL"onChange={habilitar}/>
+            <input type="checkbox" name="xxl" id="XXL" value="XXL"onChange={habilitar}/>
             <label for="XXL">XXL</label>
-            <input disabled className="input2"type="number" id="quantityXXL"/>
-
-          <p className="errores" style={{ visibility: errors.size ? 'visible' : 'hidden' }}>{errors.size}</p>
-          {selectedSize !== 'default' && (
-            <p>Talla seleccionada: {selectedSize}</p>
-          )}
-          
+            <input disabled className="input2"type="number" min="0" id="quantityXXL" name="quantityXXL" value={input.quantityXXL} onChange={handleChange}/>
 
         </div>
         
         <div className="buttonDiv">
-          <button className="btn" disabled={isSubmitDisabled} style={isSubmitDisabled ? { opacity: "0.6", cursor: "not-allowed" } : null} type="submit">Crear Producto</button>
-        </div>
-        <p className="errores" style={{ visibility: gErrors?.createProduct?.error ? 'visible' : 'hidden' }}>{gErrors?.createProduct?.error}</p>
+          <button id="submit" className="btn" disabled={isSubmitDisabled} style={isSubmitDisabled ? { opacity: "0.6", cursor: "not-allowed" } : null} type="submit">Crear Producto</button>
+          </div>
+          <p className="errores" style={{ visibility: gErrors?.createProduct?.error ? 'visible' : 'hidden' }}>{gErrors?.createProduct?.error}</p>
 
+
+        
+        
       </form>
     </div>
   )

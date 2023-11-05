@@ -9,6 +9,10 @@ import LogIn from './pages/logIn/LogIn';
 import NotFound404 from './pages/404/notFound';
 import Favorites from './components/favorites/Favorites';
 import Form from './pages/Forms/Form/Form';
+import FormEmpresa from './pages/Forms/FormEmpresa/CreateEmpresa';
+import FormMedioPago from './pages/Forms/FormMedioPago/CreateMedioPago';
+import FormTransportadora from './pages/Forms/FormTransport/CreateTransport';
+import FormCtaBanco from './pages/Forms/FormCuentaBanco/CreateCtaBanco';
 import ConfirmTokenForm from './pages/logIn/ConfirmTokenForm';
 import RegisterForm from './pages/logIn/registerForm';
 
@@ -27,6 +31,10 @@ function App() {
       <Route exact path='/carrito' element={<ShoppingCart />} /> 
       <Route exact path='favorites' element={<Favorites/>} />  
       <Route exact path='/Form' element={<Form/>}/>
+      <Route exact path='/crearempresa' element={<FormEmpresa/>} />
+      <Route exact path='/mediopago' element={<FormMedioPago/>} />
+      <Route exact path= '/transporte' element={<FormTransportadora/>} />
+      <Route exact path= '/cuentabanco' element={<FormCtaBanco/>} />
       <Route exact path='/RegisterForm' element={<RegisterForm/>}/>
       <Route exact path='/ConfirmTokenForm' element={<ConfirmTokenForm/>}/>
 
