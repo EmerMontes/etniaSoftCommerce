@@ -5,9 +5,8 @@ const express = require('express');
 const prendas = require('./src/controllers/savedInDB')
 const app = express();
 
-app.use(express.json());
-
-const PORT = 3001;
+app.use(express.json())
+const PORT =  process.env.PORT || 3001;
 
 conn.sync({ force: true }).then(() => {
   prendas();

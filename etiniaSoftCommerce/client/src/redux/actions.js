@@ -19,6 +19,7 @@ export const CREATE_USER = "CREATE_USER";
 export const RESTORE_PRODUCT = "RESTORE_PRODUCT";
 //routes Put
 export const UPDATE_USER = "UPDATE_USER";
+export const UPDATE_PRODUCT="UPDATE_PRODUCT";
 //Filters
 export const GET_FILTER_GENDER = "GET_FILTER_GENDER";
 export const GET_FILTER_CATEGORY = "GET_FILTER_CATEGORY";
@@ -35,13 +36,24 @@ export const ERRORS = "ERRORS";
 export const ADD_TO_CART = "ADD_TO_CART";
 //LocalStorage
 export const LOCALSTORAGE = "LOCALSTORAGE";
-//logistics
-export const ADD_SHIPPING = "ADD_SHIPPING";
-export const UPDATE_SHIPPING = "UPDATE_SHIPPING";
-export const REMOVE_SHIPPING = "REMOVE_SHIPPING";
+
 export const USER_LOGIN = "USER_LOGIN";
 export const USER_LOGOUT = "USER_LOGOUT";
-const URL = "http://localhost:3001";
+export const REGISTER_USER = "REGISTER_USER";
+
+//const URL = "http://localhost:3001";
+const URL = "https://etniasoftcommerce.up.railway.app";
+
+
+export function registerUser(payload) {
+  return async function (dispatch) {
+    const { data } = await axios.post(`${URL}/register`, payload);
+    dispatch({
+      type: REGISTER_USER,
+      payload: data,
+    });
+  };
+}
 
 export function addshipping(envio) {
   return {
@@ -61,6 +73,8 @@ export function removeshipping(shippingID) {
     payload: shippingID,
   };
 }
+
+
 
 export function putLocalstorage() {
   if (localStorage.getItem("cart")) {
@@ -138,6 +152,15 @@ export function getAllUsers() {
     dispatch({
       type: GET_ALL_USERS,
       payload: allUsers.data,
+    });
+  };
+}
+export function updateProduct(payload){
+  return async function(dispatch){
+    const info= await axios.put(`${URL}/${payload.id}`, payload);
+    dispatch({
+      type:UPDATE_PRODUCT,
+      payload:info.data,
     });
   };
 }

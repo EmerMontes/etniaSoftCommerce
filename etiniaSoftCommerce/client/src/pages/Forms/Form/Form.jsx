@@ -56,7 +56,28 @@ const Form = () => {
   // }
 
 
+
   let isSubmitDisabled = Object.keys(errors).length > 0;
+
+
+  const handleSize = (event) => {
+    setSelectedSize(event.target.value);
+    event.preventDefault();
+    const rep = input.talla?.find(size => size === event.target.value)
+
+    if (event.target.value !== "default" && !rep) {
+      setInput({
+        ...input, size: [...input.size, event.target.value]
+        
+      })
+      event.target.value = "default"
+
+      validateInput({
+        ...input, size: [...input.size, event.target.value]
+      })
+    }
+  };
+
 
   const handleSubmit = (event) => {
     event.preventDefault();
