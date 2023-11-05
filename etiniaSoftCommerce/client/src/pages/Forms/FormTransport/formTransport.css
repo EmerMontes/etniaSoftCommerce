@@ -1,6 +1,5 @@
 
-  
-  .form{
+.form{
     background-color: rgb(196, 196, 196);
     max-width: 1000px;
     padding: 20px 20px 20px 20px;
@@ -42,7 +41,7 @@
       margin: 0.5rem;
     }
   
-    .form button {
+    .globalLocation button {
       padding: 0.5em 1em;
       margin: 0.5em;
       border: none;
@@ -51,14 +50,14 @@
       border-radius:5px;
       font-family: 'Bebas Neue', sans-serif;
       letter-spacing: 2px;
-      width: 200px;
+      width: 250px;
       font-size:medium;
       font-weight: bold;
       font-family: 'Rubik', sans-serif;
       padding: 5px 5px;
     }
     
-    .form button:hover{
+    .globalLocation button:hover{
       background-color: #207015;
       box-shadow:  0px 0px 5px #000000;
       transition: 0.15s ease-in-out;
@@ -104,14 +103,45 @@
   }
 
   .empresaTitle{
+    
     color: black;
     align-items: center;
-    /*box-shadow: 0px 0px 8px 2px rgba(0, 0, 0, 0.507);*/
     padding: 5px;
-    /*border-radius: 8px ;*/
-    width: 250px;
+    width: 300px;
     font-family: 'Bebas Neue', sans-serif;
-    letter-spacing: 4px;
+    letter-spacing: 3px;
     margin-bottom: 40px;
   }
 
+
+  .globalLocation {
+    background-color: rgb(196, 196, 196);
+    max-width: 1000px;
+    padding: 20px 20px 20px 20px;
+    display: grid;
+    grid-template-columns: 1fr;
+    flex-direction: column;
+    margin: auto;
+    width: 50%;
+    height: 100%;
+  }
+
+  .globalLocation input {
+    width: 80px;
+    border-style:ridge;
+    flex: 1;
+    padding: 0.5rem;
+    font-size: 1rem;
+    height: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    transition: border-color 0.3s;
+    margin-bottom: 40px;
+  }
+
+  .globalLocation label{
+    font-size:small;
+    font-weight: bold;
+    font-family: 'Rubik', sans-serif;
+    margin-top: -40px;
+  }
