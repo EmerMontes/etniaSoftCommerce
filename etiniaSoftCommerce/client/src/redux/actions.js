@@ -40,19 +40,58 @@ export const LOCALSTORAGE = "LOCALSTORAGE";
 export const USER_LOGIN = "USER_LOGIN";
 export const USER_LOGOUT = "USER_LOGOUT";
 export const REGISTER_USER = "REGISTER_USER";
+export const ADD_SHIPPING = "ADD_SHIPPING";
+export const UPDATE_SHIPPING = "UPDATE_SHIPPING";
+export const REMOVE_SHIPPING = "REMOVE_SHIPPING";
+export const REGISTER_USER_ERROR= "REGISTER_USER_ERROR"
+export const CONFITRM_TOKEN= "CONFITRM_TOKEN"
+
 
 const URL = "http://localhost:3001";
 
 
-export function registerUser(payload) {
+export function confirmToken(token) {
   return async function (dispatch) {
-    const { data } = await axios.post(`${URL}/register`, payload);
-    dispatch({
-      type: REGISTER_USER,
-      payload: data,
-    });
+    try {
+      console.log("hola desde action");
+      const { data } = await axios.get(`${URL}/users/confirm/${token}`);
+      dispatch({
+        type: CONFITRM_TOKEN,
+        payload: data,
+      });
+      // Devuelve una respuesta exitosa
+      return { success: true, message: "Usuario registrado con éxito" };
+    } catch (error) {
+      // Manejo de errores
+      console.error("Error al registrar usuario:", error);
+      // Devuelve una respuesta de error
+      return { success: false, message: "Error al registrar usuario. Inténtelo nuevamente." };
+    }
   };
 }
+
+export function registerUser(payload) {
+  console.log("register")
+  return async function (dispatch) {
+    try {
+      const  respuesta  = await axios.post(`${URL}/users/register`, payload);
+      console.log("sigue la data")
+      console.log(respuesta);
+      dispatch({
+        type: REGISTER_USER,
+        payload: respuesta.data,
+      });
+      // Devuelve una respuesta exitosa
+      return { success: true, message: "Usuario registrado con éxito" };
+    } catch (error) {
+      // Manejo de errores
+      console.error("Error al registrar usuario:", error.response.data.error);
+      // Devuelve una respuesta de error
+      return { success: false, message: `Error al registrar usuario: ${error.response.data.error}` };
+    }
+  };
+}
+
 
 export function addshipping(envio) {
   return {

@@ -1,10 +1,13 @@
 /* eslint-disable no-unused-vars */
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-
+import { registerUser } from "../../redux/actions";
+import "./LogIn.module.css";
 
 function RegisterForm(props) {
   const [email, setEmail] = useState("");
+  const [mensaje, setMensaje] = useState("");
+
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState(null);
@@ -33,11 +36,7 @@ function RegisterForm(props) {
         setError("Por favor, ingresa un correo electrónico válido.");
         return;
       }
-      if () {
-        setError("Por favor, ingresa un correo electrónico válido.");
-        return;
-      }
-      //correo ya existe - iniciar sesion? 
+   
 
       if (!password) {
         setError("El campo de contraseña no puede estar vacío.");
@@ -57,20 +56,33 @@ function RegisterForm(props) {
         setError("Las contraseñas no coinciden.");
         return;
       }
-      
+      const payload = {
+        email: email,
+        password: password,
+        // Agrega otros campos del payload si es necesario
+      };
     // Realiza las validaciones necesarias de los campos del formulario de registro
     // Asegúrate de tener un mecanismo para verificar si el usuario ya existe
 
     // Luego, registra al usuario utilizando tu acción `userRegister`
-    // dispatch(userRegister(email, password))
-    //   .then((response) => {
-    //     console.log(response);
-    //     // Aquí puedes continuar con el código después de registrar al usuario con éxito
-    //   })
-    //   .catch((error) => {
-    //     setError("Error al registrar al usuario");
-    //     // Determina el código de estado según el tipo de error
-    //   });
+    dispatch(registerUser(payload))
+    .then((response) => {
+      if (response.success) {
+        setError("");
+        setMensaje("Registro exitoso: Revisa tu correo para confirmar tu contraseña");
+        console.log("Registro exitoso: Revisa tu correo para confirmar tu contraseña", response.message);
+        // Aquí puedes continuar con el código después de registrar al usuario con éxito
+      } else {
+        console.error("Error durante el registro:", response.message);
+        setError(response.message);
+        // Determina el código de estado según el tipo de error
+      }
+    })
+    .catch((error) => {
+      console.error("Error en la promesa:", error);
+      setError("Error al registrar el usuario");
+    });
+  
   };
 
   return (
@@ -101,6 +113,8 @@ function RegisterForm(props) {
         <button type="submit">Registrarse</button>
       </form>
       {error && <div className="error-message">{error}</div>}
+      {mensaje && <div className="exito-message">{mensaje}</div>}
+
     </div>
   );
 }

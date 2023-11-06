@@ -11,23 +11,26 @@ const {
 } = require("../controllers/userControllers");
 
 const confirmEmail = async (req, res) => {
-  const name = req.params.name;
+  
   try {
-    const response = await confirmEmailControll(name);
-    res.status(200).send(response);
+    const response = await confirmEmailControll(req, res);
+    res.status(200);
   } catch (error) {
-    res.status(400).json({ error: error.message });
+    console.log(error);
+    //res.status(400).json({ error: error.message });
   }
 };
 const postUsersRegsiter = async (req, res) => {
-  
   try {
     const response = await registerUser(req, res);
-    res.status(200).send(response);
+    res.status(200).json({ message: "Registro exitoso" });
   } catch (error) {
+    console.log(error.message);
+    console.log("Error atrapado en el handler");
     res.status(400).json({ error: error.message });
   }
 };
+
 
 const getUsersByName = async (req, res) => {
   const name = req.params.name;

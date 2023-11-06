@@ -1,12 +1,26 @@
+/* eslint-disable no-undef */
 /* eslint-disable no-unused-vars */
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
+import { confirmToken } from "../../redux/actions";
 
-function ConfirmTokenForm(props) {
+import { Link, useNavigate } from "react-router-dom";
+
+function ConfirmTokenForm() {
   const [token, setToken] = useState("");
   const [error, setError] = useState(null);
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  // Utiliza useEffect para obtener el token de la URL cuando el componente se carga
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const tokenParam = urlParams.get("token");
+
+    if (tokenParam) {
+      setToken(tokenParam);
+    }
+  }, []);
 
   const handleConfirmToken = (event) => {
     event.preventDefault();
@@ -16,19 +30,21 @@ function ConfirmTokenForm(props) {
       return;
     }
 
-    // Realiza las validaciones necesarias del token
-    // Asegúrate de tener un mecanismo para verificar si el token es válido
-
     // Luego, confirma el token utilizando tu acción `confirmToken`
-    // dispatch(confirmToken(token))
-    //   .then((response) => {
-    //     console.log(response);
-    //     // Aquí puedes continuar con el código después de confirmar el token con éxito
-    //   })
-    //   .catch((error) => {
-    //     setError("Error al confirmar el token");
-    //     // Determina el código de estado según el tipo de error
-    //   });
+    dispatch(confirmToken(token))
+      .then((response) => {
+        console.log("formulario dispatch");
+        console.log(response.success);
+        if (response.success) {
+          navigate("/");
+          // Aquí puedes continuar con el código después de confirmar el token con éxito
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+        //setError("Error al confirmar el token");
+        // Determina el código de estado según el tipo de error
+      });
   };
 
   return (
