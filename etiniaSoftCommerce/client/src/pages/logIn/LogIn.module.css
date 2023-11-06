@@ -47,7 +47,7 @@ button {
 
 .google-login {
   height: 3rem;
-  padding: 0,1vh;
+  padding: 0, 1vh;
   background-color: #fff;
   color: #000;
   border: 1px solid #ccc;
@@ -71,4 +71,9 @@ p {
   color: #ff0000; /* Color rojo para los mensajes de error */
   font-size: 14px; /* Tamaño de fuente */
   margin-top: 5px; /* Espacio superior para separar el mensaje de otros elementos */
+}
+.exito-message {
+  color: rgb(0, 255, 68); /* Color rojo para los mensajes de error */
+  font-size: 14px; /* Tamaño de fuente */
+  margin-top: 5px;
 }

@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable no-case-declarations */
 import {
   GET_ALL_PRODUCTS,
@@ -50,7 +51,7 @@ const reducer = (state = initialState, action) => {
     case REGISTER_USER:
       return {
         ...state,
-        allProducts: action.payload,
+        user: action.payload,
       };
     case GET_ALL_PRODUCTS:
       return {

@@ -102,7 +102,16 @@ function LogIn(props) {
         {error && <div className={styles["error-message"]}>{error}</div>}
 
       </form>
-      <p>¿No tienes cuenta? Regístrate</p>
+      <nav>
+          <ul>
+            <li>
+              <Link to="/RegisterForm">¿Aún no tienes una cuenta? obtener una</Link>
+            </li>
+            <li>
+              <Link to="/recuperar-contrasena">¿Olvidaste tu Password?</Link>
+            </li>
+          </ul>
+        </nav>
 
         {isAuthenticated ? <LogoutButton /> : <LoginButton/>}
       </div>
