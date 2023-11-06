@@ -5,7 +5,7 @@ const { Op } = require("sequelize");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 
-const URL = "http://localhost:5173";
+const URL = "https://etnia.vercel.app";
 
 const uuid = require("uuid");
 const sgMail = require("@sendgrid/mail");
