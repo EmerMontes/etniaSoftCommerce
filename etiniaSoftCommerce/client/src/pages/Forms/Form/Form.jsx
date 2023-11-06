@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Validation from './validation';
 import primeraMayuscula from '../../../functions/primeraMayuscula';
 import { createProduct, clearErrors } from '../../../redux/actions';
+import Swal from 'sweetalert2';
 import "./form.css";
 
 
@@ -24,17 +25,20 @@ const Form = () => {
     gender: "",
     img: "",
     quantity: 0,
-    quantityXS: null,
-    quantityS: null,
-    quantityM: null,
-    quantityL: null,
-    quantityXL: null,
-    quantityXXL: null,
+    
   });
 
   useEffect(() => {
     return () => dispatch(clearErrors())
   }, [dispatch])
+
+  const mostrarAlertaExitosa=() => {
+    Swal.fire({
+      icon: 'success',
+      title: 'Producto creado',
+      text: 'El producto se guardó de manera exitosa'
+    })
+  }
 
 
   const handleChange = (event) => {
@@ -60,23 +64,7 @@ const Form = () => {
   let isSubmitDisabled = Object.keys(errors).length > 0;
 
 
-  const handleSize = (event) => {
-    setSelectedSize(event.target.value);
-    event.preventDefault();
-    const rep = input.talla?.find(size => size === event.target.value)
-
-    if (event.target.value !== "default" && !rep) {
-      setInput({
-        ...input, size: [...input.size, event.target.value]
-        
-      })
-      event.target.value = "default"
-
-      validateInput({
-        ...input, size: [...input.size, event.target.value]
-      })
-    }
-  };
+  
 
 
   const handleSubmit = (event) => {
@@ -118,7 +106,7 @@ const Form = () => {
     
     if (input.quantity === 0) setErrorSubmit("Debe escoger una talla y una cantidad")
     else {
-    //dispatch(createProduct(input))
+    dispatch(createProduct(input))
 
         setInput({
           name: "",
@@ -132,17 +120,31 @@ const Form = () => {
           gender: "default",
           img: "",
           quantity: 0,
-          quantityXS: 0,
-          quantityS: 0,
-          quantityM: 0,
-          quantityL: 0,
-          quantityXL: 0,
-          quantityXXL: 0,
           
         })
       console.log(input)
+      //desmarca todo los checkbox
+      for (let i=0; i<document.f1.elements.length; i++) {
+        if(document.f1.elements[i].type == "checkbox") {
+            document.f1.elements[i].checked = false
+        }
+      }
+      //deshabilita todos los inputs de cantidad
+      document.querySelector("#quantityXS").disabled = true;
+      document.querySelector("#quantityXS").value = null;
+      document.querySelector("#quantityS").disabled = true;
+      document.querySelector("#quantityS").value = null;
+      document.querySelector("#quantityM").disabled = true;
+      document.querySelector("#quantityM").value = null;
+      document.querySelector("#quantityL").disabled = true;
+      document.querySelector("#quantityL").value = null;
+      document.querySelector("#quantityXL").disabled = true;
+      document.querySelector("#quantityXL").value = null;
+      document.querySelector("#quantityXXL").disabled = true;
+      document.querySelector("#quantityXXL").value = null;
+
       document.querySelector("#submit").disabled = true;
-      alert("Producto creado con exito")
+      mostrarAlertaExitosa()
       dispatch(clearErrors())
     }
   };
@@ -201,7 +203,7 @@ const Form = () => {
 
   return (
     <div >
-      <form onSubmit={(event) => handleSubmit(event)} >
+      <form onSubmit={(event) => handleSubmit(event)} name="f1" id="formElement">
       <div className="globalCont"> 
         <h3 className="formTitle">+ Crear nuevo producto</h3>
         <br>
@@ -308,7 +310,7 @@ const Form = () => {
         </div>
         <div className="previewImage">
           <h5>Imagen Previa:</h5>
-          <img className="img" src={input.img} width="50px" height="80px" alt="" wi/>
+          <img className="img" src={input.img} width="100px" height="150px" alt="" wi/>
         </div>
 
         </div>
@@ -319,27 +321,27 @@ const Form = () => {
           
             <input type="checkbox" name="xs" id="XS" value="XS"onChange={habilitar}/>
             <label for="XS">XS</label>
-            <input disabled className="input2"type="number" min="0" id="quantityXS" name="quantityXS" value={input.quantityXS} onChange={handleChange}/>
+            <input disabled className="input2"type="number" min="0" id="quantityXS" name="quantityXS"  onChange={handleChange}/>
 
             <input type="checkbox" name="s" id="S" value="S"onChange={habilitar}/>
             <label for="S">S</label>
-            <input disabled className="input2"type="number" min="0" id="quantityS" name="quantityS" value={input.quantityS} onChange={handleChange}/>
+            <input disabled className="input2"type="number" min="0" id="quantityS" name="quantityS" onChange={handleChange}/>
 
             <input type="checkbox" name= "m" id="M" value="M"onChange={habilitar}/>
             <label for="M">M</label>
-            <input disabled className="input2"type="number" min="0" id="quantityM" name="quantityM" value={input.quantityM} onChange={handleChange}/>
+            <input disabled className="input2"type="number" min="0" id="quantityM" name="quantityM"  onChange={handleChange}/>
 
             <input type="checkbox" name="l" id="L" value="L"onChange={habilitar}/>
             <label for="L">L</label>
-            <input disabled className="input2"type="number" min="0" id="quantityL" name= "quantityL"value={input.quantityL} onChange={handleChange}/>
+            <input disabled className="input2"type="number" min="0" id="quantityL" name= "quantityL" onChange={handleChange}/>
 
             <input type="checkbox" name="xl"id="XL" value="XL"onChange={habilitar}/>
             <label for="XL">XL</label>
-            <input disabled className="input2"type="number" min="0" id="quantityXL" name= "quantityXL" value={input.quantityXL} onChange={handleChange}/>
+            <input disabled className="input2"type="number" min="0" id="quantityXL" name= "quantityXL"  onChange={handleChange}/>
 
             <input type="checkbox" name="xxl" id="XXL" value="XXL"onChange={habilitar}/>
             <label for="XXL">XXL</label>
-            <input disabled className="input2"type="number" min="0" id="quantityXXL" name="quantityXXL" value={input.quantityXXL} onChange={handleChange}/>
+            <input disabled className="input2"type="number" min="0" id="quantityXXL" name="quantityXXL" onChange={handleChange}/>
 
         </div>
         

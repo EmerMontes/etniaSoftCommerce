@@ -113,6 +113,7 @@ const getProductByName = async (name) => {
   return productDB;
 };
 const createProducts = async (productData) => {
+  console.log (productData)
   try {
     const {
       
@@ -130,8 +131,7 @@ const createProducts = async (productData) => {
     } = productData;
 
     const model = await Products.findAll();
-    console.log(model.length)
-    const nextID = model.length + 2;
+    const nextID = (model[model.length-1].id) + 1;
     id = nextID
     const newProduct = await Products.create({
 

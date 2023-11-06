@@ -23,7 +23,7 @@
       justify-content: center;
       font-size: small;
       height: 20px;
-      margin-left: 20px;
+      margin-right: 150px;
     }
     .previewImage{
       display: flex;
@@ -31,7 +31,11 @@
       justify-content: center;
       align-items: center;
       margin: auto;
-      margin-top: -30px;
+      margin-top: -120px;
+      margin-right: 100px;
+      font-size: medium;
+      font-weight: bold;
+      font-family: 'Rubik', sans-serif;
     }
     .img{
       margin: auto;

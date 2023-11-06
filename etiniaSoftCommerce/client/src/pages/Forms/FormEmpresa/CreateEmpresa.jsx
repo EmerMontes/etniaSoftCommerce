@@ -72,7 +72,7 @@ const CreateEmpresa = () => {
 
       return <div>
       <form className="form" onSubmit={handleSubmit} name ='form'>
-      <h3 className="empresaTitle"> + Crear Empresa</h3>
+      <h3 className="empresaTitle"> Datos de la Empresa</h3>
         
 
         <div>
@@ -105,7 +105,7 @@ const CreateEmpresa = () => {
         <span>{errorSubmit}</span>
        
         
-        <button id="submit">Crear Empresa</button>
+        <button id="submit">Actualizar Empresa</button>
         
       
         
