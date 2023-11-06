@@ -143,17 +143,15 @@ export function removeshipping(shippingID) {
   };
 }
 
-// export function registerUser(payload) {
-
-  
-//   return async function (dispatch) {
-//     const { data } = await axios.post(`${URL}/register`, payload);
-//     dispatch({
-//       type: REGISTER_USER,
-//       payload: data,
-//     });
-//   };
-// }
+//  export function registerUser(payload) {
+//    return async function (dispatch) {
+//      const { data } = await axios.post(`${URL}/register`, payload);
+//      dispatch({
+//        type: REGISTER_USER,
+//        payload: data,
+//      });
+//    };
+//  }
 
 export function putLocalstorage() {
   if (localStorage.getItem("cart")) {
