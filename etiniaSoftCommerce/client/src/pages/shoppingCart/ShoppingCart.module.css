@@ -12,8 +12,6 @@
   
   .cart-item {
     display: flex;
-    justify-content: space-between;
-    align-: left;
     background: #f7f7f7;
     padding: 10px;
     border: 1px solid #ddd;
@@ -22,10 +20,12 @@
     width: 97%;
     height: 30.5vh;
     margin: 1vh;
+    margin-left: 0vh;
   }
 
   .cart-item img {
     height: 30vh;
+    border-radius: 1vh;
   }
   
   .price {
@@ -33,16 +33,11 @@
   }
 
   .totalPrice {
-    justify-content: center;
-    align-items: center;
-    align-content: center;
-    text-align: center;
-    justify-content: center;
     border-radius: 2vh;
     background-color: rgba(0, 0, 0, 0.342);
     width: 30vh;
-    margin-left: 42.5%;
-    margin-right: 42.5%;
+    margin-left: auto;
+    margin-right: auto;
   }
   
   
@@ -76,12 +71,6 @@
     background-color: #71A611;
     border-radius: 2ch;
     font-size: 5vh;
-  }
-  
-  .product-details {
-    text-align: left;
-    align-items: left;
-    align-content: left;
   }
   
   .price {

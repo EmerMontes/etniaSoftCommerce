@@ -8,7 +8,7 @@ import NavBar from '../../components/navBar/NavBar';
 function calculateTotalPrice(cart) {
   return cart.reduce((total, product) => {
     let quantity = (product.cantidad || 1)
-    return total + product.price * quantity;
+    return total + (product.price * quantity);
   }, 0);
 }
 
