@@ -239,7 +239,6 @@ export function removeFav(id) {
 
 export function createProduct(newproduct) {
   return async function (dispatch) {
-    console.log(newproduct)
     const info = await axios.post(`${URL}/products`, newproduct);
     dispatch({
       type: CREATE_PRODUCT,

@@ -21,7 +21,7 @@ if(!input.price){errors.price="Seleccione un precio"};
 if (!input.category.trim()) {  errors.category = 'Este campo es obligatorio'};
 
 //Genero
-if (input.gender != "female" && input.gender != "male") {  errors.gender = 'Debe seleccionar un género'};
+if (input.gender != "female" && input.gender != "male") {  errors.gender = 'Seleccione un género'};
 
 //Imagen
 if(!input.img) {errors.image="Seleccione una imagen para su producto"}

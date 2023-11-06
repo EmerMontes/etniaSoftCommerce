@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 //import { createEmpresa } from "../../../redux/actions";
 import primeraMayuscula from "../../../functions/primeraMayuscula";
+import Swal from 'sweetalert2';
 import validate from "./validate"
 import './formMedioPago.css'
 
@@ -27,6 +28,21 @@ const CreateMedioPago = () => {
        // dispatch(getAllTeams())
       }, [dispatch])
     
+      const mostrarAlertaExitosa=() => {
+        Swal.fire({
+          icon: 'success',
+          title: 'Crear medio de pago',
+          text: 'El medio de pago se guardó de manera exitosa'
+        })
+      }
+
+      const mostrarAlertaError=() => {
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'Debe llenar el campo sin errores'
+        })
+      }
       const handleChange = (evento) => {
         setInput({
           ...input,
@@ -50,12 +66,13 @@ const CreateMedioPago = () => {
             input.name = primeraMayuscula(input.name);
             console.log(input)
          // await dispatch(createEmpresa(input))
-            setErrorSubmit(`El medio de pago ha sido creado`)
+            mostrarAlertaExitosa()
             setInput({name:'', type_of_person: '', email:'', phone: ''})
             setErrors({name:'', type_of_person: '', email:'', phone: ''})
           
           }else {
-            setErrorSubmit("Debe llenar el campo sin errores");
+            //setErrorSubmit("Debe llenar el campo sin errores");
+            mostrarAlertaError();
            
           }
         }catch (error) {
