@@ -10,7 +10,7 @@ const transport = require("../mailer");
 const uuid = require("uuid");
 const sgMail = require("@sendgrid/mail");
 sgMail.setApiKey(
-  "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"
+  "clave..."
 );
 //DEBRIA ENTRAR DESDE .ENV
 // ...
