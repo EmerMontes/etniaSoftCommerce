@@ -1,30 +1,35 @@
 export default function Validation(input){
-    let errors={}
+console.log(input)
+let errors={}
+const patronUrl = /(?:https?):\/\/(\w+:?\w*)?(\S+)(:\d+)?(\/|\/([\w#!:.?+=&%!\-\/]))?/;
 //Name
-if(!input.name){errors.name = "Your game needs a name"};
-if(input.name.length > 30){errors.name = "The name has to be under 30 characters"};
-if(input.name.length < 4){errors.name = "The name has to be over 5 characters"};
-if(!(/^[a-zA-Z0-9\s]+$/).test(input.name)){errors.name = "Special characters are not allowed"};
+if(!input.name){errors.name = "Este campo es obligatorio"};
+if(input.name.length > 100){errors.name = "El nombre debe estar por debajo de 100 caracteres"};
 
 //Description
-if(!input.description){errors.description = "We need to know what your game is about"};
-if(input.description.length < 10){errors.description = "Tell us more!"};
+
+if(input.description.length > 250){errors.description = "Hasta 250 caracteres"};
 
 //Color
-if(!input.color){errors.color="Your clothe needs a color"};
+if(!input.color){errors.color="Este campo es obligatorio"};
 //Brand
-if (!input.brand.trim()) {errors.brand = 'Brand is required';}
+if (!input.brand.trim()) {errors.brand = 'Este campo es obligatorio';}
 //Price
-if(!input.price){errors.price="select a price for your garment!"};
-if(isNaN(input.price)){errors.price="Price must be a number"};
-
-//Sale
-if (isNaN(input.sale)) {  errors.sale = 'Sale must be a number';}
+if(!input.price){errors.price="Seleccione un precio"};
 
 //Category
-if (!input.category.trim()) {  errors.category = 'Category is required';}
- //Quantity
-if (isNaN(input.quantity)) {errors.quantity = 'Quantity must be a number';}
-    
+if (!input.category.trim()) {  errors.category = 'Este campo es obligatorio'};
+
+//Genero
+if (input.gender != "female" && input.gender != "male") {  errors.gender = 'Seleccione un género'};
+
+//Imagen
+if(!input.img) {errors.image="Seleccione una imagen para su producto"}
+if (!patronUrl.test(input.img)){errors.image = 'La imagen debe corresponder a una URL'}
+
+
+
+
+
 return errors;
 }

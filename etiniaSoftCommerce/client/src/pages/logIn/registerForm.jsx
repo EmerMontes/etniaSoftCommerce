@@ -11,6 +11,15 @@ function RegisterForm(props) {
 
   const dispatch = useDispatch();
 
+// const transport = nodemailer.createTransport({
+//   host: "smtp.mailtrap.io",
+//   port: 2525,
+//   auth: {
+//     user: "5bee669b086010",
+//     pass: "17320da4ab0d5b"
+//   }
+// });
+
   const handleRegister = (event) => {
     event.preventDefault();
 
@@ -24,6 +33,12 @@ function RegisterForm(props) {
         setError("Por favor, ingresa un correo electrónico válido.");
         return;
       }
+      // if () {
+      //   setError("Por favor, ingresa un correo electrónico válido.");
+      //   return;
+      // }
+      //correo ya existe - iniciar sesion? 
+
       if (!password) {
         setError("El campo de contraseña no puede estar vacío.");
         return;

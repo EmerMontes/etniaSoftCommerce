@@ -1,4 +1,5 @@
 const {
+  registerUser,
   getAllUser,
   getUsuarById,
   getUserByName,
@@ -6,7 +7,27 @@ const {
   deleteUserById,
   updateUserById,
   loginUser,
+  confirmEmailControll
 } = require("../controllers/userControllers");
+
+const confirmEmail = async (req, res) => {
+  const name = req.params.name;
+  try {
+    const response = await confirmEmailControll(name);
+    res.status(200).send(response);
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+};
+const postUsersRegsiter = async (req, res) => {
+  
+  try {
+    const response = await registerUser(req, res);
+    res.status(200).send(response);
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+};
 
 const getUsersByName = async (req, res) => {
   const name = req.params.name;
@@ -17,6 +38,7 @@ const getUsersByName = async (req, res) => {
     res.status(400).json({ error: error.message });
   }
 };
+
 
 const getUsersHandler = async (req, res) => {
   try {
@@ -85,4 +107,6 @@ module.exports = {
   deleteUserHandler: deleteUserHandler,
   updateUserHandler: updateUserHandler,
   loginUserHandler: loginUserHandler,
+  postUsersRegsiter:postUsersRegsiter,
+  confirmEmail:confirmEmail
 };

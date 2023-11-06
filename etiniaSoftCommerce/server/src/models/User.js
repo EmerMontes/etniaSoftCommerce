@@ -12,27 +12,35 @@ module.exports = (sequelize) => {
       },
       name:{
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
       },
       last_name:{
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
       },
       phone_number:{
         type: DataTypes.DECIMAL,
-        allowNull: false,
+        allowNull: true,
       },
       address:{
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
+      },
+      confirmationToken:{
+        type: DataTypes.STRING,
+        allowNull: true,
+      },
+      isVerify:{
+        type: DataTypes.BOOLEAN,
+        allowNull: true,
       },
       admin:{
         type: DataTypes.BOOLEAN,
-            allowNull: false,
+            allowNull: true,
       },
       employee:{
         type: DataTypes.BOOLEAN,
-            allowNull: false,
+            allowNull: true,
       },
       email: {
         type: DataTypes.STRING,

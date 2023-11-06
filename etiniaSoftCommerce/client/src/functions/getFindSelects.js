@@ -1,7 +1,8 @@
 import axios from "axios";
 
 
-const URL = "http://localhost:3001";
+//const URL = "http://localhost:3001";
+const URL = "https://etniasoftcommerce.up.railway.app";
 
 const getFindSelects = async () => {
             
