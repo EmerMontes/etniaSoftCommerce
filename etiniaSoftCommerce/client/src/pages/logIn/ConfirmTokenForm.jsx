@@ -4,7 +4,11 @@ import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { confirmToken } from "../../redux/actions";
 
+import LogoEtniablanco from "../../assets/png/LogoEtniablanco.png";
+
 import { Link, useNavigate } from "react-router-dom";
+
+import styles from "./LogIn.module.css";
 
 function ConfirmTokenForm() {
   const [token, setToken] = useState("");
@@ -48,19 +52,22 @@ function ConfirmTokenForm() {
   };
 
   return (
-    <div>
+    <div className={styles["login-container"]}>
       <h2>Confirmar Token</h2>
-      <form onSubmit={handleConfirmToken}>
-        <label>Token de Confirmación</label>
-        <input
-          type="text"
-          placeholder="Ingresa el token de confirmación"
-          value={token}
-          onChange={(e) => setToken(e.target.value)}
-        />
+      <img src={LogoEtniablanco} alt="Etnia Logo" />
+      <form className={styles["login-form"]} onSubmit={handleConfirmToken}>
+        <div className={styles["form-group"]}>
+          <label>Token de Confirmación</label>
+          <input
+            type="text"
+            placeholder="Ingresa el token de confirmación"
+            value={token}
+            onChange={(e) => setToken(e.target.value)}
+          />
+        </div>
         <button type="submit">Confirmar Token</button>
       </form>
-      {error && <div className="error-message">{error}</div>}
+      {error && <div className={styles["error-message"]}>{error}</div>}
     </div>
   );
 }

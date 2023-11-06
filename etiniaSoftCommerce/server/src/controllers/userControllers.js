@@ -1,3 +1,4 @@
+require("dotenv").config();
 const { User } = require("../db");
 console.log(User);
 const { Op } = require("sequelize");
@@ -65,9 +66,12 @@ const registerUser = async (req, res) => {
       confirmationToken,
     });
 
-
+    const {
+      SENDGRID_API_KEY,
+   } = process.env;
+   console.log(SENDGRID_API_KEY);
     sgMail.setApiKey(
-      ""
+      SENDGRID_API_KEY
     );
     //sendgrid
     const msg = {
