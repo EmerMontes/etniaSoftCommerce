@@ -60,22 +60,19 @@ export default function ProductDetail({handleChange}) {
         </div>
 
           <div className={styles.productdetail}>
-            <div style={{width: '420px' , height: '400px'}}>
+            <div className={styles.productdeta} style={{ width: '50vh'}}>
             <ReactImageMagnify 
              {...{
                smallImage: {
                  alt: 'product etnia',
                  isFluidWidth: true,
                  src: `${Product.img}` ,
-                    // srcSet: src.srcSet,
-                    //sizes: '(max-width: 480px) 100vw, (max-width: 1200px) 30vw, 360px'
                    },
                    largeImage: {
-                     src: `${Product.img}` ,
+                     src: `${Product.img}`,
                      width: 1426,
-                     height: 2000
+                     height: 2200
                    },
-                   // lensStyle: { backgroundColor: {'rgba(0,0,0,.6)'} }
                  }}
             />
             </div>
@@ -85,8 +82,7 @@ export default function ProductDetail({handleChange}) {
                 <div className={styles.productinfo}>
                   <h2 className={styles.productname}>{Product.name}</h2>
                   <p>${Product.price} | {Product.sale}% OFF</p>
-                  <p>Descripcion:</p>
-                  <p>{Product.description}</p>
+                  <p>Descripcion: {Product.description}</p>
                   <p className={isHovered ? styles.error : null }>Select talla:</p> 
                   <div className={styles.contentLabel}>
                        {Product.size?.map(siz => (
@@ -96,26 +92,23 @@ export default function ProductDetail({handleChange}) {
                          </label>  
                         ))}  
                   </div>
-                    <p> Cantidad en tienda:{inputCantidad} </p>
               <button 
               disabled={isHovered===true ? true: false}
               onMouseEnter={()=>handleMouseEnter()}
               onMouseLeave={()=>handleMouseLeave()}              
               onClick={handleAddToCart} className={styles.addToCartButton}>
                 Agregar al carrito
+                  {productAdded && (
+                    <p className={styles.productAddedMessage}>añadido</p>
+                    )}
               </button>
-                  <p>......................................................</p>
-                  <p>Caracteristicas:</p>
+              <p>      </p>
                   <p>Marca: {Product.brand} | Categoria: {Product.category}</p>
-                  <p> Colores: {Product.color}</p>
-                  <p> Genero: {Product.gender} | Stock: {Product.quantity}</p>
+                  <p>Colores: {Product.color} | Genero: {Product.gender} | Stock: {Product.quantity}</p>
                 </div>
               )}
             </div>
-              </div>
-              {productAdded && (
-                <p className={styles.productAddedMessage}>añadido correctamente</p>
-                )}
+         </div>
       </div>
     );
   }

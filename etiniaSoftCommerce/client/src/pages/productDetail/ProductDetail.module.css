@@ -30,9 +30,13 @@
   align-items: left;
 }
 
-.productimage {
-  height: 80vh;
+.productdetail {
+  
+}
+
+.productdetail img {
   border-radius: 2vh;
+  
 }
 
 .productinfo {
