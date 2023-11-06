@@ -33,12 +33,12 @@ export const PAGINATION = "SET_PAGINATION";
 export const CLEAR_ERRORS = "CLEAR_ERRORS";
 export const ERRORS = "ERRORS";
 //carrito
-export const ADD_SHIPPING = "ADD_SHIPPING";
-export const REMOVE_SHIPPING = "REMOVE_SHIPPING";
+//export const ADD_SHIPPING = "ADD_SHIPPING";
+//export const REMOVE_SHIPPING = "REMOVE_SHIPPING";
 export const ADD_TO_CART = "ADD_TO_CART";
 export const REMOVE_FROM_CART = "REMOVE_FROM_CART";
 export const UPDATE_CART_ITEM_QUANTITY = "UPDATE_CART_ITEM_QUANTITY";
-export const UPDATE_SHIPPING = "UPDATE_SHIPPING";
+//export const UPDATE_SHIPPING = "UPDATE_SHIPPING";
 //LocalStorage
 
 export const LOCALSTORAGE = "LOCALSTORAGE";
@@ -106,7 +106,8 @@ export function registerUser(payload) {
       // Devuelve una respuesta de error
       return { success: false, message: `Error al registrar usuario: ${error.response.data.error}` };
     }
-
+  }
+}
 export function addToCart(product) {
   return {
     type: ADD_TO_CART,
@@ -382,7 +383,7 @@ export function userLogin(email, password) {
 }
 
 export function userLogout() {
-  return {
-    type: USER_LOGOUT,
-  };
-}
+   return {
+     type: USER_LOGOUT,
+   };
+ }
