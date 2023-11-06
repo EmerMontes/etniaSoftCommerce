@@ -224,7 +224,7 @@ function Home(props) {
       <br />
       <br />
       <Pagination textPaginado={textPaginado}/>
-      <h2>{textPaginado}</h2>
+      <p className={styles.textPaginado}>{textPaginado}</p>
     </div>
   );
 }

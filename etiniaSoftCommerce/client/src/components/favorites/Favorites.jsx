@@ -5,6 +5,7 @@ import { removeFav } from '../../redux/actions';
 import NavBar from '../navBar/NavBar';
 import styles from "../card/Card.module.css"
 import stylesContainer from "../cardsContainer/CardsContainer.module.css"
+import stylesb from "./Favorites.module.css"
 
 
 export default function Favorites(props){
@@ -16,7 +17,7 @@ export default function Favorites(props){
      };
 
     return (
-    <div>
+    <div className={stylesb.container}>
         <NavBar/>
         <h2>FAVORITES</h2>
         <div className={stylesContainer['card-container']}>
