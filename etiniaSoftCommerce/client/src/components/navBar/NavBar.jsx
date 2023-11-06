@@ -39,7 +39,7 @@ function NavBar(props) {
       </button>
       
       <button>
-        <Link to="/favorites"> FAVORITES </Link>
+        <Link to="/favorites"><img src="https://www.emojiall.com/images/240/classic/1f5a4.png" /></Link>
       </button>
     </div>
   );
