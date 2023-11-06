@@ -158,13 +158,13 @@ function Home(props) {
           handleChange={handleChange}
           state={null}
         />
-        <Filters
+        {/* <Filters
           className={styles.filters}
           name={"size"}
           options={sizeOpt}
           handleChange={handleChange}
           state={null}
-        />
+        /> */}
         <Filters
           className="filters"
           name={"price"}
