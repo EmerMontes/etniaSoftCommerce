@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "@auth0/auth0-react": "^2.2.3",
-    "axios": "^1.5.1",
+    "axios": "^1.6.0",
     "google-auth-library": "^9.2.0",
     "nodemailer": "^6.9.7",
     "react": "^18.2.0",
