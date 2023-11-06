@@ -5,13 +5,10 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 
 const URL = "http://localhost:5173";
-const transport = require("../mailer");
 
 const uuid = require("uuid");
 const sgMail = require("@sendgrid/mail");
-sgMail.setApiKey(
-  "clave..."
-);
+
 //DEBRIA ENTRAR DESDE .ENV
 // ...
 
@@ -33,8 +30,9 @@ const confirmEmailControll = async (req, res) => {
   // Guarda el usuario actualizado en la base de datos
   try {
     await user.save();
-    return res.status(200).json({ success: true, message: "Usuario registrado con éxito" });
-
+    return res
+      .status(200)
+      .json({ success: true, message: "Usuario registrado con éxito" });
   } catch (error) {
     console.error(error);
   }
@@ -67,16 +65,21 @@ const registerUser = async (req, res) => {
       confirmationToken,
     });
 
+
+    sgMail.setApiKey(
+      ""
+    );
     //sendgrid
     const msg = {
       to: email, // Usar el correo del usuario registrado
       from: "clickyticketg18pf@gmail.com", // Cambiar al remitente verificado
       subject: "Confirmación de Correo Electrónico",
-      text: "PRUEBA DE CAMBIO DE TEXTO",
+      text: "Confirmación de Correo Electrónico",
       html: `<p style="font-size: 16px; color: #0074d9;">
       Para confirmar tu correo electrónico, haz clic <a href="${URL}/ConfirmTokenForm?token=${confirmationToken}" style="text-decoration: none; color: #ff4136; font-weight: bold;">aquí</a>.
     </p>
-    `};
+    `,
+    };
 
     sgMail
       .send(msg)
@@ -91,7 +94,6 @@ const registerUser = async (req, res) => {
     throw new Error("Error al registrar al usuario.");
   }
 };
-
 
 const getAllUser = async () => {
   const usuariotDB = await User.findAll();
@@ -129,7 +131,7 @@ const createusers = async (userData) => {
       employee,
       email,
       password,
-      confirmationToken
+      confirmationToken,
     } = userData;
 
     const hashedPassword = await bcrypt.hash(password, 10);
@@ -143,7 +145,7 @@ const createusers = async (userData) => {
       employee,
       email,
       password: hashedPassword,
-      confirmationToken
+      confirmationToken,
     });
 
     return newuser;
@@ -184,8 +186,6 @@ const updateUserById = async (id, newData) => {
   }
 };
 
-
-
 const loginUser = async (req, res) => {
   const { password, email } = req.body;
 
@@ -198,7 +198,10 @@ const loginUser = async (req, res) => {
         .json({ error: "Correo electrónico o contraseña inválidos" });
     }
 
-    const passwordMatch = await bcrypt.compare(password, user.dataValues.password);
+    const passwordMatch = await bcrypt.compare(
+      password,
+      user.dataValues.password
+    );
 
     if (passwordMatch) {
       // La contraseña proporcionada coincide con la contraseña almacenada en la base de datos
@@ -215,7 +218,6 @@ const loginUser = async (req, res) => {
     return res.status(500).json({ error: "Error interno del servidor" });
   }
 };
-
 
 module.exports = {
   registerUser,

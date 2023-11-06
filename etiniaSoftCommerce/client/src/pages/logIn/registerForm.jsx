@@ -4,6 +4,8 @@ import { useDispatch } from "react-redux";
 import { registerUser } from "../../redux/actions";
 import "./LogIn.module.css";
 
+import { Link, useNavigate } from "react-router-dom";
+
 function RegisterForm(props) {
   const [email, setEmail] = useState("");
   const [mensaje, setMensaje] = useState("");
@@ -114,7 +116,13 @@ function RegisterForm(props) {
       </form>
       {error && <div className="error-message">{error}</div>}
       {mensaje && <div className="exito-message">{mensaje}</div>}
-
+      <nav>
+          <ul>
+            <li>
+              <Link to="/user">¿Ya tienes cuenta? Iniciar Sesión</Link>
+            </li>
+          </ul>
+        </nav>
     </div>
   );
 }

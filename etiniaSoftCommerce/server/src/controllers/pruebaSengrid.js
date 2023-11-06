@@ -1,5 +1,5 @@
 const sgMail = require('@sendgrid/mail')
-sgMail.setApiKey("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")
+sgMail.setApiKey("")
 //DEBRIA ENTRAR DESDE .ENV
 const msg = {
   to: 'santiagoqm99.9@gmail.com', // Change to your recipient
