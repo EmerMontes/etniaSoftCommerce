@@ -10,7 +10,7 @@ module.exports = (sequelize) => {
         primaryKey: true,
       },
       paymentMethod:{
-        type: DataTypes.ENUM("Credit", "Debit", "Cash"),
+        type: DataTypes.STRING,
         allowNull: false
       },
     },

@@ -32,6 +32,7 @@ function RegisterForm(props) {
     event.preventDefault();
 
     if (!email) {
+
       setError("El campo de correo electrónico no puede estar vacío.");
       return;
     }
@@ -65,6 +66,10 @@ function RegisterForm(props) {
       password: password,
       // Agrega otros campos del payload si es necesario
     };
+
+    
+    
+
     // Realiza las validaciones necesarias de los campos del formulario de registro
     // Asegúrate de tener un mecanismo para verificar si el usuario ya existe
 

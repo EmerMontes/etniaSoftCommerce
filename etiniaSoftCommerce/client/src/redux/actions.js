@@ -33,8 +33,14 @@ export const PAGINATION = "SET_PAGINATION";
 export const CLEAR_ERRORS = "CLEAR_ERRORS";
 export const ERRORS = "ERRORS";
 //carrito
+export const ADD_SHIPPING = "ADD_SHIPPING";
+export const REMOVE_SHIPPING = "REMOVE_SHIPPING";
 export const ADD_TO_CART = "ADD_TO_CART";
+export const REMOVE_FROM_CART = "REMOVE_FROM_CART";
+export const UPDATE_CART_ITEM_QUANTITY = "UPDATE_CART_ITEM_QUANTITY";
+export const UPDATE_SHIPPING = "UPDATE_SHIPPING";
 //LocalStorage
+
 export const LOCALSTORAGE = "LOCALSTORAGE";
 
 export const USER_LOGIN = "USER_LOGIN";
@@ -47,7 +53,18 @@ export const REGISTER_USER_ERROR= "REGISTER_USER_ERROR"
 export const CONFITRM_TOKEN= "CONFITRM_TOKEN"
 
 
-const URL = "http://localhost:3001";
+//const URL = "http://localhost:3001";
+const URL = "https://etniasoftcommerce.up.railway.app";
+
+export function updateCartItemQuantity(productId, newQuantity) {
+  return {
+    type: UPDATE_CART_ITEM_QUANTITY,
+    payload: {
+      productId,
+      newQuantity,
+    },
+  };
+}
 
 
 export function confirmToken(token) {
@@ -89,6 +106,19 @@ export function registerUser(payload) {
       // Devuelve una respuesta de error
       return { success: false, message: `Error al registrar usuario: ${error.response.data.error}` };
     }
+
+export function addToCart(product) {
+  return {
+    type: ADD_TO_CART,
+    payload: product,
+  };
+}
+
+export function removeFromCart(productId) {
+  return {
+    type: REMOVE_FROM_CART,
+    payload: productId,
+
   };
 }
 
@@ -112,7 +142,17 @@ export function removeshipping(shippingID) {
   };
 }
 
+export function registerUser(payload) {
 
+  
+  return async function (dispatch) {
+    const { data } = await axios.post(`${URL}/register`, payload);
+    dispatch({
+      type: REGISTER_USER,
+      payload: data,
+    });
+  };
+}
 
 export function putLocalstorage() {
   if (localStorage.getItem("cart")) {
@@ -128,13 +168,6 @@ export function putLocalstorage() {
       payload: cart,
     };
   }
-}
-
-export function addToCart(product) {
-  return {
-    type: ADD_TO_CART,
-    payload: product,
-  };
 }
 
 export function setNewErrors(obj) {
@@ -277,7 +310,6 @@ export function removeFav(id) {
 
 export function createProduct(newproduct) {
   return async function (dispatch) {
-    console.log(newproduct)
     const info = await axios.post(`${URL}/products`, newproduct);
     dispatch({
       type: CREATE_PRODUCT,
