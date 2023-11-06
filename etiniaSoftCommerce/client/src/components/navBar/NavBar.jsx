@@ -13,7 +13,7 @@ function NavBar(props) {
 
   const handleUserClick = () => {
     if (isAuthenticated) {
-      navigate(`/user/${user.sub}`); // User is logged in, redirect to user details page.
+      navigate(`/user`); // User is logged in, redirect to user details page.
     } else {
       navigate('/user'); // User is not logged in, redirect to login page.
     }

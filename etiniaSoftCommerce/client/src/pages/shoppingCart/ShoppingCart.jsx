@@ -38,11 +38,17 @@ function ShoppingCart() {
           const item = cart.find((product) => product.id === productId);
           return (
             <div key={productId} className={styles['cart-item']}>
+
               <img src={item.img} alt={item.name} />
+
               <div className={styles['product-details']}>
+
                 <h2>{item.name}</h2>
                 <p className={styles.price}>Precio: ${item.price}</p>
+
                 <div className={styles['cart-controls']}>
+
+                  <div className={styles.quantity} >
                   <p>Cantidad: </p>
                   <input
                     type="number"
@@ -50,9 +56,16 @@ function ShoppingCart() {
                     value={item.cantidad || 1}
                     onChange={(e) => handleQuantityChange(productId, e.target.value)}
                   />
+                  </div>
+
+
+                </div>
+                <div className={styles.closeButton}>
                   <button onClick={() => handleRemoveFromCart(productId)}>X</button>
                 </div>
+
               </div>
+
             </div>
           );
         })}
