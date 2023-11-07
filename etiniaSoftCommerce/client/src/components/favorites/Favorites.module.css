@@ -1,0 +1,16 @@
+.container {
+    background-color: rgb(196, 196, 196);
+    min-height: 100vh;
+}
+
+.card {
+    border: 1px solid #ccc;
+    padding: 1vh;
+    margin: 1vh;
+    text-align: center;
+    background-color: #fff;
+    border-radius: 1vh;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+    height: 5vh; /* Alto fijo para cada tarjeta */
+  }

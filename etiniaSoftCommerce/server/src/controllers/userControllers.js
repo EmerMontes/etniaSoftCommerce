@@ -1,12 +1,16 @@
+require("dotenv").config();
 const { User } = require("../db");
 console.log(User);
 const { Op } = require("sequelize");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
-const nodemailer = require("nodemailer");
-const transport = require("../mailer");
 
-const uuid = require('uuid');
+const URL = "https://etnia.vercel.app";
+
+const uuid = require("uuid");
+const sgMail = require("@sendgrid/mail");
+
+//DEBRIA ENTRAR DESDE .ENV
 // ...
 
 const confirmEmailControll = async (req, res) => {
@@ -16,7 +20,9 @@ const confirmEmailControll = async (req, res) => {
   const user = await User.findOne({ where: { confirmationToken: token } });
 
   if (!user) {
-    return res.status(404).json({ message: 'Token de confirmación no válido.' });
+    return res
+      .status(404)
+      .json({ message: "Token de confirmación no válido." });
   }
 
   // Marca el correo como confirmado (actualiza el campo de confirmación en tu modelo de datos)
@@ -25,10 +31,11 @@ const confirmEmailControll = async (req, res) => {
   // Guarda el usuario actualizado en la base de datos
   try {
     await user.save();
-    return res.json({ message: 'Correo electrónico confirmado con éxito.' });
+    return res
+      .status(200)
+      .json({ success: true, message: "Usuario registrado con éxito" });
   } catch (error) {
     console.error(error);
-    return res.status(500).json({ message: 'Error al confirmar el correo electrónico.' });
   }
 };
 
@@ -36,15 +43,16 @@ const registerUser = async (req, res) => {
   const { name, last_name, phone_number, address, email, password } = req.body;
 
   // Validación de datos (puedes agregar más validaciones según tus necesidades)
-  if (!name || !email || !password) {
-    return res.status(400).json({ message: 'Todos los campos son obligatorios.' });
+  if (!email || !password) {
+    throw new Error("Todos los campos son obligatorios.");
   }
+
   const userExists = await User.findOne({ where: { email } });
   if (userExists) {
-    return res.status(400).json({ message: 'Este usuario ya está registrado.' });
+    throw new Error("Este usuario ya está registrado.");
   }
-  
-  const token = uuid.v4(); // Genera un token de confirmación único
+
+  const confirmationToken = uuid.v4();
 
   // Almacena el token de confirmación y otros detalles del usuario en la base de datos
   try {
@@ -55,27 +63,42 @@ const registerUser = async (req, res) => {
       address,
       email,
       password,
-      confirmationToken: token, // Agrega un campo para el token de confirmación en tu modelo de datos
+      confirmationToken,
     });
 
-    // Envía un correo de confirmación
-    const mailOptions = {
-      from: 'tu_correo@gmail.com',
-      to: email,
-      subject: 'Confirmación de Correo Electrónico',
-      html: `<p>Haz clic <a href="${URL}/confirm/${token}">aquí</a> para confirmar tu correo electrónico.</p>`,
+    const {
+      SENDGRID_API_KEY,
+   } = process.env;
+   console.log(SENDGRID_API_KEY);
+    sgMail.setApiKey(
+      SENDGRID_API_KEY
+    );
+    //sendgrid
+    const msg = {
+      to: email, // Usar el correo del usuario registrado
+      from: "clickyticketg18pf@gmail.com", // Cambiar al remitente verificado
+      subject: "Confirmación de Correo Electrónico",
+      text: "Confirmación de Correo Electrónico",
+      html: `<p style="font-size: 16px; color: #0074d9;">
+      Para confirmar tu correo electrónico, haz clic <a href="${URL}/ConfirmTokenForm?token=${confirmationToken}" style="text-decoration: none; color: #ff4136; font-weight: bold;">aquí</a>.
+    </p>
+    `,
     };
-    transport.sendMail(mailOptions, (error, info) => {
-      if (error) {
-        return res.status(500).json({ message: 'Error en el envío de correo de confirmación.' });
-      }
-      return res.json({ message: 'Se ha enviado un correo de confirmación.' });
-    });
+
+    sgMail
+      .send(msg)
+      .then(() => {
+        console.log("Email enviado");
+      })
+      .catch((error) => {
+        console.error("Error al enviar el correo:", error);
+      });
   } catch (error) {
-    console.error(error);
-    return res.status(500).json({ message: 'Error al registrar al usuario.' });
+    console.error("Error al registrar al usuario:", error);
+    throw new Error("Error al registrar al usuario.");
   }
 };
+
 const getAllUser = async () => {
   const usuariotDB = await User.findAll();
   console.log("lista de todos los usuarios");
@@ -112,6 +135,7 @@ const createusers = async (userData) => {
       employee,
       email,
       password,
+      confirmationToken,
     } = userData;
 
     const hashedPassword = await bcrypt.hash(password, 10);
@@ -125,6 +149,7 @@ const createusers = async (userData) => {
       employee,
       email,
       password: hashedPassword,
+      confirmationToken,
     });
 
     return newuser;
@@ -176,8 +201,13 @@ const loginUser = async (req, res) => {
         .status(400)
         .json({ error: "Correo electrónico o contraseña inválidos" });
     }
-    // Debes implementar la comparación segura de contraseñas aquí
-    if (password === user.dataValues.password) {
+
+    const passwordMatch = await bcrypt.compare(
+      password,
+      user.dataValues.password
+    );
+
+    if (passwordMatch) {
       // La contraseña proporcionada coincide con la contraseña almacenada en la base de datos
       const token = jwt.sign({ userId: user.dataValues.id }, "your_jwt_secret"); // Reemplaza 'your_jwt_secret' por tu clave JWT real
       res.json({ token });
@@ -202,5 +232,5 @@ module.exports = {
   deleteUserById,
   updateUserById,
   loginUser,
-  confirmEmailControll
+  confirmEmailControll,
 };

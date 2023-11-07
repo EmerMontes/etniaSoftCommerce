@@ -101,23 +101,20 @@ function LogIn(props) {
 
         {error && <div className={styles["error-message"]}>{error}</div>}
 
-        {isAuthenticated ? <LogoutButton /> : <LoginButton />}
       </form>
-      <p>¿No tienes cuenta? Regístrate</p>
+      <nav>
+          <ul>
+            <li>
+              <Link to="/RegisterForm">¿Aún no tienes una cuenta? obtener una</Link>
+            </li>
+            <li>
+              <Link to="/recuperar-contrasena">¿Olvidaste tu Password?</Link>
+            </li>
+          </ul>
+        </nav>
 
-      <div
-        className={styles["google-login"]}
-        onClick={() =>
-          window.gapi.auth2
-            .getAuthInstance()
-            .signIn({ prompt: "select_account" })
-            .then(onSignIn)
-        }
-      >
-        <img className={styles["googlelogo"]} src={Google} alt="Google Logo" />{" "}
-        Iniciar con Google
+        {isAuthenticated ? <LogoutButton /> : <LoginButton/>}
       </div>
-    </div>
   );
 }
 export default LogIn;

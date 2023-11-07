@@ -158,13 +158,13 @@ function Home(props) {
           handleChange={handleChange}
           state={null}
         />
-        <Filters
+        {/* <Filters
           className={styles.filters}
           name={"size"}
           options={sizeOpt}
           handleChange={handleChange}
           state={null}
-        />
+        /> */}
         <Filters
           className="filters"
           name={"price"}
@@ -224,7 +224,7 @@ function Home(props) {
       <br />
       <br />
       <Pagination textPaginado={textPaginado}/>
-      <h2>{textPaginado}</h2>
+      <p className={styles.textPaginado}>{textPaginado}</p>
     </div>
   );
 }

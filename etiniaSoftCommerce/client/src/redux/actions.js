@@ -53,16 +53,29 @@ export const PAGINATION = "SET_PAGINATION";
 export const CLEAR_ERRORS = "CLEAR_ERRORS";
 export const ERRORS = "ERRORS";
 //carrito
+//export const ADD_SHIPPING = "ADD_SHIPPING";
+//export const REMOVE_SHIPPING = "REMOVE_SHIPPING";
 export const ADD_TO_CART = "ADD_TO_CART";
+export const REMOVE_FROM_CART = "REMOVE_FROM_CART";
+export const UPDATE_CART_ITEM_QUANTITY = "UPDATE_CART_ITEM_QUANTITY";
+//export const UPDATE_SHIPPING = "UPDATE_SHIPPING";
 //LocalStorage
+
 export const LOCALSTORAGE = "LOCALSTORAGE";
 
 export const USER_LOGIN = "USER_LOGIN";
 export const USER_LOGOUT = "USER_LOGOUT";
 export const REGISTER_USER = "REGISTER_USER";
+export const ADD_SHIPPING = "ADD_SHIPPING";
+export const UPDATE_SHIPPING = "UPDATE_SHIPPING";
+export const REMOVE_SHIPPING = "REMOVE_SHIPPING";
+export const REGISTER_USER_ERROR= "REGISTER_USER_ERROR"
+export const CONFITRM_TOKEN= "CONFITRM_TOKEN"
+
 
 //const URL = "http://localhost:3001";
 const URL = "https://etniasoftcommerce.up.railway.app";
+
 
 export function getCuentas(){
   return async function(dispatch){
@@ -200,15 +213,74 @@ export function deleteComment(idUser, idProduct){
 }
 
 
-export function registerUser(payload) {
-  return async function (dispatch) {
-    const { data } = await axios.post(`${URL}/register`, payload);
-    dispatch({
-      type: REGISTER_USER,
-      payload: data,
-    });
+export function updateCartItemQuantity(productId, newQuantity) {
+  return {
+    type: UPDATE_CART_ITEM_QUANTITY,
+    payload: {
+      productId,
+      newQuantity,
+    },
   };
 }
+
+
+export function confirmToken(token) {
+  return async function (dispatch) {
+    try {
+      console.log("hola desde action");
+      const { data } = await axios.get(`${URL}/users/confirm/${token}`);
+      dispatch({
+        type: CONFITRM_TOKEN,
+        payload: data,
+      });
+      // Devuelve una respuesta exitosa
+      return { success: true, message: "Usuario registrado con éxito" };
+    } catch (error) {
+      // Manejo de errores
+      console.error("Error al registrar usuario:", error);
+      // Devuelve una respuesta de error
+      return { success: false, message: "Error al registrar usuario. Inténtelo nuevamente." };
+    }
+  };
+}
+
+
+export function registerUser(payload) {
+  console.log("register")
+  return async function (dispatch) {
+    try {
+      const  respuesta  = await axios.post(`${URL}/users/register`, payload);
+      console.log("sigue la data")
+      console.log(respuesta);
+      dispatch({
+        type: REGISTER_USER,
+        payload: respuesta.data,
+      });
+      // Devuelve una respuesta exitosa
+      return { success: true, message: "Usuario registrado con éxito" };
+    } catch (error) {
+      // Manejo de errores
+      console.error("Error al registrar usuario:", error.response.data.error);
+      // Devuelve una respuesta de error
+      return { success: false, message: `Error al registrar usuario: ${error.response.data.error}` };
+    }
+  }
+}
+export function addToCart(product) {
+  return {
+    type: ADD_TO_CART,
+    payload: product,
+  };
+}
+
+export function removeFromCart(productId) {
+  return {
+    type: REMOVE_FROM_CART,
+    payload: productId,
+
+  };
+}
+
 
 export function addshipping(envio) {
   return {
@@ -229,7 +301,15 @@ export function removeshipping(shippingID) {
   };
 }
 
-
+//  export function registerUser(payload) {
+//    return async function (dispatch) {
+//      const { data } = await axios.post(`${URL}/register`, payload);
+//      dispatch({
+//        type: REGISTER_USER,
+//        payload: data,
+//      });
+//    };
+//  }
 
 export function putLocalstorage() {
   if (localStorage.getItem("cart")) {
@@ -245,13 +325,6 @@ export function putLocalstorage() {
       payload: cart,
     };
   }
-}
-
-export function addToCart(product) {
-  return {
-    type: ADD_TO_CART,
-    payload: product,
-  };
 }
 
 export function setNewErrors(obj) {
@@ -449,7 +522,7 @@ export function userLogin(email, password) {
 }
 
 export function userLogout() {
-  return {
-    type: USER_LOGOUT,
-  };
-}
+   return {
+     type: USER_LOGOUT,
+   };
+ }

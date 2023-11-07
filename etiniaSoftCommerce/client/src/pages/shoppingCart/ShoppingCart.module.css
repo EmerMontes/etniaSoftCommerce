@@ -4,50 +4,55 @@
   align-content: center;
   text-align: center;
   justify-content: center;
-  padding: 20px;
+  }
+
+  .quantity {
+    display: flex;
+    flex-direction: row;
   }
   
   .product-list {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 20px;
+    flex-direction: column;
   }
   
   .cart-item {
+    display: flex;
+    flex-wrap: wrap;
     background: #f7f7f7;
     padding: 10px;
     border: 1px solid #ddd;
     border-radius: 5px;
-    width: 250px;
+    gap: 3vh;
+    width: 97%;
+    height: 30.5vh;
+    margin: 1vh;
+    margin-left: 0vh;
   }
 
+  .cart-item img {
+    height: 30vh;
+    border-radius: 1vh;
+  }
+  
   .price {
     color: black;
   }
 
   .totalPrice {
-    justify-content: center;
-    align-items: center;
-    align-content: center;
-    text-align: center;
-    justify-content: center;
     border-radius: 2vh;
     background-color: rgba(0, 0, 0, 0.342);
     width: 30vh;
-    margin-left: 42.5%;
-    margin-right: 42.5%;
+    margin-left: auto;
+    margin-right: auto;
   }
   
-  .cart-item img {
-    max-width: 100px;
-    height: auto;
-  }
   
-  .product-details {
-    text-align: left;
-    padding: 10px;
-  }
+.product-details {
+  text-align: left;
+  padding: 10px;
+
+  margin-right: auto;
+}
   
   .checkout-button {
     background-color: #71A611;
@@ -73,6 +78,60 @@
     background-color: #71A611;
     border-radius: 2ch;
     font-size: 5vh;
+  }
+  
+  .price {
+    color: black;
+    margin-right: auto;
+  }
+  
+  .cart-controls {
+    display: flex;
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .cart-controls p {
+    font-weight: bold;
+    color: #000;
+  }
+  
+  .cart-controls input {
+    width: 20vh;
+    height: 2.5vh;
+    text-align: center;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+
+  .cart-item button {
+    background-color: #FF4444;
+    color: #fff;
+    border: none;
+    border-radius: 100%;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    max-width: 5vh;
+    height: 4vh;
+    padding: 1vh;
+    margin-left: auto;
+    float: left;
+    
+  }
+  
+  .closeButton {
+    background-color: #FF4444;
+    color: #fff;
+    border: none;
+    border-radius: 100%;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    max-width: 5vh;
+    height: 4vh;
+    padding: 1vh;
+    margin-left: auto;
+    float: left;
+    
   }
 
   @media (max-width: 768px) {

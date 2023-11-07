@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable no-case-declarations */
 import {
   GET_ALL_PRODUCTS,
@@ -14,11 +15,11 @@ import {
   CLEAR_ERRORS,
   ERRORS,
   FILTROS_AND_PAGINATION,
-  ADD_TO_CART,
   USER_LOGIN,
   USER_LOGOUT,
   GET_ALL_SELECTS,
   LOCALSTORAGE,
+
   CREATE_COMMENT,
   UPDATE_COMMENT,
   GET_ALL_COMMENTS,
@@ -27,8 +28,16 @@ import {
  // REMOVE_SHIPPING,
   //UPDATE_SHIPPING,
   //ADD_SHIPPING,
+
+  ADD_TO_CART,
+  REMOVE_SHIPPING,
+  UPDATE_SHIPPING,
+  ADD_SHIPPING,
+
   REGISTER_USER,
   UPDATE_PRODUCT,
+  REMOVE_FROM_CART,
+  UPDATE_CART_ITEM_QUANTITY,
 
 } from "./actions";
 
@@ -54,7 +63,7 @@ const reducer = (state = initialState, action) => {
     case REGISTER_USER:
       return {
         ...state,
-        allProducts: action.payload,
+        user: action.payload,
       };
     case GET_ALL_COMMENTS:
       return{
@@ -83,6 +92,21 @@ const reducer = (state = initialState, action) => {
         ...state,
         cart: [...state.cart, action.payload],
       };
+      case REMOVE_FROM_CART:
+        const productIdToRemove = action.payload;
+        return {
+          ...state,
+          cart: state.cart.filter((item) => item.id !== productIdToRemove),
+        };
+  
+      case UPDATE_CART_ITEM_QUANTITY:
+        const { productId, newQuantity } = action.payload;
+        return {
+          ...state,
+          cart: state.cart.map((item) =>
+            item.id === productId ? { ...item, cantidad: newQuantity } : item
+          ),
+        };
     case LOCALSTORAGE:
       return {
         ...state,

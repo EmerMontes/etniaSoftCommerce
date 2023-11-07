@@ -1,11 +1,12 @@
 const sgMail = require('@sendgrid/mail')
-sgMail.setApiKey(process.env.SENDGRID_API_KEY)
+sgMail.setApiKey("")
+//DEBRIA ENTRAR DESDE .ENV
 const msg = {
-  to: 'edueliasxez@gmail.com', // Change to your recipient
+  to: 'santiagoqm99.9@gmail.com', // Change to your recipient
   from: 'clickyticketg18pf@gmail.com', // Change to your verified sender
   subject: 'Sending with SendGrid is Fun',
-  text: 'and easy to do anywhere, even with Node.js',
-  html: '<strong>and easy to do anywhere, even with Node.js</strong>',
+  text: 'PRUEBA DE CAMBIO DE TEXTO',
+  html: '<strong>PRUEBA DE CAMBIO DE TEXTO</strong>',
 }
 sgMail
   .send(msg)
