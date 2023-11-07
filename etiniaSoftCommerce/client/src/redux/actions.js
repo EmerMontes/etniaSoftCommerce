@@ -100,6 +100,55 @@ export function getLogistica(){
     })
   }
 }
+export function createLogistica(newLogistica){
+  return async function (dispatch){
+    const info= await axios.post(`/logistica`,newLogistica);
+    dispatch({
+      type:CREATE_LOGISTICA,
+      payload:info.data,
+    })
+  }
+}
+
+export function createEmpresa(newEmpresa){
+  return async function (dispatch){
+    const info= await axios.post(`/empresa`,newEmpresa);
+    dispatch({
+      type:CREATE_EMPRESA,
+      payload:info.data,
+    })
+  }
+}
+
+export function createCuentas(newCuentas){
+  return async function (dispatch){
+    const info= await axios.post(`/cuentas`,newCuentas);
+    dispatch({
+      type:CREATE_CUENTAS,
+      payload:info.data,
+    })
+  }
+}
+export function createMediopago(newMediopago){
+  return async function (dispatch){
+    const info= await axios.post(`/mediopago`,newMediopago);
+    dispatch({
+      type:CREATE_MEDIOPAGO,
+      payload:info.data,
+    })
+  }
+}
+
+
+export function createProduct(newproduct) {
+  return async function (dispatch) {
+    const info = await axios.post(`${URL}/products`, newproduct);
+    dispatch({
+      type: CREATE_PRODUCT,
+      payload: info.data,
+    });
+  };
+}
 
 export function getAllProducts() {
   return async function (dispatch) {
@@ -334,15 +383,7 @@ export function removeFav(id) {
   };
 }
 
-export function createProduct(newproduct) {
-  return async function (dispatch) {
-    const info = await axios.post(`${URL}/products`, newproduct);
-    dispatch({
-      type: CREATE_PRODUCT,
-      payload: info.data,
-    });
-  };
-}
+
 
 export function restoreProduct(id) {
   return async function (dispatch) {
