@@ -8,16 +8,16 @@ const {
 } = process.env;
 
 
-// const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/softCommerce`, {
-//    logging: false, 
-//    native: false, 
-//  });
+const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/softCommerce`, {
+   logging: false, 
+   native: false, 
+ });
 
-const sequelize = new Sequelize(DB_DEPLOY, {
+// const sequelize = new Sequelize(DB_DEPLOY, {
 
-  logging: false, 
-  native: false, 
-});
+//   logging: false, 
+//   native: false, 
+// });
 
 const basename = path.basename(__filename);
 
@@ -36,7 +36,7 @@ let entries = Object.entries(sequelize.models);
 let capsEntries = entries.map((entry) => [entry[0][0].toUpperCase() + entry[0].slice(1), entry[1]]);
 sequelize.models = Object.fromEntries(capsEntries);
 
-const { Company, Reviews, PaymentMethod, Purchases, Coupon, Invoice, BankAccounts, Logistics, Complaints, Products, Shipments, User } = sequelize.models;
+const { Company, Reviews, PaymentMethod, Purchases, Coupon, Invoice, BankAccounts, Logistics, Complaints, Products, Shipments, User, user_products} = sequelize.models;
 
 User.belongsToMany(Products, {through: "user_products"});
 Products.belongsToMany(User, {through: "user_products"});
@@ -85,6 +85,7 @@ Shipments.belongsTo(Logistics, { foreignKey: "logisticsId", targetKey: "id" });
 
 
 module.exports = {
+  user_products,
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');
   conn: sequelize,     // para importart la conexión { conn } = require('./db.js');
 };
