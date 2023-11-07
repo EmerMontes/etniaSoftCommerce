@@ -11,15 +11,35 @@ export const GET_USERS_BY_NAME = "GET_USERS_BY_NAME";
 export const GET_PRODUCTS_BY_NAME = "GET_PRODUCTS_BY_NAME";
 export const ADD_FAVORITES = "ADD_FAVORITES";
 export const GET_BY_ID = "GET_BY_ID";
+export const GET_ALL_COMMENTS="GET_ALL_COMMENTS";
+export const GET_EMPRESA="GET_EMPRESA";
+export const GET_CUENTAS="GET_CUENTAS";
+export const GET_MEDIOPAGO="GET_MEDIOPAGO";
+export const GET_LOGISTICA="GET_LOGISTICA";
 //routes Delete
 export const DELETE_PRODUCT = "DELETE_PRODUCT";
+export const DELETE_COMMENT="DELETE_COMMENT";
+export const DELETE_EMPRESA="DELETE_EMPRESA";
+export const DELETE_CUENTAS="DELETE_CUENTAS";
+export const DELETE_MEDIOPAGO="DELETE_MEDIOPAGO";
+export const DELETE_LOGISTICA="DELETE_LOGISTICA";
 //Routes Post
 export const CREATE_PRODUCT = "CREATE_PRODUCT";
 export const CREATE_USER = "CREATE_USER";
 export const RESTORE_PRODUCT = "RESTORE_PRODUCT";
+export const CREATE_COMMENT="CREATE_COMMENT";
+export const CREATE_EMPRESA="CREATE_EMPRESA";
+export const CREATE_CUENTAS="CREATE_CUENTAS";
+export const CREATE_MEDIOPAGO="CREATE_MEDIOPAGO";
+export const CREATE_LOGISTICA="CREATE_LOGISTICA";
 //routes Put
 export const UPDATE_USER = "UPDATE_USER";
 export const UPDATE_PRODUCT="UPDATE_PRODUCT";
+export const UPDATE_COMMENT = "UPDATE_COMMENT";
+export const UPDATE_EMPRESA="UPDATE_EMPRESA";
+export const UPDATE_CUENTAS="UPDATE_CUENTAS";
+export const UPDATE_MEDIOPAGO="UPDATE_MEDIOPAGO";
+export const UPDATE_LOGISTICA="UPDATE_LOGISTICA";
 //Filters
 export const GET_FILTER_GENDER = "GET_FILTER_GENDER";
 export const GET_FILTER_CATEGORY = "GET_FILTER_CATEGORY";
@@ -56,6 +76,143 @@ export const CONFITRM_TOKEN= "CONFITRM_TOKEN"
 //const URL = "http://localhost:3001";
 const URL = "https://etniasoftcommerce.up.railway.app";
 
+
+export function getCuentas(){
+  return async function(dispatch){
+    const cuentasInfo= await axios.get(`/cuentas`);
+    dispatch({
+      type:GET_CUENTAS,
+      payload:cuentasInfo.data.results,
+    })
+  }
+}
+export function getEmpresa(){
+  return async function(dispatch){
+    const empresaInfo= await axios.get(`/empresa`);
+    dispatch({
+      type:GET_EMPRESA,
+      payload:empresaInfo.data.results,
+    })
+  }
+}
+export function getMedioPago(){
+  return async function(dispatch){
+    const mediopagoInfo= await axios.get(`/mediopago`);
+    dispatch({
+      type:GET_MEDIOPAGO,
+      payload:mediopagoInfo.data.results,
+    })
+  }
+}
+export function getLogistica(){
+  return async function(dispatch){
+    const logisticaInfo= await axios.get(`/logistica`);
+    dispatch({
+      type:GET_LOGISTICA,
+      payload:logisticaInfo.data.results,
+    })
+  }
+}
+export function createLogistica(newLogistica){
+  return async function (dispatch){
+    const info= await axios.post(`/logistica`,newLogistica);
+    dispatch({
+      type:CREATE_LOGISTICA,
+      payload:info.data,
+    })
+  }
+}
+
+export function createEmpresa(newEmpresa){
+  return async function (dispatch){
+    const info= await axios.post(`/empresa`,newEmpresa);
+    dispatch({
+      type:CREATE_EMPRESA,
+      payload:info.data,
+    })
+  }
+}
+
+export function createCuentas(newCuentas){
+  return async function (dispatch){
+    const info= await axios.post(`/cuentas`,newCuentas);
+    dispatch({
+      type:CREATE_CUENTAS,
+      payload:info.data,
+    })
+  }
+}
+export function createMediopago(newMediopago){
+  return async function (dispatch){
+    const info= await axios.post(`/mediopago`,newMediopago);
+    dispatch({
+      type:CREATE_MEDIOPAGO,
+      payload:info.data,
+    })
+  }
+}
+
+
+export function createProduct(newproduct) {
+  return async function (dispatch) {
+    const info = await axios.post(`${URL}/products`, newproduct);
+    dispatch({
+      type: CREATE_PRODUCT,
+      payload: info.data,
+    });
+  };
+}
+
+export function getAllProducts() {
+  return async function (dispatch) {
+    const productsInfo = await axios.get(`${URL}/products`);
+    console.log(productsInfo);
+    dispatch({
+      type: GET_ALL_PRODUCTS,
+      payload: productsInfo.data.results,
+    });
+  };
+}
+
+export function getAllComments(id){
+  return async function(dispatch){
+    const commentsInfo=await axios.get(`/comments/${id}`)
+    dispatch({
+      type:GET_ALL_COMMENTS,
+      payload:commentsInfo.data
+    })
+  }
+}
+export function createComment(payload){
+  return async function(dispatch){
+    const info= await axios.post(`/comments`,payload)
+    dispatch({
+      type:CREATE_COMMENT,
+      payload:info.data
+    })
+  }
+}
+
+export function updateComment(payload){
+  return async function(dispatch){
+    const info =await axios.put(`/comments`,payload)
+    dispatch({
+      type:UPDATE_COMMENT,
+      payload:info.data
+    })
+  }
+}
+export function deleteComment(idUser, idProduct){
+  return async function (dispatch){
+    const deletedComment= await axios.delete(`/comments/${idUser}/${idProduct}`)
+    dispatch({
+      type:DELETE_COMMENT,
+      payload:deletedComment.data
+    })
+  }
+}
+
+
 export function updateCartItemQuantity(productId, newQuantity) {
   return {
     type: UPDATE_CART_ITEM_QUANTITY,
@@ -86,6 +243,7 @@ export function confirmToken(token) {
     }
   };
 }
+
 
 export function registerUser(payload) {
   console.log("register")
@@ -275,16 +433,7 @@ export function getAllSelects() {
   };
 }
 
-export function getAllProducts() {
-  return async function (dispatch) {
-    const productsInfo = await axios.get(`${URL}/products`);
-    console.log(productsInfo);
-    dispatch({
-      type: GET_ALL_PRODUCTS,
-      payload: productsInfo.data.results,
-    });
-  };
-}
+
 
 export function getAddFavorites(product) {
   return async (dispatch) => {
@@ -307,15 +456,7 @@ export function removeFav(id) {
   };
 }
 
-export function createProduct(newproduct) {
-  return async function (dispatch) {
-    const info = await axios.post(`${URL}/products`, newproduct);
-    dispatch({
-      type: CREATE_PRODUCT,
-      payload: info.data,
-    });
-  };
-}
+
 
 export function restoreProduct(id) {
   return async function (dispatch) {
