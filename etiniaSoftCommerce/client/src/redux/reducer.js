@@ -19,6 +19,10 @@ import {
   USER_LOGOUT,
   GET_ALL_SELECTS,
   LOCALSTORAGE,
+  CREATE_COMMENT,
+  UPDATE_COMMENT,
+  GET_ALL_COMMENTS,
+  DELETE_COMMENT,
 
  // REMOVE_SHIPPING,
   //UPDATE_SHIPPING,
@@ -31,6 +35,7 @@ import {
 const initialState = {
   allProducts: [],
   productDetail: [],
+  productComments: [],
   allFavorites: [],
   productShow: [],
   indexProductShow: [],
@@ -51,6 +56,23 @@ const reducer = (state = initialState, action) => {
         ...state,
         allProducts: action.payload,
       };
+    case GET_ALL_COMMENTS:
+      return{
+        ...state,
+        reportedComments:action.payload
+      }
+    case CREATE_COMMENT:
+      return action.payload
+    case UPDATE_COMMENT:
+      return{
+        ...state,
+        productComments:action.payload
+      }      
+     case DELETE_COMMENT:
+      return{
+        ...state,
+        productComments:action.payload
+      } 
     case GET_ALL_PRODUCTS:
       return {
         ...state,
