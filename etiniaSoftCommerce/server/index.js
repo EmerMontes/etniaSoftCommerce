@@ -8,7 +8,7 @@ const app = express();
 app.use(express.json())
 const PORT =  process.env.PORT || 3001;
 
-conn.sync({ force: false }).then(() => {
+conn.sync({ force: true }).then(() => {
   prendas();
 
 server.listen(PORT, () => {

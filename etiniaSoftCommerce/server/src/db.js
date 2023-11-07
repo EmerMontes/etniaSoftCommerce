@@ -8,16 +8,16 @@ const {
 } = process.env;
 
 
-const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/softCommerce`, {
-   logging: false, 
-   native: false, 
- });
+// const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/softCommerce`, {
+//    logging: false, 
+//    native: false, 
+//  });
 
-// const sequelize = new Sequelize(DB_DEPLOY, {
+const sequelize = new Sequelize(DB_DEPLOY, {
 
-//   logging: false, 
-//   native: false, 
-// });
+  logging: false, 
+  native: false, 
+});
 
 const basename = path.basename(__filename);
 
